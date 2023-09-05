@@ -51,10 +51,13 @@ TaoThuVien::TaoThuVien()
     connect(nutHienSym, &QPushButton::clicked, [soChanIC, this]() {
         if (soChanIC->currentIndex() == 1) {
             khongGianHienSymIC->setCurrentWidget(trangHienSymIC14);
+            boxCauHinhChan->setFixedHeight(400);
         } else if (soChanIC->currentText() == " 16 Chân") {
             khongGianHienSymIC->setCurrentWidget(trangHienSymIC16);
+            boxCauHinhChan->setFixedHeight(420);
         } else if (soChanIC->currentText() == " 20 Chân") {
             khongGianHienSymIC->setCurrentWidget(trangHienSymIC20);
+            boxCauHinhChan->setFixedHeight(450);
         } else {
             QMessageBox::warning(this,
                                  "Cảnh báo",
@@ -78,7 +81,7 @@ TaoThuVien::TaoThuVien()
     QVBoxLayout *lopKhonGianHienSymIC = new QVBoxLayout;
     lopKhonGianHienSymIC->addWidget(khongGianHienSymIC);
     boxCauHinhChan->setStyleSheet("font-size: 15px;");
-    boxCauHinhChan->setFixedHeight(450);
+    boxCauHinhChan->setFixedHeight(400);
     boxCauHinhChan->setLayout(lopKhonGianHienSymIC);
     lopGanChan14 = new QGridLayout;
     lopGanChan16 = new QGridLayout;
@@ -408,7 +411,7 @@ void TaoThuVien::opTrangCauHinhChan()
 {
     khongGianTaoThuVien->setCurrentWidget(trangCauHinhChan);
     khongGianHienSymIC->setCurrentWidget(trangHienSymDefault);
-
+    boxCauHinhChan->setFixedHeight(400);
     tenIC->clear();
     moTaIC->clear();
 }

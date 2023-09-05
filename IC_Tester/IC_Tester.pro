@@ -10,15 +10,21 @@ CONFIG += c++17
 VPATH += src/
 INCLUDEPATH += include/
 SOURCES += \
+    src/huongdan.cpp \
     src/kiemtra.cpp \
     main.cpp \
     src/mainwindow.cpp \
-    src/taothuvien.cpp
+    src/taothuvien.cpp \
+    src/xemlichsu.cpp \
+    src/xemthuvien.cpp
 
 HEADERS += \
+    include/huongdan.h \
     include/kiemtra.h \
     include/mainwindow.h \
-    include/taothuvien.h
+    include/taothuvien.h \
+    include/xemlichsu.h \
+    include/xemthuvien.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

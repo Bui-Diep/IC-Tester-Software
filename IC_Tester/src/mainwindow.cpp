@@ -3,7 +3,7 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
 {
-    //    tuy chinh giao diện Home
+    //    tuy chinh giao diện Home =========================================================
     setWindowTitle("IC Tester Development Version");
     setWindowIcon(QIcon("://resources/SoftwareIcon.png"));
 
@@ -11,7 +11,7 @@ MainWindow::MainWindow(QWidget *parent)
     QHBoxLayout *lopWellcome = new QHBoxLayout;
     QVBoxLayout *lopNutNhan = new QVBoxLayout;
 
-    QLabel *space = new QLabel("        ");
+    QLabel *space = new QLabel(" ");
     QLabel *wellcomeText = new QLabel("Welcome to IC Tester Development Version");
     wellcomeText->setAlignment(Qt::AlignLeft);
     wellcomeText->setStyleSheet("color: #0000FF; font-size: 36px;font-weight: bold;");
@@ -36,6 +36,12 @@ MainWindow::MainWindow(QWidget *parent)
     lopHome->addLayout(lopWellcome, 0, 3);
     lopHome->addWidget(homeIcon, 3, 3, 11, 1);
     lopHome->addWidget(space, 1, 1);
+    QLabel *auThor = new QLabel("The software is designed and created by BuiDiep");
+    lopHome->addWidget(auThor, 14, 3);
+    auThor->setAlignment(Qt::AlignCenter);
+    auThor->setStyleSheet("color: #0000FF; font-size: 22px;font-weight: bold; font-style: italic;");
+
+    //    tuy chinh nut chuc nang================================================================
     QSize iconSize(30, 30);
     QPushButton *nutKiemTra = new QPushButton("  Kiểm Tra IC");
     nutKiemTra->setFixedSize(300, 55);
@@ -58,7 +64,7 @@ MainWindow::MainWindow(QWidget *parent)
     nutXemLichSu->setIcon(QIcon("://resources/XemLichSu.png"));
     nutXemLichSu->setIconSize(iconSize);
 
-    QLabel *nhanThongTin = new QLabel("                 Thông Tin?");
+    QLabel *nhanThongTin = new QLabel("                   Thông Tin?");
     nhanThongTin->setStyleSheet("font-size: 20px;font-weight: bold;");
     QPushButton *nutHuongDan = new QPushButton("  Hướng Dẫn");
     nutHuongDan->setFixedSize(300, 55);
@@ -108,12 +114,14 @@ MainWindow::MainWindow(QWidget *parent)
     QGroupBox *boxNutNhan = new QGroupBox;
     boxNutNhan->setLayout(lopNutNhan);
     lopHome->addWidget(boxNutNhan, 2, 1, 14, 1);
-    QLabel *auThor = new QLabel("The software is designed and created by BuiDiep");
-    lopHome->addWidget(auThor, 14, 3);
-    auThor->setAlignment(Qt::AlignCenter);
-    auThor->setStyleSheet("color: #0000FF; font-size: 22px;font-weight: bold; font-style: italic;");
 
-    //    cau hinh thanh menu
+    connect(nutKiemTra, SIGNAL(clicked(bool)), this, SLOT(opKiemTra()));
+    connect(nutTaoThuVien, SIGNAL(clicked(bool)), this, SLOT(opTaoThuVien()));
+    connect(nutXemThuVien, SIGNAL(clicked(bool)), this, SLOT(opXemThuVien()));
+    connect(nutXemLichSu, SIGNAL(clicked(bool)), this, SLOT(opXemLichSu()));
+    connect(nutHuongDan, SIGNAL(clicked(bool)), this, SLOT(opHuongDan()));
+
+    //    cau hinh thanh menu =================================================================
     QMenu *tep = menuBar()->addMenu("&Tệp");
     QMenu *timKiem = menuBar()->addMenu("Tìm &Kiếm");
     QMenu *chinhSua = menuBar()->addMenu("&Chỉnh sửa");
@@ -121,7 +129,7 @@ MainWindow::MainWindow(QWidget *parent)
     QMenu *huongDan = menuBar()->addMenu("&Hướng dẫn");
     QMenu *thongTin = menuBar()->addMenu("&Thông tin");
 
-    //    cau hinh thanh cong cu
+    //    cau hinh thanh cong cu ================================================================
     QToolBar *thanhCongCu = new QToolBar;
     QToolBar *thanhLienHe = new QToolBar;
     thanhCongCu->setMovable(0);
@@ -143,39 +151,51 @@ MainWindow::MainWindow(QWidget *parent)
     thanhCongCu->addSeparator();
     thanhCongCu->addAction(acXemThuVien);
     thanhCongCu->addSeparator();
-    thanhLienHe->addAction(fB);
     QAction *setting = new QAction("Cài đặt");
     setting->setIcon(QIcon("://resources/setting.png"));
-    thanhCongCu->addSeparator();
     thanhCongCu->addAction(setting);
     QAction *thoat = new QAction("Thoát Phần Mềm");
     thoat->setIcon(QIcon("://resources/power.png"));
     thanhCongCu->addSeparator();
     thanhCongCu->addAction(thoat);
+    thanhLienHe->setMovable(true);
+    thanhLienHe->setAllowedAreas(Qt::TopToolBarArea);
+    thanhLienHe->addSeparator();
+    thanhLienHe->addAction(fB);
+    thanhLienHe->addSeparator();
+    thanhLienHe->addAction(tG);
+    thanhLienHe->addSeparator();
+    thanhLienHe->addAction(gH);
     connect(nutBackHome, SIGNAL(clicked(bool)), this, SLOT(opHome()));
     connect(thoat, SIGNAL(triggered(bool)), qApp, SLOT(quit()));
     connect(acKiemTra, SIGNAL(triggered(bool)), this, SLOT(opKiemTra()));
     thanhCongCu->setIconSize(QSize(20, 20));
-    thanhLienHe->setAllowedAreas(Qt::RightToolBarArea);
-    thanhLienHe->setMovable(0);
+
     addToolBar(thanhLienHe);
 
     //    cau hinh vung trung tam
     khongGianLamViec = new QStackedWidget;
-
     trangHome = new QWidget;
     trangHome->setStyleSheet("background-color: #9AC7BF;");
     trangKiemTra = new KiemTra;
     trangKiemTra->setStyleSheet("background-color: #E3E3E3;");
     trangTaoThuVien = new TaoThuVien;
+    trangTaoThuVien->setStyleSheet("background-color: #E3E3E3;");
+    trangXemThuVien = new XemThuVien;
+    trangXemThuVien->setStyleSheet("background-color: #E3E3E3;");
+    trangXemLichSu = new XemLichSu;
+    trangXemLichSu->setStyleSheet("background-color: #E3E3E3;");
+    trangHuongDan = new HuongDan;
+    trangHuongDan->setStyleSheet("background-color: #E3E3E3;");
+
     khongGianLamViec->addWidget(trangHome);
     khongGianLamViec->addWidget(trangKiemTra);
     khongGianLamViec->addWidget(trangTaoThuVien);
+    khongGianLamViec->addWidget(trangXemThuVien);
+    khongGianLamViec->addWidget(trangXemLichSu);
 
     trangHome->setLayout(lopHome);
     khongGianLamViec->setCurrentWidget(trangHome);
-    connect(nutKiemTra, SIGNAL(clicked(bool)), this, SLOT(opKiemTra()));
-    connect(nutTaoThuVien, SIGNAL(clicked(bool)), this, SLOT(opTaoThuVien()));
     setCentralWidget(khongGianLamViec);
 }
 void MainWindow::opHome()
@@ -189,5 +209,17 @@ void MainWindow::opKiemTra()
 void MainWindow::opTaoThuVien()
 {
     khongGianLamViec->setCurrentWidget(trangTaoThuVien);
+}
+void MainWindow::opXemThuVien()
+{
+    khongGianLamViec->setCurrentWidget(trangXemThuVien);
+}
+void MainWindow::opXemLichSu()
+{
+    khongGianLamViec->setCurrentWidget(trangXemLichSu);
+}
+void MainWindow::opHuongDan()
+{
+    trangHuongDan->exec();
 }
 MainWindow::~MainWindow() {}
