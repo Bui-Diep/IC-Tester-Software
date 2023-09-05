@@ -130,8 +130,8 @@ MainWindow::MainWindow(QWidget *parent)
     QMenu *thongTin = menuBar()->addMenu("&Thông tin");
 
     //    cau hinh thanh cong cu ================================================================
-    QToolBar *thanhCongCu = new QToolBar;
-    QToolBar *thanhLienHe = new QToolBar;
+    QToolBar *thanhCongCu = new QToolBar("Thanh công cụ");
+    QToolBar *thanhLienHe = new QToolBar("Thanh liên hệ");
     thanhCongCu->setMovable(0);
     thanhCongCu->setAllowedAreas(Qt::RightToolBarArea);
     addToolBar(thanhCongCu);
