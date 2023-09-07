@@ -201,22 +201,27 @@ MainWindow::MainWindow(QWidget *parent)
 void MainWindow::opHome()
 {
     khongGianLamViec->setCurrentWidget(trangHome);
+    setWindowTitle("IC Tester Development Version");
 }
 void MainWindow::opKiemTra()
 {
     khongGianLamViec->setCurrentWidget(trangKiemTra);
+    setWindowTitle("Kiểm Tra - IC Tester Development Version");
 }
 void MainWindow::opTaoThuVien()
 {
     khongGianLamViec->setCurrentWidget(trangTaoThuVien);
+    setWindowTitle("Tạo Thư Viện - IC Tester Development Version");
 }
 void MainWindow::opXemThuVien()
 {
     khongGianLamViec->setCurrentWidget(trangXemThuVien);
+    setWindowTitle("Xem Thư Viện - IC Tester Development Version");
 }
 void MainWindow::opXemLichSu()
 {
     khongGianLamViec->setCurrentWidget(trangXemLichSu);
+    setWindowTitle("Xem Lịch Sử - IC Tester Development Version");
 }
 void MainWindow::opHuongDan()
 {

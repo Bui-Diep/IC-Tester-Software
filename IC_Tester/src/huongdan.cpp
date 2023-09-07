@@ -2,8 +2,8 @@
 
 HuongDan::HuongDan()
 {
-    setWindowTitle("Hướng dẫn");
-    setWindowIcon(QIcon("://resources/SoftwareIcon.png"));
+    setWindowTitle("Hướng Dẫn - IC Tester Development Version");
+    setWindowIcon(QIcon("://resources/HuongDan.png"));
     setFixedWidth(450);
 
     QGridLayout *lopHuongDan = new QGridLayout;
