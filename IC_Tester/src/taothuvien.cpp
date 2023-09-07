@@ -2,7 +2,6 @@
 
 TaoThuVien::TaoThuVien()
 {
-    //    QFont tieuDeBox("Sans Serif", 10, QFont::Bold);
     khongGianTaoThuVien = new QStackedWidget;
 
     //    =============================================================================================
@@ -10,10 +9,11 @@ TaoThuVien::TaoThuVien()
     lopCauHinhChan = new QVBoxLayout;
     QHBoxLayout *lopCauHinhChanTong = new QHBoxLayout;
     lopCauHinhChanTong->addLayout(lopCauHinhChan);
+    //    lopCauHinhChanTong->setAlignment(Qt::AlignCenter);
     trangCauHinhChan->setLayout(lopCauHinhChanTong);
 
     //    nhom thuoc tinh
-    QGroupBox *boxThuocTinh = new QGroupBox("Thuộc tính IC");
+    QGroupBox *boxThuocTinh = new QGroupBox();
     boxThuocTinh->setStyleSheet("font-size: 15px;");
     QHBoxLayout *lopThuocTinhChung = new QHBoxLayout;
     QFormLayout *lopThuocTinh = new QFormLayout;
@@ -48,28 +48,43 @@ TaoThuVien::TaoThuVien()
     moTaIC = new QTextEdit;
     lopThuocTinh->addRow("Mô tả:", moTaIC);
     moTaIC->setPlaceholderText("Mô tả IC tại đây ...");
-    connect(nutHienSym, &QPushButton::clicked, [soChanIC, this]() {
-        if (soChanIC->currentIndex() == 1) {
-            khongGianHienSymIC->setCurrentWidget(trangHienSymIC14);
-            boxCauHinhChan->setFixedHeight(400);
-        } else if (soChanIC->currentText() == " 16 Chân") {
-            khongGianHienSymIC->setCurrentWidget(trangHienSymIC16);
-            boxCauHinhChan->setFixedHeight(420);
-        } else if (soChanIC->currentText() == " 20 Chân") {
-            khongGianHienSymIC->setCurrentWidget(trangHienSymIC20);
-            boxCauHinhChan->setFixedHeight(450);
+    connect(nutHienSym, &QPushButton::clicked, [congNgheBanDan, soChanIC, this]() {
+        if (!tenIC->text().isEmpty()) {
+            QString textMoTaIC;
+            if (!moTaIC->toPlainText().isEmpty()) {
+                textMoTaIC = "<br><b>Ghi chú:</b> " + moTaIC->toPlainText();
+            }
+            auto placeholder = soChanIC->currentText();
+            bangHienThiThuocTinhIC->setText(
+                "<b>Tên IC:</b> " + tenIC->text() + "<br><b>Số chân IC:</b> " + placeholder
+                + "<br><b>Công nghệ:</b> " + congNgheBanDan->currentText() + textMoTaIC);
+
+            if (soChanIC->currentIndex() == 1) {
+                khongGianHienSymIC->setCurrentWidget(trangHienSymIC14);
+                boxCauHinhChan->setFixedHeight(400);
+            } else if (soChanIC->currentText() == " 16 Chân") {
+                khongGianHienSymIC->setCurrentWidget(trangHienSymIC16);
+                boxCauHinhChan->setFixedHeight(420);
+            } else if (soChanIC->currentText() == " 20 Chân") {
+                khongGianHienSymIC->setCurrentWidget(trangHienSymIC20);
+                boxCauHinhChan->setFixedHeight(450);
+            } else {
+                QMessageBox::information(this,
+                                         "Thông báo",
+                                         "IC" + soChanIC->currentText()
+                                             + " chưa được hỗ trợ\nVui lòng chọn loại khác");
+                khongGianHienSymIC->setCurrentWidget(trangHienSymDefault);
+            };
         } else {
-            QMessageBox::warning(this,
-                                 "Cảnh báo",
-                                 "IC" + soChanIC->currentText()
-                                     + " chưa được hỗ trợ\nVui lòng chọn loại khác");
-            khongGianHienSymIC->setCurrentWidget(trangHienSymDefault);
+            QMessageBox::warning(this, "Cảnh báo", "Vui lòng nhập tên IC");
         }
     });
 
     //  nhom cau hinh chan
-    boxCauHinhChan = new QGroupBox("Cấu hình chân");
+    boxCauHinhChan = new QGroupBox("Cấu hình chân IC");
+    boxCauHinhChan->setStyleSheet("font-weight: bold;font-size: 16px; color: #0000FF");
     khongGianHienSymIC = new QStackedWidget;
+    khongGianHienSymIC->setStyleSheet("font-weight: 550;font-size: 15px; color: nomal");
     trangHienSymDefault = new QWidget;
     trangHienSymIC14 = new QWidget;
     trangHienSymIC16 = new QWidget;
@@ -80,7 +95,6 @@ TaoThuVien::TaoThuVien()
     khongGianHienSymIC->addWidget(trangHienSymIC20);
     QVBoxLayout *lopKhonGianHienSymIC = new QVBoxLayout;
     lopKhonGianHienSymIC->addWidget(khongGianHienSymIC);
-    boxCauHinhChan->setStyleSheet("font-size: 15px;");
     boxCauHinhChan->setFixedHeight(400);
     boxCauHinhChan->setLayout(lopKhonGianHienSymIC);
     lopGanChan14 = new QGridLayout;
@@ -173,6 +187,8 @@ TaoThuVien::TaoThuVien()
     lopGanChan20->addWidget(pin5_20, 4, 0);
     //    chan 6
     QMenu *pinType = new QMenu;
+    pinType->setCursor(Qt::PointingHandCursor);
+    //    pinType->setStyleSheet("background-color: #9AC7BF; color: red;");
     pinType->addAction(new QAction("VCC"));
     pinType->addAction(new QAction("GND"));
     pinType->addAction(new QAction("CLK"));
@@ -314,7 +330,7 @@ TaoThuVien::TaoThuVien()
     QLabel *nhanTrangHienSymDefault = new QLabel(
         "Cấu hình chân cho IC kiểm tra tại đây\nHãy tham khảo Datasheet");
     nhanTrangHienSymDefault->setStyleSheet(
-        "font-size: 18px;font-weight: bold; color: #0000FF; font-style: italic;");
+        "font-size: 18px;font-weight: 550; color: #0000FF; font-style: italic;");
     nhanTrangHienSymDefault->setAlignment(Qt::AlignCenter);
 
     QLabel *icontrangHienSymDefault = new QLabel;
@@ -349,16 +365,17 @@ TaoThuVien::TaoThuVien()
 
     //    nhom hien thi
     QGroupBox *boxHienThi = new QGroupBox("Hiển thị thông tin IC");
-    boxHienThi->setStyleSheet("font-size: 15px;");
-    QVBoxLayout *lopHienThi = new QVBoxLayout;
-    QListView *danhSachThuocTinh = new QListView;
-    danhSachThuocTinh->setFixedHeight(150);
+    boxHienThi->setStyleSheet("font-weight: bold;font-size: 16px; color: #0000FF");
+    lopHienThiThuocTinhIC = new QGridLayout;
+
+    bangHienThiThuocTinhIC = new QLabel;
+    bangHienThiThuocTinhIC->setStyleSheet("font-weight: 400;font-size: 15px; color: black");
+    bangHienThiThuocTinhIC->setWordWrap(true);
+
     QTableView *bangGanChan = new QTableView;
+    lopHienThiThuocTinhIC->addWidget(bangGanChan, 1, 0);
 
-    lopHienThi->addWidget(danhSachThuocTinh);
-    lopHienThi->addWidget(bangGanChan);
-
-    boxHienThi->setLayout(lopHienThi);
+    boxHienThi->setLayout(lopHienThiThuocTinhIC);
 
     //    Nut nhan
     QHBoxLayout *lopNext = new QHBoxLayout;
@@ -374,8 +391,9 @@ TaoThuVien::TaoThuVien()
     connect(datLai, SIGNAL(clicked(bool)), this, SLOT(opTrangCauHinhChan()));
     lopNext->addWidget(datLai);
     lopNext->addWidget(next);
-    lopHienThi->addLayout(lopNext);
-
+    lopHienThiThuocTinhIC->addWidget(bangHienThiThuocTinhIC, 0, 0);
+    lopHienThiThuocTinhIC->addLayout(lopNext, 2, 0);
+    lopCauHinhChanTong->addWidget(new QLabel("        "));
     lopCauHinhChanTong->addWidget(boxHienThi);
 
     //=============================================================================================
@@ -412,6 +430,7 @@ void TaoThuVien::opTrangCauHinhChan()
     khongGianTaoThuVien->setCurrentWidget(trangCauHinhChan);
     khongGianHienSymIC->setCurrentWidget(trangHienSymDefault);
     boxCauHinhChan->setFixedHeight(400);
+    bangHienThiThuocTinhIC->clear();
     tenIC->clear();
     moTaIC->clear();
 }

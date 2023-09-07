@@ -3,5 +3,5 @@
 XemLichSu::XemLichSu(QWidget *parent)
     : QWidget{parent}
 {
-
+    
 }

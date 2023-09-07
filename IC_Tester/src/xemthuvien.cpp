@@ -2,6 +2,4 @@
 
 XemThuVien::XemThuVien(QWidget *parent)
     : QWidget{parent}
-{
-
-}
+{}

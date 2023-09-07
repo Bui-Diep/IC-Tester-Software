@@ -30,6 +30,9 @@ private:
     QComboBox *soChanIC;
     QLineEdit *tenIC;
     QTextEdit *moTaIC;
+    QComboBox *congNgheBanDan;
+    QGridLayout *lopHienThiThuocTinhIC;
+    QLabel *bangHienThiThuocTinhIC;
 };
 
 #endif // TAOTHUVIEN_H
