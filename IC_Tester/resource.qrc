@@ -17,6 +17,7 @@
         <file>resources/IC16.png</file>
         <file>resources/IC20.png</file>
         <file>resources/Git.png</file>
+        <file>resources/SoftwareIcon.ico</file>
     </qresource>
     <qresource prefix="/document">
         <file>Readme/HuongDan.txt</file>

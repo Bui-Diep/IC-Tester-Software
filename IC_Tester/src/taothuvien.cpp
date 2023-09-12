@@ -2,9 +2,7 @@
 
 TaoThuVien::TaoThuVien()
 {
-    khongGianTaoThuVien = new QStackedWidget;
-
-    //    =============================================================================================
+    //=============================================================
     trangCauHinhChan = new QWidget;
     lopCauHinhChan = new QVBoxLayout;
     QSplitter *splitCauHinhChanTong = new QSplitter(Qt::Horizontal);
@@ -39,8 +37,8 @@ TaoThuVien::TaoThuVien()
     lopThuocTinh->addRow("Số chân IC:", soChanIC);
     QComboBox *congNgheBanDan = new QComboBox;
     congNgheBanDan->setFixedSize(150, 25);
-    congNgheBanDan->addItem("CMOS (3.3V)");
-    congNgheBanDan->addItem("TTL (5V)");
+    congNgheBanDan->addItem(" CMOS (3.3V)");
+    congNgheBanDan->addItem(" TTL (5V)");
     lopThuocTinh->addRow("Công nghệ:", congNgheBanDan);
     lopThuocTinhChung->addLayout(lopThuocTinh);
     lopThuocTinhChung->addLayout(lopNutHienSym);
@@ -471,19 +469,20 @@ TaoThuVien::TaoThuVien()
     bangHienThiThuocTinhIC = new QLabel;
     bangHienThiThuocTinhIC->setStyleSheet("font-weight: 400;font-size: 15px; color: black");
     bangHienThiThuocTinhIC->setWordWrap(true);
+    bangHienThiThuocTinhIC->setFixedHeight(140);
+    bangHienThiThuocTinhIC->setAlignment(Qt::AlignTop);
 
     //hien thi Icon socket
     QFrame *khungSocket20 = new QFrame;
     khungSocket20->setObjectName("khungSocket20"); // Đặt tên cho việc trang trí CSS sau này
-    khungSocket20->setFixedHeight(370);            // Đặt kích thước hình chữ nhật
+    khungSocket20->setFixedHeight(420);            // Đặt kích thước hình chữ nhật
     khungSocket20->setStyleSheet("QFrame#khungSocket20 {"
                                  "   background-color: red;"
                                  "   border: 2px solid black;"
                                  "   border-radius: 10px;"
                                  "}");
-    QLabel *chanSocketIC[10][3];
     QGridLayout *lopKhungChan = new QGridLayout(khungSocket20);
-    QLabel *space = new QLabel("    ");
+    QLabel *space = new QLabel("            ");
 
     space->setStyleSheet("background-color: rgba(0, 0, 0, 0);");
     lopKhungChan->addWidget(space, 1, 1);
@@ -492,9 +491,9 @@ TaoThuVien::TaoThuVien()
         for (int j = 0; j < 3; j += 2) {
             chanSocketIC[i][j] = new QLabel("NC");
             chanSocketIC[i][j]->setAlignment(Qt::AlignCenter);
-            chanSocketIC[i][j]->setFixedSize(30, 30);
+            chanSocketIC[i][j]->setFixedSize(32, 32);
             chanSocketIC[i][j]->setStyleSheet(
-                "background-color: white; border-radius: 15px; font-size: 10px;");
+                "background-color: white; border-radius: 16px; font-size: 12px;");
 
             // Đặt tên cho con trỏ dựa trên số đếm i và j
             QString tenChanSocketIC = QString("chanSocKet_%1%2").arg(i).arg(j);
@@ -527,35 +526,35 @@ TaoThuVien::TaoThuVien()
 
     for (int i = 0; i < 6; ++i) {
         QAction *acTick1 = acPin1.at(i);
-        connect(acTick1, &QAction::triggered, [chanSocketIC, acTick1]() {
+        connect(acTick1, &QAction::triggered, [this, acTick1]() {
             chanSocketIC[0][0]->setText(acTick1->text());
         });
         QAction *acTick2 = acPin2.at(i);
-        connect(acTick2, &QAction::triggered, [chanSocketIC, acTick2]() {
+        connect(acTick2, &QAction::triggered, [this, acTick2]() {
             chanSocketIC[1][0]->setText(acTick2->text());
         });
         QAction *acTick3 = acPin3.at(i);
-        connect(acTick3, &QAction::triggered, [chanSocketIC, acTick3]() {
+        connect(acTick3, &QAction::triggered, [this, acTick3]() {
             chanSocketIC[2][0]->setText(acTick3->text());
         });
         QAction *acTick4 = acPin4.at(i);
-        connect(acTick4, &QAction::triggered, [chanSocketIC, acTick4]() {
+        connect(acTick4, &QAction::triggered, [this, acTick4]() {
             chanSocketIC[3][0]->setText(acTick4->text());
         });
         QAction *acTick5 = acPin5.at(i);
-        connect(acTick5, &QAction::triggered, [chanSocketIC, acTick5]() {
+        connect(acTick5, &QAction::triggered, [this, acTick5]() {
             chanSocketIC[4][0]->setText(acTick5->text());
         });
         QAction *acTick6 = acPin6.at(i);
-        connect(acTick6, &QAction::triggered, [chanSocketIC, acTick6]() {
+        connect(acTick6, &QAction::triggered, [this, acTick6]() {
             chanSocketIC[5][0]->setText(acTick6->text());
         });
         QAction *acTick7 = acPin7.at(i);
-        connect(acTick7, &QAction::triggered, [chanSocketIC, acTick7]() {
+        connect(acTick7, &QAction::triggered, [this, acTick7]() {
             chanSocketIC[6][0]->setText(acTick7->text());
         });
         QAction *acTick8 = acPin8.at(i);
-        connect(acTick8, &QAction::triggered, [chanSocketIC, acTick8, soChanIC]() {
+        connect(acTick8, &QAction::triggered, [this, acTick8, soChanIC]() {
             if (soChanIC->currentText() == " 14 Chân") {
                 chanSocketIC[6][2]->setText(acTick8->text());
             } else {
@@ -563,7 +562,7 @@ TaoThuVien::TaoThuVien()
             }
         });
         QAction *acTick9 = acPin9.at(i);
-        connect(acTick9, &QAction::triggered, [chanSocketIC, acTick9, soChanIC]() {
+        connect(acTick9, &QAction::triggered, [this, acTick9, soChanIC]() {
             if (soChanIC->currentText() == " 14 Chân") {
                 chanSocketIC[5][2]->setText(acTick9->text());
             } else if (soChanIC->currentText() == " 16 Chân") {
@@ -573,7 +572,7 @@ TaoThuVien::TaoThuVien()
             }
         });
         QAction *acTick10 = acPin10.at(i);
-        connect(acTick10, &QAction::triggered, [chanSocketIC, acTick10, soChanIC]() {
+        connect(acTick10, &QAction::triggered, [this, acTick10, soChanIC]() {
             if (soChanIC->currentText() == " 14 Chân") {
                 chanSocketIC[4][2]->setText(acTick10->text());
             } else if (soChanIC->currentText() == " 16 Chân") {
@@ -583,7 +582,7 @@ TaoThuVien::TaoThuVien()
             }
         });
         QAction *acTick11 = acPin11.at(i);
-        connect(acTick11, &QAction::triggered, [chanSocketIC, acTick11, soChanIC]() {
+        connect(acTick11, &QAction::triggered, [this, acTick11, soChanIC]() {
             if (soChanIC->currentText() == " 14 Chân") {
                 chanSocketIC[3][2]->setText(acTick11->text());
             } else if (soChanIC->currentText() == " 16 Chân") {
@@ -593,7 +592,7 @@ TaoThuVien::TaoThuVien()
             }
         });
         QAction *acTick12 = acPin12.at(i);
-        connect(acTick12, &QAction::triggered, [chanSocketIC, acTick12, soChanIC]() {
+        connect(acTick12, &QAction::triggered, [this, acTick12, soChanIC]() {
             if (soChanIC->currentText() == " 14 Chân") {
                 chanSocketIC[2][2]->setText(acTick12->text());
             } else if (soChanIC->currentText() == " 16 Chân") {
@@ -603,7 +602,7 @@ TaoThuVien::TaoThuVien()
             }
         });
         QAction *acTick13 = acPin13.at(i);
-        connect(acTick13, &QAction::triggered, [chanSocketIC, acTick13, soChanIC]() {
+        connect(acTick13, &QAction::triggered, [this, acTick13, soChanIC]() {
             if (soChanIC->currentText() == " 14 Chân") {
                 chanSocketIC[1][2]->setText(acTick13->text());
             } else if (soChanIC->currentText() == " 16 Chân") {
@@ -613,7 +612,7 @@ TaoThuVien::TaoThuVien()
             }
         });
         QAction *acTick14 = acPin14.at(i);
-        connect(acTick14, &QAction::triggered, [chanSocketIC, acTick14, soChanIC]() {
+        connect(acTick14, &QAction::triggered, [this, acTick14, soChanIC]() {
             if (soChanIC->currentText() == " 14 Chân") {
                 chanSocketIC[0][2]->setText(acTick14->text());
             } else if (soChanIC->currentText() == " 16 Chân") {
@@ -623,7 +622,7 @@ TaoThuVien::TaoThuVien()
             }
         });
         QAction *acTick15 = acPin15.at(i);
-        connect(acTick15, &QAction::triggered, [chanSocketIC, acTick15, soChanIC]() {
+        connect(acTick15, &QAction::triggered, [this, acTick15, soChanIC]() {
             if (soChanIC->currentText() == " 16 Chân") {
                 chanSocketIC[1][2]->setText(acTick15->text());
             } else {
@@ -631,7 +630,7 @@ TaoThuVien::TaoThuVien()
             }
         });
         QAction *acTick16 = acPin16.at(i);
-        connect(acTick16, &QAction::triggered, [chanSocketIC, acTick16, soChanIC]() {
+        connect(acTick16, &QAction::triggered, [this, acTick16, soChanIC]() {
             if (soChanIC->currentText() == " 16 Chân") {
                 chanSocketIC[0][2]->setText(acTick16->text());
             } else {
@@ -639,19 +638,19 @@ TaoThuVien::TaoThuVien()
             }
         });
         QAction *acTick17 = acPin17.at(i);
-        connect(acTick17, &QAction::triggered, [chanSocketIC, acTick17]() {
+        connect(acTick17, &QAction::triggered, [this, acTick17]() {
             chanSocketIC[3][2]->setText(acTick17->text());
         });
         QAction *acTick18 = acPin18.at(i);
-        connect(acTick18, &QAction::triggered, [chanSocketIC, acTick18]() {
+        connect(acTick18, &QAction::triggered, [this, acTick18]() {
             chanSocketIC[2][2]->setText(acTick18->text());
         });
         QAction *acTick19 = acPin19.at(i);
-        connect(acTick19, &QAction::triggered, [chanSocketIC, acTick19]() {
+        connect(acTick19, &QAction::triggered, [this, acTick19]() {
             chanSocketIC[1][2]->setText(acTick19->text());
         });
         QAction *acTick20 = acPin20.at(i);
-        connect(acTick20, &QAction::triggered, [chanSocketIC, acTick20]() {
+        connect(acTick20, &QAction::triggered, [this, acTick20]() {
             chanSocketIC[0][2]->setText(acTick20->text());
         });
     }
@@ -663,7 +662,7 @@ TaoThuVien::TaoThuVien()
     boxHienThi->setLayout(lopHienThiThuocTinhIC);
 
     //    Nut nhan
-    QHBoxLayout *lopNext = new QHBoxLayout;
+    QHBoxLayout *lopNutNhanCauHinhChanIC = new QHBoxLayout;
     QPushButton *next = new QPushButton("Tiếp Theo");
     next->setStyleSheet(
         "background-color: #009900;font-size: 16px;font-weight: bold; color: white");
@@ -674,28 +673,338 @@ TaoThuVien::TaoThuVien()
         "background-color: #009900;font-size: 16px;font-weight: bold; color: white");
     datLai->setFixedSize(200, 30);
     connect(datLai, SIGNAL(clicked(bool)), this, SLOT(opTrangCauHinhChan()));
-    connect(datLai, &QPushButton::clicked, [chanSocketIC]() {
-        for (int i = 0; i < 10; ++i) {
-            for (int j = 0; j < 3; j += 2) {
-                chanSocketIC[i][j]->setText("NC");
-            }
-        }
-    });
-    lopNext->addWidget(datLai);
-    //    lopNext->addWidget(new QLabel("                                           "));
-    lopNext->addWidget(next);
+    lopNutNhanCauHinhChanIC->addWidget(datLai);
+    lopNutNhanCauHinhChanIC->addWidget(next);
     lopHienThiThuocTinhIC->addWidget(bangHienThiThuocTinhIC, 0, 0, 1, 3);
-    lopHienThiThuocTinhIC->addLayout(lopNext, 4, 0, 1, 3);
+    lopHienThiThuocTinhIC->addLayout(lopNutNhanCauHinhChanIC, 4, 0, 1, 3);
 
     splitCauHinhChanTong->addWidget(boxHienThi);
 
-    //=============================================================================================
+    //=============================================================
     trangCauHinhDuLieu = new QWidget;
-    QPushButton *finish = new QPushButton("Finish");
+    QSplitter *splitCauHinhDuLieu = new QSplitter(Qt::Horizontal);
+
+    //    tạo bảng cấu hình dữ liệu 20 chân
+    QFrame *khungCauHinhDuLieu20 = new QFrame;
+    QFrame *khungSymIC20 = new QFrame;
+    khungCauHinhDuLieu20->setObjectName(
+        "khungCauHinhDuLieu20");          // Đặt tên cho việc trang trí CSS sau này
+    khungSymIC20->setFixedSize(250, 485); // Đặt kích thước hình chữ nhật
+    khungSymIC20->setStyleSheet(
+        "font-size: 20px; color: blue; font-weight: bold; background-color: rgba(0, 0, 0, 0);");
+    khungCauHinhDuLieu20->setStyleSheet("QFrame#khungCauHinhDuLieu20 {"
+                                        "   background-color: #A8D9D0;"
+                                        "   border: 2px solid black;"
+                                        "   border-radius: 10px;"
+                                        "}");
+
+    QGridLayout *lopKhungCauHinhDuLieu20 = new QGridLayout(khungCauHinhDuLieu20);
+    QGridLayout *lopChuaKhungCauHinhDuLieu20 = new QGridLayout(khungSymIC20);
+    lopChuaKhungCauHinhDuLieu20->addWidget(khungCauHinhDuLieu20, 0, 1, 10, 1);
+    for (int i = 0; i < 10; ++i) {
+        QString pL = QString::number(i + 1);
+        QString pR = QString::number(i + 11);
+        lopKhungCauHinhDuLieu20->addWidget(new QLabel(pL), i, 0);
+        lopKhungCauHinhDuLieu20->addWidget(new QLabel(pR), 9 - i, 2);
+    }
+    //    QLabel *space2 = new QLabel("               ");
+
+    //    space2->setStyleSheet("background-color: rgba(0, 0, 0, 0);");
+    lopKhungCauHinhDuLieu20->addWidget(new QLabel("               "), 1, 1);
+
+    for (int i = 0; i < 10; ++i) {
+        for (int j = 0; j < 3; j += 2) {
+            chanDuLieuIC20[i][j] = new QPushButton("X");
+            chanDuLieuIC20[i][j]->setFixedSize(32, 32);
+            chanDuLieuIC20[i][j]->setStyleSheet("background-color: white;"
+                                                " border-radius: 16px; "
+                                                " font-size: 16px;"
+                                                " font-weight: bold;"
+                                                " color: blue;"
+                                                " border: 1px solid blue;");
+
+            // Đặt tên cho con trỏ dựa trên số đếm i và j
+            QString tenchanDuLieuIC20 = QString("chanDuLieu_%1%2").arg(i).arg(j);
+            chanDuLieuIC20[i][j]->setObjectName(tenchanDuLieuIC20);
+
+            lopChuaKhungCauHinhDuLieu20->addWidget(chanDuLieuIC20[i][j], i, j);
+        }
+    }
+    int *state20[20]; // 20 biến trạng thái cho 20 nút
+    // Thiết lập toàn bộ mảng state20 bằng 0
+    for (int i = 0; i < 20; ++i) {
+        state20[i] = new int(0);
+    }
+
+    for (int i = 0; i < 10; ++i) {
+        connect(chanDuLieuIC20[i][0], &QPushButton::clicked, [i, this, state20]() {
+            // Thiết lập trạng thái ban đầu
+            if (*state20[i] == 0) {
+                chanDuLieuIC20[i][0]->setText("0");
+                //            ->setEnabled(false); // Tắt chức năng nút
+                chanDuLieuIC20[i][0]->setStyleSheet(
+                    "background-color: red; border-radius: 16px;"
+                    "font-size: 16px; color: white; font-weight: bold; border: 1px solid blue;");
+            } else if (*state20[i] == 1) {
+                chanDuLieuIC20[i][0]->setText("1");
+                chanDuLieuIC20[i][0]->setStyleSheet(
+                    "background-color: #009900; border-radius: 16px;"
+                    "font-size: 16px; color: white; font-weight: bold; border: 1px solid blue;");
+            } else if (*state20[i] == 2) {
+                chanDuLieuIC20[i][0]->setText("Z");
+                chanDuLieuIC20[i][0]->setStyleSheet(
+                    "background-color: grey; border-radius: 16px;"
+                    "font-size: 16px; color: white; font-weight: bold; border: 1px solid blue;");
+            }
+            *state20[i] = (*state20[i] + 1) % 3;
+        });
+    }
+    for (int i = 0; i < 10; ++i) {
+        connect(chanDuLieuIC20[i][2], &QPushButton::clicked, [i, this, state20]() {
+            // Thiết lập trạng thái ban đầu
+            if (*state20[i + 10] == 0) {
+                chanDuLieuIC20[i][2]->setText("0");
+                //            ->setEnabled(false); // Tắt chức năng nút
+                chanDuLieuIC20[i][2]->setStyleSheet(
+                    "background-color: red; border-radius: 16px; border: 1px solid blue;"
+                    "font-size: 16px; color: white; font-weight: bold;");
+            } else if (*state20[i + 10] == 1) {
+                chanDuLieuIC20[i][2]->setText("1");
+                chanDuLieuIC20[i][2]->setStyleSheet(
+                    "background-color: #009900; border-radius: 16px; "
+                    "font-size: 16px; color: white; font-weight: bold; border: 1px solid blue;");
+            } else if (*state20[i + 10] == 2) {
+                chanDuLieuIC20[i][2]->setText("Z");
+                chanDuLieuIC20[i][2]->setStyleSheet(
+                    "background-color: grey; border-radius: 16px; "
+                    "font-size: 16px; color: white; font-weight: bold; border: 1px solid blue;");
+            }
+            *state20[i + 10] = (*state20[i + 10] + 1) % 3;
+        });
+    }
+
+    //    tạo bảng cấu hình dữ liệu 16 chân
+    QFrame *khungCauHinhDuLieu16 = new QFrame;
+    QFrame *khungSymIC16 = new QFrame;
+    khungCauHinhDuLieu16->setObjectName(
+        "khungCauHinhDuLieu16");          // Đặt tên cho việc trang trí CSS sau này
+    khungSymIC16->setFixedSize(250, 445); // Đặt kích thước hình chữ nhật
+    khungSymIC16->setStyleSheet(
+        "font-size: 20px; color: blue; font-weight: bold; background-color: rgba(0, 0, 0, 0);");
+    khungCauHinhDuLieu16->setStyleSheet("QFrame#khungCauHinhDuLieu16 {"
+                                        "   background-color: #A8D9D0;"
+                                        "   border: 2px solid black;"
+                                        "   border-radius: 10px;"
+                                        "}");
+    QGridLayout *lopKhungCauHinhDuLieu16 = new QGridLayout(khungCauHinhDuLieu16);
+    QGridLayout *lopChuaKhungCauHinhDuLieu16 = new QGridLayout(khungSymIC16);
+    lopChuaKhungCauHinhDuLieu16->addWidget(khungCauHinhDuLieu16, 0, 1, 8, 1);
+    for (int i = 0; i < 8; ++i) {
+        QString pL = QString::number(i + 1);
+        QString pR = QString::number(i + 9);
+        lopKhungCauHinhDuLieu16->addWidget(new QLabel(pL), i, 0);
+        lopKhungCauHinhDuLieu16->addWidget(new QLabel(pR), 7 - i, 2);
+    }
+    lopKhungCauHinhDuLieu16->addWidget(new QLabel("               "), 1, 1);
+
+    for (int i = 0; i < 8; ++i) {
+        for (int j = 0; j < 3; j += 2) {
+            chanDuLieuIC16[i][j] = new QPushButton("X");
+            chanDuLieuIC16[i][j]->setFixedSize(32, 32);
+            chanDuLieuIC16[i][j]->setStyleSheet("background-color: white;"
+                                                " border-radius: 16px; "
+                                                " font-size: 16px;"
+                                                " font-weight: bold;"
+                                                " color: blue;"
+                                                " border: 1px solid blue;");
+
+            // Đặt tên cho con trỏ dựa trên số đếm i và j
+            QString tenChanDuLieuIC16 = QString("chanDuLieu_%1%2").arg(i).arg(j);
+            chanDuLieuIC16[i][j]->setObjectName(tenChanDuLieuIC16);
+
+            lopChuaKhungCauHinhDuLieu16->addWidget(chanDuLieuIC16[i][j], i, j);
+        }
+    }
+    int *state16[16]; // 16 biến trạng thái cho 16 nút
+    // Thiết lập toàn bộ mảng state16 bằng 0
+    for (int i = 0; i < 16; ++i) {
+        state16[i] = new int(0);
+    }
+
+    for (int i = 0; i < 8; ++i) {
+        connect(chanDuLieuIC16[i][0], &QPushButton::clicked, [i, this, state16]() {
+            // Thiết lập trạng thái ban đầu
+            if (*state16[i] == 0) {
+                chanDuLieuIC16[i][0]->setText("0");
+                //            ->setEnabled(false); // Tắt chức năng nút
+                chanDuLieuIC16[i][0]->setStyleSheet(
+                    "background-color: red; border-radius: 16px;"
+                    "font-size: 16px; color: white; font-weight: bold; border: 1px solid blue;");
+            } else if (*state16[i] == 1) {
+                chanDuLieuIC16[i][0]->setText("1");
+                chanDuLieuIC16[i][0]->setStyleSheet(
+                    "background-color: #009900; border-radius: 16px;"
+                    "font-size: 16px; color: white; font-weight: bold; border: 1px solid blue;");
+            } else if (*state16[i] == 2) {
+                chanDuLieuIC16[i][0]->setText("Z");
+                chanDuLieuIC16[i][0]->setStyleSheet(
+                    "background-color: grey; border-radius: 16px;"
+                    "font-size: 16px; color: white; font-weight: bold; border: 1px solid blue;");
+            }
+            *state16[i] = (*state16[i] + 1) % 3;
+        });
+    }
+    for (int i = 0; i < 8; ++i) {
+        connect(chanDuLieuIC16[i][2], &QPushButton::clicked, [i, this, state16]() {
+            // Thiết lập trạng thái ban đầu
+            if (*state16[i + 8] == 0) {
+                chanDuLieuIC16[i][2]->setText("0");
+                //            ->setEnabled(false); // Tắt chức năng nút
+                chanDuLieuIC16[i][2]->setStyleSheet(
+                    "background-color: red; border-radius: 16px; border: 1px solid blue;"
+                    "font-size: 16px; color: white; font-weight: bold;");
+            } else if (*state16[i + 8] == 1) {
+                chanDuLieuIC16[i][2]->setText("1");
+                chanDuLieuIC16[i][2]->setStyleSheet(
+                    "background-color: #009900; border-radius: 16px; "
+                    "font-size: 16px; color: white; font-weight: bold; border: 1px solid blue;");
+            } else if (*state16[i + 8] == 2) {
+                chanDuLieuIC16[i][2]->setText("Z");
+                chanDuLieuIC16[i][2]->setStyleSheet(
+                    "background-color: grey; border-radius: 16px; "
+                    "font-size: 16px; color: white; font-weight: bold; border: 1px solid blue;");
+            }
+            *state16[i + 8] = (*state16[i + 8] + 1) % 3;
+        });
+    }
+
+    //    tạo bảng cấu hình dữ liệu 14 chân
+    QFrame *khungCauHinhDuLieu14 = new QFrame;
+    QFrame *khungSymIC14 = new QFrame;
+    khungCauHinhDuLieu14->setObjectName(
+        "khungCauHinhDuLieu14");          // Đặt tên cho việc trang trí CSS sau này
+    khungSymIC14->setFixedSize(250, 415); // Đặt kích thước hình chữ nhật
+    khungSymIC14->setStyleSheet(
+        "font-size: 20px; color: blue; font-weight: bold; background-color: rgba(0, 0, 0, 0);");
+    khungCauHinhDuLieu14->setStyleSheet("QFrame#khungCauHinhDuLieu14 {"
+                                        "   background-color: #A8D9D0;"
+                                        "   border: 2px solid black;"
+                                        "   border-radius: 10px;"
+                                        "}");
+    QGridLayout *lopkhungCauHinhDuLieu14 = new QGridLayout(khungCauHinhDuLieu14);
+    QGridLayout *lopChuakhungCauHinhDuLieu14 = new QGridLayout(khungSymIC14);
+    lopChuakhungCauHinhDuLieu14->addWidget(khungCauHinhDuLieu14, 0, 1, 7, 1);
+    for (int i = 0; i < 7; ++i) {
+        QString pL = QString::number(i + 1);
+        QString pR = QString::number(i + 8);
+        lopkhungCauHinhDuLieu14->addWidget(new QLabel(pL), i, 0);
+        lopkhungCauHinhDuLieu14->addWidget(new QLabel(pR), 6 - i, 2);
+    }
+    lopkhungCauHinhDuLieu14->addWidget(new QLabel("               "), 1, 1);
+
+    for (int i = 0; i < 7; ++i) {
+        for (int j = 0; j < 3; j += 2) {
+            chanDuLieuIC14[i][j] = new QPushButton("X");
+            chanDuLieuIC14[i][j]->setFixedSize(32, 32);
+            chanDuLieuIC14[i][j]->setStyleSheet("background-color: white;"
+                                                " border-radius: 16px; "
+                                                " font-size: 16px;"
+                                                " font-weight: bold;"
+                                                " color: blue;"
+                                                " border: 1px solid blue;");
+
+            // Đặt tên cho con trỏ dựa trên số đếm i và j
+            QString tenchanDuLieuIC14 = QString("chanDuLieu_%1%2").arg(i).arg(j);
+            chanDuLieuIC14[i][j]->setObjectName(tenchanDuLieuIC14);
+
+            lopChuakhungCauHinhDuLieu14->addWidget(chanDuLieuIC14[i][j], i, j);
+        }
+    }
+    int *state14[14]; // 14 biến trạng thái cho 14 nút
+    // Thiết lập toàn bộ mảng state14 bằng 0
+    for (int i = 0; i < 14; ++i) {
+        state14[i] = new int(0);
+    }
+
+    for (int i = 0; i < 7; ++i) {
+        connect(chanDuLieuIC14[i][0], &QPushButton::clicked, [i, this, state14]() {
+            // Thiết lập trạng thái ban đầu
+            if (*state14[i] == 0) {
+                chanDuLieuIC14[i][0]->setText("0");
+                //            ->setEnabled(false); // Tắt chức năng nút
+                chanDuLieuIC14[i][0]->setStyleSheet(
+                    "background-color: red; border-radius: 16px;"
+                    "font-size: 16px; color: white; font-weight: bold; border: 1px solid blue;");
+            } else if (*state14[i] == 1) {
+                chanDuLieuIC14[i][0]->setText("1");
+                chanDuLieuIC14[i][0]->setStyleSheet(
+                    "background-color: #009900; border-radius: 16px;"
+                    "font-size: 16px; color: white; font-weight: bold; border: 1px solid blue;");
+            } else if (*state14[i] == 2) {
+                chanDuLieuIC14[i][0]->setText("Z");
+                chanDuLieuIC14[i][0]->setStyleSheet(
+                    "background-color: grey; border-radius: 16px;"
+                    "font-size: 16px; color: white; font-weight: bold; border: 1px solid blue;");
+            }
+            *state14[i] = (*state14[i] + 1) % 3;
+        });
+    }
+    for (int i = 0; i < 7; ++i) {
+        connect(chanDuLieuIC14[i][2], &QPushButton::clicked, [i, this, state14]() {
+            // Thiết lập trạng thái ban đầu
+            if (*state14[i + 7] == 0) {
+                chanDuLieuIC14[i][2]->setText("0");
+                //            ->setEnabled(false); // Tắt chức năng nút
+                chanDuLieuIC14[i][2]->setStyleSheet(
+                    "background-color: red; border-radius: 16px; border: 1px solid blue;"
+                    "font-size: 16px; color: white; font-weight: bold;");
+            } else if (*state14[i + 7] == 1) {
+                chanDuLieuIC14[i][2]->setText("1");
+                chanDuLieuIC14[i][2]->setStyleSheet(
+                    "background-color: #009900; border-radius: 16px; "
+                    "font-size: 16px; color: white; font-weight: bold; border: 1px solid blue;");
+            } else if (*state14[i + 7] == 2) {
+                chanDuLieuIC14[i][2]->setText("Z");
+                chanDuLieuIC14[i][2]->setStyleSheet(
+                    "background-color: grey; border-radius: 16px; "
+                    "font-size: 16px; color: white; font-weight: bold; border: 1px solid blue;");
+            }
+            *state14[i + 7] = (*state14[i + 7] + 1) % 3;
+        });
+    }
+
+    QPushButton *finish = new QPushButton("Hoàn thành");
+    finish->setStyleSheet(
+        "background-color: #009900;font-size: 16px;font-weight: bold; color: white");
     QPushButton *back = new QPushButton("Quay lại");
-    QVBoxLayout *lopCauHinhDuLieu = new QVBoxLayout;
-    lopCauHinhDuLieu->addWidget(finish);
-    lopCauHinhDuLieu->addWidget(back);
+    back->setStyleSheet(
+        "background-color: #009900;font-size: 16px;font-weight: bold; color: white");
+    QHBoxLayout *lopCauHinhDuLieu = new QHBoxLayout;
+    QHBoxLayout *lopNutNhanCauHinhDuLieu = new QHBoxLayout;
+
+    lopNutNhanCauHinhDuLieu->addWidget(finish);
+    lopNutNhanCauHinhDuLieu->addWidget(back);
+    lopCauHinhDuLieu->addWidget(splitCauHinhDuLieu);
+
+    khongGianCauHinhDuLieu = new QStackedWidget(splitCauHinhDuLieu);
+
+    khongGianCauHinhDuLieu->addWidget(khungSymIC14);
+    khongGianCauHinhDuLieu->addWidget(khungSymIC16);
+    khongGianCauHinhDuLieu->addWidget(khungSymIC20);
+
+    connect(next,
+            &QPushButton::clicked,
+            [soChanIC, this, khungSymIC20, khungSymIC16, khungSymIC14]() {
+                if (soChanIC->currentText() == " 14 Chân") {
+                    khongGianCauHinhDuLieu->setCurrentWidget(khungSymIC14);
+                } else if (soChanIC->currentText() == " 16 Chân") {
+                    khongGianCauHinhDuLieu->setCurrentWidget(khungSymIC16);
+                } else if (soChanIC->currentText() == " 20 Chân") {
+                    khongGianCauHinhDuLieu->setCurrentWidget(khungSymIC20);
+                }
+            });
+
+    lopCauHinhDuLieu->addLayout(lopNutNhanCauHinhDuLieu);
     trangCauHinhDuLieu->setLayout(lopCauHinhDuLieu);
 
     connect(finish, SIGNAL(clicked(bool)), this, SLOT(opComplete()));
@@ -704,14 +1013,15 @@ TaoThuVien::TaoThuVien()
         khongGianTaoThuVien->setCurrentWidget(trangCauHinhChan);
     });
 
+    //    ======================================================================
+    khongGianTaoThuVien = new QStackedWidget;
     khongGianTaoThuVien->addWidget(trangCauHinhChan);
     khongGianTaoThuVien->addWidget(trangCauHinhDuLieu);
     khongGianTaoThuVien->setCurrentWidget(trangCauHinhChan);
 
     QVBoxLayout *lopTaoThuVien = new QVBoxLayout;
     lopTaoThuVien->addWidget(khongGianTaoThuVien);
-    QLabel *a = new QLabel("Tạo Thư Viện");
-    lopTaoThuVien->addWidget(a);
+    lopTaoThuVien->addWidget(new QLabel("Tạo Thư Viện"));
     this->setLayout(lopTaoThuVien);
 }
 void TaoThuVien::opTrangCauHinhDuLieu()
@@ -726,8 +1036,12 @@ void TaoThuVien::opTrangCauHinhChan()
     bangHienThiThuocTinhIC->clear();
     tenIC->clear();
     moTaIC->clear();
+    for (int i = 0; i < 10; ++i) {
+        for (int j = 0; j < 3; j += 2) {
+            chanSocketIC[i][j]->setText("NC");
+        }
+    }
 }
-
 void TaoThuVien::opComplete()
 {
     QMessageBox::information(this, "Thông báo", "Tạo thư viện hoàn tất");

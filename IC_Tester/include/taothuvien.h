@@ -33,6 +33,11 @@ private:
     QComboBox *congNgheBanDan;
     QGridLayout *lopHienThiThuocTinhIC;
     QLabel *bangHienThiThuocTinhIC;
+    QLabel *chanSocketIC[10][3];
+    QPushButton *chanDuLieuIC20[10][3];
+    QPushButton *chanDuLieuIC16[8][3];
+    QPushButton *chanDuLieuIC14[7][3];
+    QStackedWidget *khongGianCauHinhDuLieu;
 };
 
 #endif // TAOTHUVIEN_H

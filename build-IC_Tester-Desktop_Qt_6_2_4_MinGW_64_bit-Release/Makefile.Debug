@@ -19,7 +19,7 @@ CXXFLAGS      = -fno-keep-inline-dllexport -g -std=gnu++1z -Wall -Wextra -Wextra
 INCPATH       = -I../IC_Tester -I. -I../IC_Tester/include -IX:/QT_Creator/6.2.4/mingw_64/include -IX:/QT_Creator/6.2.4/mingw_64/include/QtWidgets -IX:/QT_Creator/6.2.4/mingw_64/include/QtGui -IX:/QT_Creator/6.2.4/mingw_64/include/QtCore -Idebug -I/include -IX:/QT_Creator/6.2.4/mingw_64/mkspecs/win32-g++ 
 LINKER      =        g++
 LFLAGS        =        -Wl,-subsystem,windows -mthreads
-LIBS        =        X:\QT_Creator\6.2.4\mingw_64\lib\libQt6Widgets.a X:\QT_Creator\6.2.4\mingw_64\lib\libQt6Gui.a X:\QT_Creator\6.2.4\mingw_64\lib\libQt6Core.a -lmingw32 X:\QT_Creator\6.2.4\mingw_64\lib\libQt6EntryPoint.a -lshell32  
+LIBS        =        X:\QT_Creator\6.2.4\mingw_64\lib\libQt6Widgets.a X:\QT_Creator\6.2.4\mingw_64\lib\libQt6Gui.a X:\QT_Creator\6.2.4\mingw_64\lib\libQt6Core.a debug\IC_Tester_resource_res.o -lmingw32 X:\QT_Creator\6.2.4\mingw_64\lib\libQt6EntryPoint.a -lshell32  
 QMAKE         = X:\QT_Creator\6.2.4\mingw_64\bin\qmake.exe
 DEL_FILE      = del
 CHK_DIR_EXISTS= if not exist
@@ -40,7 +40,7 @@ IDC           = idc
 IDL           = midl
 ZIP           = zip -r -9
 DEF_FILE      = 
-RES_FILE      = 
+RES_FILE      = debug\IC_Tester_resource_res.o
 SED           = $(QMAKE) -install sed
 MOVE          = move
 
@@ -100,8 +100,11 @@ DESTDIR_TARGET = debug\IC_Tester.exe
 first: all
 all: Makefile.Debug  debug/IC_Tester.exe
 
-debug/IC_Tester.exe: X:/QT_Creator/6.2.4/mingw_64/lib/libQt6Widgets.a X:/QT_Creator/6.2.4/mingw_64/lib/libQt6Gui.a X:/QT_Creator/6.2.4/mingw_64/lib/libQt6Core.a X:/QT_Creator/6.2.4/mingw_64/lib/libQt6EntryPoint.a $(OBJECTS) 
+debug/IC_Tester.exe: X:/QT_Creator/6.2.4/mingw_64/lib/libQt6Widgets.a X:/QT_Creator/6.2.4/mingw_64/lib/libQt6Gui.a X:/QT_Creator/6.2.4/mingw_64/lib/libQt6Core.a X:/QT_Creator/6.2.4/mingw_64/lib/libQt6EntryPoint.a $(OBJECTS) debug/IC_Tester_resource_res.o
 	$(LINKER) $(LFLAGS) -o $(DESTDIR_TARGET) @object_script.IC_Tester.Debug  $(LIBS)
+
+debug/IC_Tester_resource_res.o: IC_Tester_resource.rc
+	windres -i IC_Tester_resource.rc -o debug\IC_Tester_resource_res.o --include-dir=. $(DEFINES)
 
 qmake: FORCE
 	@$(QMAKE) -o Makefile.Debug ..\IC_Tester\IC_Tester.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug"
@@ -113,6 +116,7 @@ dist:
 
 clean: compiler_clean 
 	-$(DEL_FILE) debug\huongdan.o debug\kiemtra.o debug\main.o debug\mainwindow.o debug\taothuvien.o debug\xemlichsu.o debug\xemthuvien.o debug\qrc_resource.o debug\moc_huongdan.o debug\moc_kiemtra.o debug\moc_mainwindow.o debug\moc_taothuvien.o debug\moc_xemlichsu.o debug\moc_xemthuvien.o
+	-$(DEL_FILE) debug\IC_Tester_resource_res.o
 
 distclean: clean 
 	-$(DEL_FILE) .qmake.stash
@@ -144,6 +148,7 @@ debug/qrc_resource.cpp: ../IC_Tester/resource.qrc \
 		../IC_Tester/resources/XemThuVien.png \
 		../IC_Tester/resources/LienHe.png \
 		../IC_Tester/resources/SoftwareIcon.png \
+		../IC_Tester/resources/SoftwareIcon.ico \
 		../IC_Tester/resources/Tele.png \
 		../IC_Tester/resources/TaoThuVien.png \
 		../IC_Tester/resources/IC14.png \

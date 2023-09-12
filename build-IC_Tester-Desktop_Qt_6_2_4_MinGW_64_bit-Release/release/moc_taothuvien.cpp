@@ -7,7 +7,7 @@
 *****************************************************************************/
 
 #include <memory>
-#include "../../../Git new/IC-Tester-Software/IC_Tester/include/taothuvien.h"
+#include "../../IC_Tester/include/taothuvien.h"
 #include <QtGui/qtextcursor.h>
 #include <QScreen>
 #include <QtCore/qbytearray.h>

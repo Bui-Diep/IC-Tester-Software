@@ -7,7 +7,7 @@
 *****************************************************************************/
 
 #include <memory>
-#include "../../../Git new/IC-Tester-Software/IC_Tester/include/mainwindow.h"
+#include "../../IC_Tester/include/mainwindow.h"
 #include <QtGui/qtextcursor.h>
 #include <QScreen>
 #include <QtCore/qbytearray.h>

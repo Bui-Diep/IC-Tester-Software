@@ -35,3 +35,5 @@ RESOURCES += \
     resource.qrc
 
 FORMS +=
+
+RC_ICONS = resources/SoftwareIcon.ico

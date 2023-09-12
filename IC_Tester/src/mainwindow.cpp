@@ -5,7 +5,6 @@ MainWindow::MainWindow(QWidget *parent)
 {
     //    tuy chinh giao diện Home =========================================================
     setWindowTitle("IC Tester Development Version");
-    setWindowIcon(QIcon("://resources/SoftwareIcon.png"));
 
     QGridLayout *lopHome = new QGridLayout;
     QHBoxLayout *lopWellcome = new QHBoxLayout;
@@ -93,7 +92,8 @@ MainWindow::MainWindow(QWidget *parent)
         QDesktopServices::openUrl(QUrl("https://www.facebook.com/buidiep01/"));
     });
     QObject::connect(gH, &QAction::triggered, [&]() {
-        QDesktopServices::openUrl(QUrl("https://github.com/Bui-Diep"));
+        QDesktopServices::openUrl(
+            QUrl("https://github.com/Bui-Diep/IC-Tester-Software/tree/B%C3%B9i_%C4%90i%E1%BB%87p"));
     });
     lopNutNhan->addWidget(nutKiemTra);
     //    lopNutNhan->addWidget(space);
