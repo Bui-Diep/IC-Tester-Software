@@ -2,11 +2,27 @@
 #define TAOTHUVIEN_H
 #include <QtWidgets>
 
+class MyButton : public QPushButton
+{
+    Q_OBJECT
+
+public:
+    MyButton(const QString &text, QWidget *parent = nullptr);
+
+protected:
+    void enterEvent(QEnterEvent *event) override;
+    void leaveEvent(QEvent *event) override;
+signals:
+    void entered();
+    void left();
+};
+
 class TaoThuVien : public QWidget
 {
     Q_OBJECT
 public:
     TaoThuVien();
+
 public slots:
     void opTrangCauHinhDuLieu();
     void opTrangCauHinhChan();

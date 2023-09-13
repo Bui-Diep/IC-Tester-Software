@@ -1,5 +1,23 @@
 #include "taothuvien.h"
 
+MyButton::MyButton(const QString &text, QWidget *parent)
+    : QPushButton(text, parent)
+{
+    setText(text);
+}
+
+void MyButton::enterEvent(QEnterEvent *event)
+{
+    QPushButton::enterEvent(event);
+    emit entered();
+}
+
+void MyButton::leaveEvent(QEvent *event)
+{
+    QPushButton::leaveEvent(event);
+    emit left();
+}
+
 TaoThuVien::TaoThuVien()
 {
     //=============================================================
@@ -48,6 +66,11 @@ TaoThuVien::TaoThuVien()
     lopThuocTinh->addRow("Mô tả:", moTaIC);
     moTaIC->setPlaceholderText("Mô tả IC tại đây ...");
     connect(nutHienSym, &QPushButton::clicked, [congNgheBanDan, soChanIC, this]() {
+        for (int i = 0; i < 10; ++i) {
+            for (int j = 0; j < 3; j += 2) {
+                chanSocketIC[i][j]->setText("NC");
+            }
+        }
         if (!tenIC->text().isEmpty()) {
             QString textMoTaIC;
             if (!moTaIC->toPlainText().isEmpty()) {
@@ -102,316 +125,194 @@ TaoThuVien::TaoThuVien()
     lopGanChan16 = new QGridLayout;
     lopGanChan20 = new QGridLayout;
 
-    //    chan 1
-    QMenu *pinType1 = new QMenu;
-    pinType1->addAction(new QAction("VCC"));
-    pinType1->addAction(new QAction("GND"));
-    pinType1->addAction(new QAction("CLK"));
-    pinType1->addAction(new QAction("DIN"));
-    pinType1->addAction(new QAction("DOUT"));
-    pinType1->addAction(new QAction("NC"));
-    QPushButton *pin1_14 = new QPushButton("Pin 1");
-    QPushButton *pin1_16 = new QPushButton("Pin 1");
-    QPushButton *pin1_20 = new QPushButton("Pin 1");
-    pin1_14->setMenu(pinType1);
-    pin1_16->setMenu(pinType1);
-    pin1_20->setMenu(pinType1);
-    lopGanChan14->addWidget(pin1_14, 0, 0);
-    lopGanChan16->addWidget(pin1_16, 0, 0);
-    lopGanChan20->addWidget(pin1_20, 0, 0);
-    //    chan 2
-    QMenu *pinType2 = new QMenu;
-    pinType2->addAction(new QAction("VCC"));
-    pinType2->addAction(new QAction("GND"));
-    pinType2->addAction(new QAction("CLK"));
-    pinType2->addAction(new QAction("DIN"));
-    pinType2->addAction(new QAction("DOUT"));
-    pinType2->addAction(new QAction("NC"));
-    QPushButton *pin2_14 = new QPushButton("Pin 2");
-    QPushButton *pin2_16 = new QPushButton("Pin 2");
-    QPushButton *pin2_20 = new QPushButton("Pin 2");
-    pin2_14->setMenu(pinType2);
-    pin2_16->setMenu(pinType2);
-    pin2_20->setMenu(pinType2);
-    lopGanChan14->addWidget(pin2_14, 1, 0);
-    lopGanChan16->addWidget(pin2_16, 1, 0);
-    lopGanChan20->addWidget(pin2_20, 1, 0);
-    //    chan 3
-    QMenu *pinType3 = new QMenu;
-    pinType3->addAction(new QAction("VCC"));
-    pinType3->addAction(new QAction("GND"));
-    pinType3->addAction(new QAction("CLK"));
-    pinType3->addAction(new QAction("DIN"));
-    pinType3->addAction(new QAction("DOUT"));
-    pinType3->addAction(new QAction("NC"));
-    QPushButton *pin3_14 = new QPushButton("Pin 3");
-    QPushButton *pin3_16 = new QPushButton("Pin 3");
-    QPushButton *pin3_20 = new QPushButton("Pin 3");
-    pin3_14->setMenu(pinType3);
-    pin3_16->setMenu(pinType3);
-    pin3_20->setMenu(pinType3);
-    lopGanChan14->addWidget(pin3_14, 2, 0);
-    lopGanChan16->addWidget(pin3_16, 2, 0);
-    lopGanChan20->addWidget(pin3_20, 2, 0);
-    //    chan 4
-    QMenu *pinType4 = new QMenu;
-    pinType4->addAction(new QAction("VCC"));
-    pinType4->addAction(new QAction("GND"));
-    pinType4->addAction(new QAction("CLK"));
-    pinType4->addAction(new QAction("DIN"));
-    pinType4->addAction(new QAction("DOUT"));
-    pinType4->addAction(new QAction("NC"));
-    QPushButton *pin4_14 = new QPushButton("Pin 4");
-    QPushButton *pin4_16 = new QPushButton("Pin 4");
-    QPushButton *pin4_20 = new QPushButton("Pin 4");
-    pin4_14->setMenu(pinType4);
-    pin4_16->setMenu(pinType4);
-    pin4_20->setMenu(pinType4);
-    lopGanChan14->addWidget(pin4_14, 3, 0);
-    lopGanChan16->addWidget(pin4_16, 3, 0);
-    lopGanChan20->addWidget(pin4_20, 3, 0);
-    //    chan 5
-    QMenu *pinType5 = new QMenu;
-    pinType5->addAction(new QAction("VCC"));
-    pinType5->addAction(new QAction("GND"));
-    pinType5->addAction(new QAction("CLK"));
-    pinType5->addAction(new QAction("DIN"));
-    pinType5->addAction(new QAction("DOUT"));
-    pinType5->addAction(new QAction("NC"));
-    QPushButton *pin5_14 = new QPushButton("Pin 5");
-    QPushButton *pin5_16 = new QPushButton("Pin 5");
-    QPushButton *pin5_20 = new QPushButton("Pin 5");
-    pin5_14->setMenu(pinType5);
-    pin5_16->setMenu(pinType5);
-    pin5_20->setMenu(pinType5);
-    lopGanChan14->addWidget(pin5_14, 4, 0);
-    lopGanChan16->addWidget(pin5_16, 4, 0);
-    lopGanChan20->addWidget(pin5_20, 4, 0);
-    //    chan 6
-    QMenu *pinType6 = new QMenu;
-    pinType6->addAction(new QAction("VCC"));
-    pinType6->addAction(new QAction("GND"));
-    pinType6->addAction(new QAction("CLK"));
-    pinType6->addAction(new QAction("DIN"));
-    pinType6->addAction(new QAction("DOUT"));
-    pinType6->addAction(new QAction("NC"));
-    QPushButton *pin6_14 = new QPushButton("Pin 6");
-    QPushButton *pin6_16 = new QPushButton("Pin 6");
-    QPushButton *pin6_20 = new QPushButton("Pin 6");
-    pin6_14->setMenu(pinType6);
-    pin6_16->setMenu(pinType6);
-    pin6_20->setMenu(pinType6);
-    lopGanChan14->addWidget(pin6_14, 5, 0);
-    lopGanChan16->addWidget(pin6_16, 5, 0);
-    lopGanChan20->addWidget(pin6_20, 5, 0);
-    //    chan 7
-    QMenu *pinType7 = new QMenu;
-    pinType7->addAction(new QAction("VCC"));
-    pinType7->addAction(new QAction("GND"));
-    pinType7->addAction(new QAction("CLK"));
-    pinType7->addAction(new QAction("DIN"));
-    pinType7->addAction(new QAction("DOUT"));
-    pinType7->addAction(new QAction("NC"));
-    QPushButton *pin7_14 = new QPushButton("Pin 7");
-    QPushButton *pin7_16 = new QPushButton("Pin 7");
-    QPushButton *pin7_20 = new QPushButton("Pin 7");
-    pin7_14->setMenu(pinType7);
-    pin7_16->setMenu(pinType7);
-    pin7_20->setMenu(pinType7);
-    lopGanChan14->addWidget(pin7_14, 6, 0);
-    lopGanChan16->addWidget(pin7_16, 6, 0);
-    lopGanChan20->addWidget(pin7_20, 6, 0);
-    //    chan 8
-    QMenu *pinType8 = new QMenu;
-    pinType8->addAction(new QAction("VCC"));
-    pinType8->addAction(new QAction("GND"));
-    pinType8->addAction(new QAction("CLK"));
-    pinType8->addAction(new QAction("DIN"));
-    pinType8->addAction(new QAction("DOUT"));
-    pinType8->addAction(new QAction("NC"));
-    QPushButton *pin8_14 = new QPushButton("Pin 8");
-    QPushButton *pin8_16 = new QPushButton("Pin 8");
-    QPushButton *pin8_20 = new QPushButton("Pin 8");
-    pin8_14->setMenu(pinType8);
-    pin8_16->setMenu(pinType8);
-    pin8_20->setMenu(pinType8);
-    lopGanChan14->addWidget(pin8_14, 6, 2);
-    lopGanChan16->addWidget(pin8_16, 7, 0);
-    lopGanChan20->addWidget(pin8_20, 7, 0);
-    //    Chan 9
-    QMenu *pinType9 = new QMenu;
-    pinType9->addAction(new QAction("VCC"));
-    pinType9->addAction(new QAction("GND"));
-    pinType9->addAction(new QAction("CLK"));
-    pinType9->addAction(new QAction("DIN"));
-    pinType9->addAction(new QAction("DOUT"));
-    pinType9->addAction(new QAction("NC"));
-    QPushButton *pin9_14 = new QPushButton("Pin 9");
-    QPushButton *pin9_16 = new QPushButton("Pin 9");
-    QPushButton *pin9_20 = new QPushButton("Pin 9");
-    pin9_14->setMenu(pinType9);
-    pin9_16->setMenu(pinType9);
-    pin9_20->setMenu(pinType9);
-    lopGanChan14->addWidget(pin9_14, 5, 2);
-    lopGanChan16->addWidget(pin9_16, 7, 2);
-    lopGanChan20->addWidget(pin9_20, 8, 0);
-    //    Chan 10
-    QMenu *pinType10 = new QMenu;
-    pinType10->addAction(new QAction("VCC"));
-    pinType10->addAction(new QAction("GND"));
-    pinType10->addAction(new QAction("CLK"));
-    pinType10->addAction(new QAction("DIN"));
-    pinType10->addAction(new QAction("DOUT"));
-    pinType10->addAction(new QAction("NC"));
-    QPushButton *pin10_14 = new QPushButton("Pin 10");
-    QPushButton *pin10_16 = new QPushButton("Pin 10");
-    QPushButton *pin10_20 = new QPushButton("Pin 10");
-    pin10_14->setMenu(pinType10);
-    pin10_16->setMenu(pinType10);
-    pin10_20->setMenu(pinType10);
-    lopGanChan14->addWidget(pin10_14, 4, 2);
-    lopGanChan16->addWidget(pin10_16, 6, 2);
-    lopGanChan20->addWidget(pin10_20, 9, 0);
-    //    Chan 11
-    QMenu *pinType11 = new QMenu;
-    pinType11->addAction(new QAction("VCC"));
-    pinType11->addAction(new QAction("GND"));
-    pinType11->addAction(new QAction("CLK"));
-    pinType11->addAction(new QAction("DIN"));
-    pinType11->addAction(new QAction("DOUT"));
-    pinType11->addAction(new QAction("NC"));
-    QPushButton *pin11_14 = new QPushButton("Pin 11");
-    QPushButton *pin11_16 = new QPushButton("Pin 11");
-    QPushButton *pin11_20 = new QPushButton("Pin 11");
-    pin11_14->setMenu(pinType11);
-    pin11_16->setMenu(pinType11);
-    pin11_20->setMenu(pinType11);
-    lopGanChan14->addWidget(pin11_14, 3, 2);
-    lopGanChan16->addWidget(pin11_16, 5, 2);
-    lopGanChan20->addWidget(pin11_20, 9, 2);
-    //    Chan 12
-    QMenu *pinType12 = new QMenu;
-    pinType12->addAction(new QAction("VCC"));
-    pinType12->addAction(new QAction("GND"));
-    pinType12->addAction(new QAction("CLK"));
-    pinType12->addAction(new QAction("DIN"));
-    pinType12->addAction(new QAction("DOUT"));
-    pinType12->addAction(new QAction("NC"));
-    QPushButton *pin12_14 = new QPushButton("Pin 12");
-    QPushButton *pin12_16 = new QPushButton("Pin 12");
-    QPushButton *pin12_20 = new QPushButton("Pin 12");
-    pin12_14->setMenu(pinType12);
-    pin12_16->setMenu(pinType12);
-    pin12_20->setMenu(pinType12);
-    lopGanChan14->addWidget(pin12_14, 2, 2);
-    lopGanChan16->addWidget(pin12_16, 4, 2);
-    lopGanChan20->addWidget(pin12_20, 8, 2);
-    //    Chan 13
-    QMenu *pinType13 = new QMenu;
-    pinType13->addAction(new QAction("VCC"));
-    pinType13->addAction(new QAction("GND"));
-    pinType13->addAction(new QAction("CLK"));
-    pinType13->addAction(new QAction("DIN"));
-    pinType13->addAction(new QAction("DOUT"));
-    pinType13->addAction(new QAction("NC"));
-    QPushButton *pin13_14 = new QPushButton("Pin 13");
-    QPushButton *pin13_16 = new QPushButton("Pin 13");
-    QPushButton *pin13_20 = new QPushButton("Pin 13");
-    pin13_14->setMenu(pinType13);
-    pin13_16->setMenu(pinType13);
-    pin13_20->setMenu(pinType13);
-    lopGanChan14->addWidget(pin13_14, 1, 2);
-    lopGanChan16->addWidget(pin13_16, 3, 2);
-    lopGanChan20->addWidget(pin13_20, 7, 2);
-    //    Chan 14
-    QMenu *pinType14 = new QMenu;
-    pinType14->addAction(new QAction("VCC"));
-    pinType14->addAction(new QAction("GND"));
-    pinType14->addAction(new QAction("CLK"));
-    pinType14->addAction(new QAction("DIN"));
-    pinType14->addAction(new QAction("DOUT"));
-    pinType14->addAction(new QAction("NC"));
-    QPushButton *pin14_14 = new QPushButton("Pin 14");
-    QPushButton *pin14_16 = new QPushButton("Pin 14");
-    QPushButton *pin14_20 = new QPushButton("Pin 14");
-    pin14_14->setMenu(pinType14);
-    pin14_16->setMenu(pinType14);
-    pin14_20->setMenu(pinType14);
-    lopGanChan14->addWidget(pin14_14, 0, 2);
-    lopGanChan16->addWidget(pin14_16, 2, 2);
-    lopGanChan20->addWidget(pin14_20, 6, 2);
-    //    Chan 15
-    QMenu *pinType15 = new QMenu;
-    pinType15->addAction(new QAction("VCC"));
-    pinType15->addAction(new QAction("GND"));
-    pinType15->addAction(new QAction("CLK"));
-    pinType15->addAction(new QAction("DIN"));
-    pinType15->addAction(new QAction("DOUT"));
-    pinType15->addAction(new QAction("NC"));
-    QPushButton *pin15_16 = new QPushButton("Pin 15");
-    QPushButton *pin15_20 = new QPushButton("Pin 15");
-    pin15_16->setMenu(pinType15);
-    pin15_20->setMenu(pinType15);
-    lopGanChan16->addWidget(pin15_16, 1, 2);
-    lopGanChan20->addWidget(pin15_20, 5, 2);
-    //    Chan 16
-    QMenu *pinType16 = new QMenu;
-    pinType16->addAction(new QAction("VCC"));
-    pinType16->addAction(new QAction("GND"));
-    pinType16->addAction(new QAction("CLK"));
-    pinType16->addAction(new QAction("DIN"));
-    pinType16->addAction(new QAction("DOUT"));
-    pinType16->addAction(new QAction("NC"));
-    QPushButton *pin16_16 = new QPushButton("Pin 16");
-    QPushButton *pin16_20 = new QPushButton("Pin 16");
-    pin16_16->setMenu(pinType16);
-    pin16_20->setMenu(pinType16);
-    lopGanChan16->addWidget(pin16_16, 0, 2);
-    lopGanChan20->addWidget(pin16_20, 4, 2);
-    //    Chan 17
-    QMenu *pinType17 = new QMenu;
-    pinType17->addAction(new QAction("VCC"));
-    pinType17->addAction(new QAction("GND"));
-    pinType17->addAction(new QAction("CLK"));
-    pinType17->addAction(new QAction("DIN"));
-    pinType17->addAction(new QAction("DOUT"));
-    pinType17->addAction(new QAction("NC"));
-    QPushButton *pin17 = new QPushButton("Pin 17");
-    pin17->setMenu(pinType17);
-    lopGanChan20->addWidget(pin17, 3, 2);
-    //    Chan 18
-    QMenu *pinType18 = new QMenu;
-    pinType18->addAction(new QAction("VCC"));
-    pinType18->addAction(new QAction("GND"));
-    pinType18->addAction(new QAction("CLK"));
-    pinType18->addAction(new QAction("DIN"));
-    pinType18->addAction(new QAction("DOUT"));
-    pinType18->addAction(new QAction("NC"));
-    QPushButton *pin18 = new QPushButton("Pin 18");
-    pin18->setMenu(pinType18);
-    lopGanChan20->addWidget(pin18, 2, 2);
-    //    Chan 19
-    QMenu *pinType19 = new QMenu;
-    pinType19->addAction(new QAction("VCC"));
-    pinType19->addAction(new QAction("GND"));
-    pinType19->addAction(new QAction("CLK"));
-    pinType19->addAction(new QAction("DIN"));
-    pinType19->addAction(new QAction("DOUT"));
-    pinType19->addAction(new QAction("NC"));
-    QPushButton *pin19 = new QPushButton("Pin 19");
-    pin19->setMenu(pinType19);
-    lopGanChan20->addWidget(pin19, 1, 2);
-    //    Chan 20
-    QMenu *pinType20 = new QMenu;
-    pinType20->addAction(new QAction("VCC"));
-    pinType20->addAction(new QAction("GND"));
-    pinType20->addAction(new QAction("CLK"));
-    pinType20->addAction(new QAction("DIN"));
-    pinType20->addAction(new QAction("DOUT"));
-    pinType20->addAction(new QAction("NC"));
-    QPushButton *pin20 = new QPushButton("Pin 20");
-    pin20->setMenu(pinType20);
-    lopGanChan20->addWidget(pin20, 0, 2);
+    QMenu *pinType14[14];
+    MyButton *pin14L[7];
+    for (int i = 0; i < 7; ++i) {
+        pinType14[i] = new QMenu;
+        pinType14[i]->addAction(new QAction("VCC"));
+        pinType14[i]->addAction(new QAction("GND"));
+        pinType14[i]->addAction(new QAction("CLK"));
+        pinType14[i]->addAction(new QAction("DIN"));
+        pinType14[i]->addAction(new QAction("DOUT"));
+        pinType14[i]->addAction(new QAction("NC"));
+        QString pL = QString::number(i + 1);
+        pin14L[i] = new MyButton("Pin " + pL);
+        pin14L[i]->setMenu(pinType14[i]);
+        lopGanChan14->addWidget(pin14L[i], i, 0);
+    }
+
+    QPushButton *pin14R[7];
+    for (int i = 0; i < 7; ++i) {
+        pinType14[i + 7] = new QMenu;
+        pinType14[i + 7]->addAction(new QAction("VCC"));
+        pinType14[i + 7]->addAction(new QAction("GND"));
+        pinType14[i + 7]->addAction(new QAction("CLK"));
+        pinType14[i + 7]->addAction(new QAction("DIN"));
+        pinType14[i + 7]->addAction(new QAction("DOUT"));
+        pinType14[i + 7]->addAction(new QAction("NC"));
+        QString pR = QString::number(14 - i);
+        pin14R[i] = new QPushButton("Pin " + pR);
+        pin14R[i]->setMenu(pinType14[i + 7]);
+        lopGanChan14->addWidget(pin14R[i], i, 2);
+    }
+
+    QList<QAction *> acPin14[14];
+    for (int i = 0; i < 14; ++i) {
+        acPin14[i] = pinType14[i]->actions();
+    }
+
+    QAction *acTick14[14];
+    for (int n = 0; n < 7; ++n) {
+        for (int i = 0; i < 6; ++i) {
+            acTick14[n] = acPin14[n].at(i);
+            connect(acTick14[n], &QAction::triggered, [this, acTick14, n]() {
+                chanSocketIC[n][0]->setText(acTick14[n]->text());
+            });
+        }
+    }
+    for (int n = 0; n < 7; ++n) {
+        for (int i = 0; i < 6; ++i) {
+            acTick14[n + 7] = acPin14[n + 7].at(i);
+            connect(acTick14[n + 7], &QAction::triggered, [this, acTick14, n]() {
+                chanSocketIC[n][2]->setText(acTick14[n + 7]->text());
+            });
+        }
+    }
+    for (int i = 0; i < 7; ++i) {
+        pin14L[i]->setCursor(QCursor(Qt::PointingHandCursor));
+        pin14L[i]->setStyleSheet("QPushButton:hover { background-color: yellow; }");
+        connect(pin14L[i], &MyButton::entered, [i, this]() {
+            chanSocketIC[i][0]->setStyleSheet("background-color: yellow;");
+        });
+        connect(pin14L[i], &MyButton::pressed, [i, this]() {
+            chanSocketIC[i][0]->setStyleSheet("background-color: yellow;");
+        });
+        connect(pin14L[i], &MyButton::left, [i, this]() {
+            chanSocketIC[i][0]->setStyleSheet("background-color: white;");
+        });
+        pin14R[i]->setCursor(QCursor(Qt::PointingHandCursor));
+        pin14R[i]->setStyleSheet("QPushButton:hover { background-color: yellow; }");
+    }
+
+    QMenu *pinType16[16];
+    QPushButton *pin16L[8];
+    for (int i = 0; i < 8; ++i) {
+        pinType16[i] = new QMenu;
+        pinType16[i]->addAction(new QAction("VCC"));
+        pinType16[i]->addAction(new QAction("GND"));
+        pinType16[i]->addAction(new QAction("CLK"));
+        pinType16[i]->addAction(new QAction("DIN"));
+        pinType16[i]->addAction(new QAction("DOUT"));
+        pinType16[i]->addAction(new QAction("NC"));
+        QString pL = QString::number(i + 1);
+        pin16L[i] = new QPushButton("Pin " + pL);
+        pin16L[i]->setMenu(pinType16[i]);
+        lopGanChan16->addWidget(pin16L[i], i, 0);
+    }
+
+    QPushButton *pin16R[8];
+    for (int i = 0; i < 8; ++i) {
+        pinType16[i + 8] = new QMenu;
+        pinType16[i + 8]->addAction(new QAction("VCC"));
+        pinType16[i + 8]->addAction(new QAction("GND"));
+        pinType16[i + 8]->addAction(new QAction("CLK"));
+        pinType16[i + 8]->addAction(new QAction("DIN"));
+        pinType16[i + 8]->addAction(new QAction("DOUT"));
+        pinType16[i + 8]->addAction(new QAction("NC"));
+        QString pR = QString::number(16 - i);
+        pin16R[i] = new QPushButton("Pin " + pR);
+        pin16R[i]->setMenu(pinType16[i + 8]);
+        lopGanChan16->addWidget(pin16R[i], i, 2);
+    }
+
+    QList<QAction *> acPin16[16];
+    for (int i = 0; i < 16; ++i) {
+        acPin16[i] = pinType16[i]->actions();
+    }
+
+    QAction *acTick16[16];
+    for (int n = 0; n < 8; ++n) {
+        for (int i = 0; i < 6; ++i) {
+            acTick16[n] = acPin16[n].at(i);
+            connect(acTick16[n], &QAction::triggered, [this, acTick16, n]() {
+                chanSocketIC[n][0]->setText(acTick16[n]->text());
+            });
+        }
+    }
+    for (int n = 0; n < 8; ++n) {
+        for (int i = 0; i < 6; ++i) {
+            acTick16[n + 8] = acPin16[n + 8].at(i);
+            connect(acTick16[n + 8], &QAction::triggered, [this, acTick16, n]() {
+                chanSocketIC[n][2]->setText(acTick16[n + 8]->text());
+            });
+        }
+    }
+    for (int i = 0; i < 8; ++i) {
+        pin16L[i]->setCursor(QCursor(Qt::PointingHandCursor));
+        pin16L[i]->setStyleSheet("QPushButton:hover { background-color: yellow; }");
+        pin16R[i]->setCursor(QCursor(Qt::PointingHandCursor));
+        pin16R[i]->setStyleSheet("QPushButton:hover { background-color: yellow; }");
+    }
+
+    QMenu *pinType20[20];
+    QPushButton *pin20L[10];
+    for (int i = 0; i < 10; ++i) {
+        pinType20[i] = new QMenu;
+        pinType20[i]->addAction(new QAction("VCC"));
+        pinType20[i]->addAction(new QAction("GND"));
+        pinType20[i]->addAction(new QAction("CLK"));
+        pinType20[i]->addAction(new QAction("DIN"));
+        pinType20[i]->addAction(new QAction("DOUT"));
+        pinType20[i]->addAction(new QAction("NC"));
+        QString pL = QString::number(i + 1);
+        pin20L[i] = new QPushButton("Pin " + pL);
+        pin20L[i]->setMenu(pinType20[i]);
+        lopGanChan20->addWidget(pin20L[i], i, 0);
+    }
+
+    QPushButton *pin20R[10];
+    for (int i = 0; i < 10; ++i) {
+        pinType20[i + 10] = new QMenu;
+        pinType20[i + 10]->addAction(new QAction("VCC"));
+        pinType20[i + 10]->addAction(new QAction("GND"));
+        pinType20[i + 10]->addAction(new QAction("CLK"));
+        pinType20[i + 10]->addAction(new QAction("DIN"));
+        pinType20[i + 10]->addAction(new QAction("DOUT"));
+        pinType20[i + 10]->addAction(new QAction("NC"));
+        QString pR = QString::number(20 - i);
+        pin20R[i] = new QPushButton("Pin " + pR);
+        pin20R[i]->setMenu(pinType20[i + 10]);
+        lopGanChan20->addWidget(pin20R[i], i, 2);
+    }
+
+    QList<QAction *> acPin20[20];
+    for (int i = 0; i < 20; ++i) {
+        acPin20[i] = pinType20[i]->actions();
+    }
+
+    QAction *acTick20[20];
+    for (int n = 0; n < 10; ++n) {
+        for (int i = 0; i < 6; ++i) {
+            acTick20[n] = acPin20[n].at(i);
+            connect(acTick20[n], &QAction::triggered, [this, acTick20, n]() {
+                chanSocketIC[n][0]->setText(acTick20[n]->text());
+            });
+        }
+    }
+    for (int n = 0; n < 10; ++n) {
+        for (int i = 0; i < 6; ++i) {
+            acTick20[n + 10] = acPin20[n + 10].at(i);
+            connect(acTick20[n + 10], &QAction::triggered, [this, acTick20, n]() {
+                chanSocketIC[n][2]->setText(acTick20[n + 10]->text());
+            });
+        }
+    }
+    for (int i = 0; i < 10; ++i) {
+        pin20L[i]->setCursor(QCursor(Qt::PointingHandCursor));
+        pin20L[i]->setStyleSheet("QPushButton:hover { background-color: yellow; }");
+        pin20R[i]->setCursor(QCursor(Qt::PointingHandCursor));
+        pin20R[i]->setStyleSheet("QPushButton:hover { background-color: yellow; }");
+    }
 
     //    chen anh SymIC
     QLabel *imageLabelIC14 = new QLabel;
@@ -491,9 +392,9 @@ TaoThuVien::TaoThuVien()
         for (int j = 0; j < 3; j += 2) {
             chanSocketIC[i][j] = new QLabel("NC");
             chanSocketIC[i][j]->setAlignment(Qt::AlignCenter);
-            chanSocketIC[i][j]->setFixedSize(32, 32);
+            chanSocketIC[i][j]->setFixedSize(40, 28);
             chanSocketIC[i][j]->setStyleSheet(
-                "background-color: white; border-radius: 16px; font-size: 12px;");
+                "background-color: white; border-radius: 12px; font-size: 12px;");
 
             // Đặt tên cho con trỏ dựa trên số đếm i và j
             QString tenChanSocketIC = QString("chanSocKet_%1%2").arg(i).arg(j);
@@ -503,157 +404,6 @@ TaoThuVien::TaoThuVien()
         }
     }
 
-    QList<QAction *> acPin1 = pinType1->actions();
-    QList<QAction *> acPin2 = pinType2->actions();
-    QList<QAction *> acPin3 = pinType3->actions();
-    QList<QAction *> acPin4 = pinType4->actions();
-    QList<QAction *> acPin5 = pinType5->actions();
-    QList<QAction *> acPin6 = pinType6->actions();
-    QList<QAction *> acPin7 = pinType7->actions();
-    QList<QAction *> acPin8 = pinType8->actions();
-    QList<QAction *> acPin9 = pinType9->actions();
-    QList<QAction *> acPin10 = pinType10->actions();
-    QList<QAction *> acPin11 = pinType11->actions();
-    QList<QAction *> acPin12 = pinType12->actions();
-    QList<QAction *> acPin13 = pinType13->actions();
-    QList<QAction *> acPin14 = pinType14->actions();
-    QList<QAction *> acPin15 = pinType15->actions();
-    QList<QAction *> acPin16 = pinType16->actions();
-    QList<QAction *> acPin17 = pinType17->actions();
-    QList<QAction *> acPin18 = pinType18->actions();
-    QList<QAction *> acPin19 = pinType19->actions();
-    QList<QAction *> acPin20 = pinType20->actions();
-
-    for (int i = 0; i < 6; ++i) {
-        QAction *acTick1 = acPin1.at(i);
-        connect(acTick1, &QAction::triggered, [this, acTick1]() {
-            chanSocketIC[0][0]->setText(acTick1->text());
-        });
-        QAction *acTick2 = acPin2.at(i);
-        connect(acTick2, &QAction::triggered, [this, acTick2]() {
-            chanSocketIC[1][0]->setText(acTick2->text());
-        });
-        QAction *acTick3 = acPin3.at(i);
-        connect(acTick3, &QAction::triggered, [this, acTick3]() {
-            chanSocketIC[2][0]->setText(acTick3->text());
-        });
-        QAction *acTick4 = acPin4.at(i);
-        connect(acTick4, &QAction::triggered, [this, acTick4]() {
-            chanSocketIC[3][0]->setText(acTick4->text());
-        });
-        QAction *acTick5 = acPin5.at(i);
-        connect(acTick5, &QAction::triggered, [this, acTick5]() {
-            chanSocketIC[4][0]->setText(acTick5->text());
-        });
-        QAction *acTick6 = acPin6.at(i);
-        connect(acTick6, &QAction::triggered, [this, acTick6]() {
-            chanSocketIC[5][0]->setText(acTick6->text());
-        });
-        QAction *acTick7 = acPin7.at(i);
-        connect(acTick7, &QAction::triggered, [this, acTick7]() {
-            chanSocketIC[6][0]->setText(acTick7->text());
-        });
-        QAction *acTick8 = acPin8.at(i);
-        connect(acTick8, &QAction::triggered, [this, acTick8, soChanIC]() {
-            if (soChanIC->currentText() == " 14 Chân") {
-                chanSocketIC[6][2]->setText(acTick8->text());
-            } else {
-                chanSocketIC[7][0]->setText(acTick8->text());
-            }
-        });
-        QAction *acTick9 = acPin9.at(i);
-        connect(acTick9, &QAction::triggered, [this, acTick9, soChanIC]() {
-            if (soChanIC->currentText() == " 14 Chân") {
-                chanSocketIC[5][2]->setText(acTick9->text());
-            } else if (soChanIC->currentText() == " 16 Chân") {
-                chanSocketIC[7][2]->setText(acTick9->text());
-            } else {
-                chanSocketIC[8][0]->setText(acTick9->text());
-            }
-        });
-        QAction *acTick10 = acPin10.at(i);
-        connect(acTick10, &QAction::triggered, [this, acTick10, soChanIC]() {
-            if (soChanIC->currentText() == " 14 Chân") {
-                chanSocketIC[4][2]->setText(acTick10->text());
-            } else if (soChanIC->currentText() == " 16 Chân") {
-                chanSocketIC[6][2]->setText(acTick10->text());
-            } else {
-                chanSocketIC[9][0]->setText(acTick10->text());
-            }
-        });
-        QAction *acTick11 = acPin11.at(i);
-        connect(acTick11, &QAction::triggered, [this, acTick11, soChanIC]() {
-            if (soChanIC->currentText() == " 14 Chân") {
-                chanSocketIC[3][2]->setText(acTick11->text());
-            } else if (soChanIC->currentText() == " 16 Chân") {
-                chanSocketIC[5][2]->setText(acTick11->text());
-            } else {
-                chanSocketIC[9][2]->setText(acTick11->text());
-            }
-        });
-        QAction *acTick12 = acPin12.at(i);
-        connect(acTick12, &QAction::triggered, [this, acTick12, soChanIC]() {
-            if (soChanIC->currentText() == " 14 Chân") {
-                chanSocketIC[2][2]->setText(acTick12->text());
-            } else if (soChanIC->currentText() == " 16 Chân") {
-                chanSocketIC[4][2]->setText(acTick12->text());
-            } else {
-                chanSocketIC[8][2]->setText(acTick12->text());
-            }
-        });
-        QAction *acTick13 = acPin13.at(i);
-        connect(acTick13, &QAction::triggered, [this, acTick13, soChanIC]() {
-            if (soChanIC->currentText() == " 14 Chân") {
-                chanSocketIC[1][2]->setText(acTick13->text());
-            } else if (soChanIC->currentText() == " 16 Chân") {
-                chanSocketIC[3][2]->setText(acTick13->text());
-            } else {
-                chanSocketIC[7][2]->setText(acTick13->text());
-            }
-        });
-        QAction *acTick14 = acPin14.at(i);
-        connect(acTick14, &QAction::triggered, [this, acTick14, soChanIC]() {
-            if (soChanIC->currentText() == " 14 Chân") {
-                chanSocketIC[0][2]->setText(acTick14->text());
-            } else if (soChanIC->currentText() == " 16 Chân") {
-                chanSocketIC[2][2]->setText(acTick14->text());
-            } else {
-                chanSocketIC[6][2]->setText(acTick14->text());
-            }
-        });
-        QAction *acTick15 = acPin15.at(i);
-        connect(acTick15, &QAction::triggered, [this, acTick15, soChanIC]() {
-            if (soChanIC->currentText() == " 16 Chân") {
-                chanSocketIC[1][2]->setText(acTick15->text());
-            } else {
-                chanSocketIC[5][2]->setText(acTick15->text());
-            }
-        });
-        QAction *acTick16 = acPin16.at(i);
-        connect(acTick16, &QAction::triggered, [this, acTick16, soChanIC]() {
-            if (soChanIC->currentText() == " 16 Chân") {
-                chanSocketIC[0][2]->setText(acTick16->text());
-            } else {
-                chanSocketIC[4][2]->setText(acTick16->text());
-            }
-        });
-        QAction *acTick17 = acPin17.at(i);
-        connect(acTick17, &QAction::triggered, [this, acTick17]() {
-            chanSocketIC[3][2]->setText(acTick17->text());
-        });
-        QAction *acTick18 = acPin18.at(i);
-        connect(acTick18, &QAction::triggered, [this, acTick18]() {
-            chanSocketIC[2][2]->setText(acTick18->text());
-        });
-        QAction *acTick19 = acPin19.at(i);
-        connect(acTick19, &QAction::triggered, [this, acTick19]() {
-            chanSocketIC[1][2]->setText(acTick19->text());
-        });
-        QAction *acTick20 = acPin20.at(i);
-        connect(acTick20, &QAction::triggered, [this, acTick20]() {
-            chanSocketIC[0][2]->setText(acTick20->text());
-        });
-    }
     lopHienThiThuocTinhIC->addWidget(new QLabel(""), 1, 0);
     lopHienThiThuocTinhIC->addWidget(khungSocket20, 2, 1);
     lopHienThiThuocTinhIC->addWidget(new QLabel(""), 3, 2);
@@ -744,17 +494,20 @@ TaoThuVien::TaoThuVien()
                 //            ->setEnabled(false); // Tắt chức năng nút
                 chanDuLieuIC20[i][0]->setStyleSheet(
                     "background-color: red; border-radius: 16px;"
-                    "font-size: 16px; color: white; font-weight: bold; border: 1px solid blue;");
+                    "font-size: 16px; color: white; font-weight: bold; border: 1px solid "
+                    "blue;");
             } else if (*state20[i] == 1) {
                 chanDuLieuIC20[i][0]->setText("1");
                 chanDuLieuIC20[i][0]->setStyleSheet(
                     "background-color: #009900; border-radius: 16px;"
-                    "font-size: 16px; color: white; font-weight: bold; border: 1px solid blue;");
+                    "font-size: 16px; color: white; font-weight: bold; border: 1px solid "
+                    "blue;");
             } else if (*state20[i] == 2) {
                 chanDuLieuIC20[i][0]->setText("Z");
                 chanDuLieuIC20[i][0]->setStyleSheet(
                     "background-color: grey; border-radius: 16px;"
-                    "font-size: 16px; color: white; font-weight: bold; border: 1px solid blue;");
+                    "font-size: 16px; color: white; font-weight: bold; border: 1px solid "
+                    "blue;");
             }
             *state20[i] = (*state20[i] + 1) % 3;
         });
@@ -772,12 +525,14 @@ TaoThuVien::TaoThuVien()
                 chanDuLieuIC20[i][2]->setText("1");
                 chanDuLieuIC20[i][2]->setStyleSheet(
                     "background-color: #009900; border-radius: 16px; "
-                    "font-size: 16px; color: white; font-weight: bold; border: 1px solid blue;");
+                    "font-size: 16px; color: white; font-weight: bold; border: 1px solid "
+                    "blue;");
             } else if (*state20[i + 10] == 2) {
                 chanDuLieuIC20[i][2]->setText("Z");
                 chanDuLieuIC20[i][2]->setStyleSheet(
                     "background-color: grey; border-radius: 16px; "
-                    "font-size: 16px; color: white; font-weight: bold; border: 1px solid blue;");
+                    "font-size: 16px; color: white; font-weight: bold; border: 1px solid "
+                    "blue;");
             }
             *state20[i + 10] = (*state20[i + 10] + 1) % 3;
         });
@@ -839,17 +594,20 @@ TaoThuVien::TaoThuVien()
                 //            ->setEnabled(false); // Tắt chức năng nút
                 chanDuLieuIC16[i][0]->setStyleSheet(
                     "background-color: red; border-radius: 16px;"
-                    "font-size: 16px; color: white; font-weight: bold; border: 1px solid blue;");
+                    "font-size: 16px; color: white; font-weight: bold; border: 1px solid "
+                    "blue;");
             } else if (*state16[i] == 1) {
                 chanDuLieuIC16[i][0]->setText("1");
                 chanDuLieuIC16[i][0]->setStyleSheet(
                     "background-color: #009900; border-radius: 16px;"
-                    "font-size: 16px; color: white; font-weight: bold; border: 1px solid blue;");
+                    "font-size: 16px; color: white; font-weight: bold; border: 1px solid "
+                    "blue;");
             } else if (*state16[i] == 2) {
                 chanDuLieuIC16[i][0]->setText("Z");
                 chanDuLieuIC16[i][0]->setStyleSheet(
                     "background-color: grey; border-radius: 16px;"
-                    "font-size: 16px; color: white; font-weight: bold; border: 1px solid blue;");
+                    "font-size: 16px; color: white; font-weight: bold; border: 1px solid "
+                    "blue;");
             }
             *state16[i] = (*state16[i] + 1) % 3;
         });
@@ -867,12 +625,14 @@ TaoThuVien::TaoThuVien()
                 chanDuLieuIC16[i][2]->setText("1");
                 chanDuLieuIC16[i][2]->setStyleSheet(
                     "background-color: #009900; border-radius: 16px; "
-                    "font-size: 16px; color: white; font-weight: bold; border: 1px solid blue;");
+                    "font-size: 16px; color: white; font-weight: bold; border: 1px solid "
+                    "blue;");
             } else if (*state16[i + 8] == 2) {
                 chanDuLieuIC16[i][2]->setText("Z");
                 chanDuLieuIC16[i][2]->setStyleSheet(
                     "background-color: grey; border-radius: 16px; "
-                    "font-size: 16px; color: white; font-weight: bold; border: 1px solid blue;");
+                    "font-size: 16px; color: white; font-weight: bold; border: 1px solid "
+                    "blue;");
             }
             *state16[i + 8] = (*state16[i + 8] + 1) % 3;
         });
@@ -933,17 +693,20 @@ TaoThuVien::TaoThuVien()
                 chanDuLieuIC14[i][0]->setText("0");
                 chanDuLieuIC14[i][0]->setStyleSheet(
                     "background-color: red; border-radius: 16px;"
-                    "font-size: 16px; color: white; font-weight: bold; border: 1px solid blue;");
+                    "font-size: 16px; color: white; font-weight: bold; border: 1px solid "
+                    "blue;");
             } else if (*state14[i] == 1) {
                 chanDuLieuIC14[i][0]->setText("1");
                 chanDuLieuIC14[i][0]->setStyleSheet(
                     "background-color: #009900; border-radius: 16px;"
-                    "font-size: 16px; color: white; font-weight: bold; border: 1px solid blue;");
+                    "font-size: 16px; color: white; font-weight: bold; border: 1px solid "
+                    "blue;");
             } else if (*state14[i] == 2) {
                 chanDuLieuIC14[i][0]->setText("Z");
                 chanDuLieuIC14[i][0]->setStyleSheet(
                     "background-color: grey; border-radius: 16px;"
-                    "font-size: 16px; color: white; font-weight: bold; border: 1px solid blue;");
+                    "font-size: 16px; color: white; font-weight: bold; border: 1px solid "
+                    "blue;");
             }
             *state14[i] = (*state14[i] + 1) % 3;
         });
@@ -961,115 +724,18 @@ TaoThuVien::TaoThuVien()
                 chanDuLieuIC14[i][2]->setText("1");
                 chanDuLieuIC14[i][2]->setStyleSheet(
                     "background-color: #009900; border-radius: 16px; "
-                    "font-size: 16px; color: white; font-weight: bold; border: 1px solid blue;");
+                    "font-size: 16px; color: white; font-weight: bold; border: 1px solid "
+                    "blue;");
             } else if (*state14[i + 7] == 2) {
                 chanDuLieuIC14[i][2]->setText("Z");
                 chanDuLieuIC14[i][2]->setStyleSheet(
                     "background-color: grey; border-radius: 16px; "
-                    "font-size: 16px; color: white; font-weight: bold; border: 1px solid blue;");
+                    "font-size: 16px; color: white; font-weight: bold; border: 1px solid "
+                    "blue;");
             }
             *state14[i + 7] = (*state14[i + 7] + 1) % 3;
         });
     }
-    //    for (int i = 0; i < 10; ++i) {
-    //        connect(next, &QPushButton::clicked, [this, i, soChanIC]() {
-    //            if (chanSocketIC[i][0]->text() == "NC") {
-    //                if (soChanIC->currentText() == " 14 Chân") {
-    //                    chanDuLieuIC14[i][0]->setText("NC");
-    //                    chanDuLieuIC14[i][0]->setEnabled(0);
-    //                    chanDuLieuIC14[i][0]->setStyleSheet(
-    //                        "background-color: grey; border-radius: 16px; "
-    //                        "font-size: 14px; color: white; font-weight: bold; border: 1px solid "
-    //                        "blue;");
-    //                } else if (soChanIC->currentText() == " 16 Chân") {
-    //                    chanDuLieuIC16[i][0]->setText("NC");
-    //                    chanDuLieuIC16[i][0]->setEnabled(0);
-    //                    chanDuLieuIC16[i][0]->setStyleSheet(
-    //                        "background-color: grey; border-radius: 16px; "
-    //                        "font-size: 14px; color: white; font-weight: bold; border: 1px solid "
-    //                        "blue;");
-    //                } else if (soChanIC->currentText() == " 20 Chân") {
-    //                    chanDuLieuIC20[i][0]->setText("NC");
-    //                    chanDuLieuIC20[i][0]->setEnabled(0);
-    //                    chanDuLieuIC20[i][0]->setStyleSheet(
-    //                        "background-color: grey; border-radius: 16px; "
-    //                        "font-size: 14px; color: white; font-weight: bold; border: 1px solid "
-    //                        "blue;");
-    //                }
-    //            } else if (chanSocketIC[i][0]->text() == "VCC") {
-    //                if (soChanIC->currentText() == " 14 Chân") {
-    //                    chanDuLieuIC14[i][0]->setText("VCC");
-    //                    chanDuLieuIC14[i][0]->setEnabled(0);
-    //                    chanDuLieuIC14[i][0]->setStyleSheet(
-    //                        "background-color: #009900; border-radius: 16px;"
-    //                        "font-size: 14px; color: white; font-weight: bold; border: 1px solid "
-    //                        "blue;");
-    //                } else if (soChanIC->currentText() == " 16 Chân") {
-    //                    chanDuLieuIC16[i][0]->setText("VCC");
-    //                    chanDuLieuIC16[i][0]->setEnabled(0);
-    //                    chanDuLieuIC16[i][0]->setStyleSheet(
-    //                        "background-color: #009900; border-radius: 16px;"
-    //                        "font-size: 14px; color: white; font-weight: bold; border: 1px solid "
-    //                        "blue;");
-    //                } else if (soChanIC->currentText() == " 20 Chân") {
-    //                    chanDuLieuIC20[i][0]->setText("VCC");
-    //                    chanDuLieuIC20[i][0]->setEnabled(0);
-    //                    chanDuLieuIC20[i][0]->setStyleSheet(
-    //                        "background-color: #009900; border-radius: 16px;"
-    //                        "font-size: 14px; color: white; font-weight: bold; border: 1px solid "
-    //                        "blue;");
-    //                }
-    //            } else if (chanSocketIC[i][0]->text() == "GND") {
-    //                if (soChanIC->currentText() == " 14 Chân") {
-    //                    chanDuLieuIC14[i][0]->setText("GND");
-    //                    chanDuLieuIC14[i][0]->setEnabled(0);
-    //                    chanDuLieuIC14[i][0]->setStyleSheet(
-    //                        "background-color: red; border-radius: 16px;"
-    //                        "font-size: 14px; color: white; font-weight: bold; border: 1px solid "
-    //                        "blue;");
-    //                } else if (soChanIC->currentText() == " 16 Chân") {
-    //                    chanDuLieuIC16[i][0]->setText("GND");
-    //                    chanDuLieuIC16[i][0]->setEnabled(0);
-    //                    chanDuLieuIC16[i][0]->setStyleSheet(
-    //                        "background-color: red; border-radius: 16px;"
-    //                        "font-size: 14px; color: white; font-weight: bold; border: 1px solid "
-    //                        "blue;");
-    //                } else if (soChanIC->currentText() == " 20 Chân") {
-    //                    chanDuLieuIC20[i][0]->setText("GND");
-    //                    chanDuLieuIC20[i][0]->setEnabled(0);
-    //                    chanDuLieuIC20[i][0]->setStyleSheet(
-    //                        "background-color: red; border-radius: 16px;"
-    //                        "font-size: 14px; color: white; font-weight: bold; border: 1px solid "
-    //                        "blue;");
-    //                }
-    //            } else {
-    //                chanDuLieuIC14[i][0]->setText("X");
-    //                chanDuLieuIC14[i][0]->setEnabled(1);
-    //                chanDuLieuIC14[i][0]->setStyleSheet("background-color: white;"
-    //                                                    " border-radius: 16px; "
-    //                                                    " font-size: 16px;"
-    //                                                    " font-weight: bold;"
-    //                                                    " color: blue;"
-    //                                                    " border: 1px solid blue;");
-    //                chanDuLieuIC16[i][0]->setText("X");
-    //                chanDuLieuIC16[i][0]->setEnabled(1);
-    //                chanDuLieuIC16[i][0]->setStyleSheet("background-color: white;"
-    //                                                    " border-radius: 16px; "
-    //                                                    " font-size: 16px;"
-    //                                                    " font-weight: bold;"
-    //                                                    " color: blue;"
-    //                                                    " border: 1px solid blue;");
-    //                chanDuLieuIC20[i][0]->setText("X");
-    //                chanDuLieuIC20[i][0]->setEnabled(1);
-    //                chanDuLieuIC20[i][0]->setStyleSheet("background-color: white;"
-    //                                                    " border-radius: 16px; "
-    //                                                    " font-size: 16px;"
-    //                                                    " font-weight: bold;"
-    //                                                    " color: blue;"
-    //                                                    " border: 1px solid blue;");
-    //            }
-    //        });
-    //    }
 
     for (int i = 0; i < 7; ++i) {
         for (int j = 0; j < 3; j += 2) {
@@ -1080,21 +746,24 @@ TaoThuVien::TaoThuVien()
                         chanDuLieuIC14[i][j]->setEnabled(0);
                         chanDuLieuIC14[i][j]->setStyleSheet(
                             "background-color: grey; border-radius: 16px; "
-                            "font-size: 14px; color: white; font-weight: bold; border: 1px solid "
+                            "font-size: 14px; color: white; font-weight: bold; border: 1px "
+                            "solid "
                             "blue;");
                     } else if (chanSocketIC[i][j]->text() == "VCC") {
                         chanDuLieuIC14[i][j]->setText("VCC");
                         chanDuLieuIC14[i][j]->setEnabled(0);
                         chanDuLieuIC14[i][j]->setStyleSheet(
                             "background-color: #009900; border-radius: 16px;"
-                            "font-size: 14px; color: white; font-weight: bold; border: 1px solid "
+                            "font-size: 14px; color: white; font-weight: bold; border: 1px "
+                            "solid "
                             "blue;");
                     } else if (chanSocketIC[i][j]->text() == "GND") {
                         chanDuLieuIC14[i][j]->setText("GND");
                         chanDuLieuIC14[i][j]->setEnabled(0);
                         chanDuLieuIC14[i][j]->setStyleSheet(
                             "background-color: red; border-radius: 16px;"
-                            "font-size: 14px; color: white; font-weight: bold; border: 1px solid "
+                            "font-size: 14px; color: white; font-weight: bold; border: 1px "
+                            "solid "
                             "blue;");
                     } else {
                         chanDuLieuIC14[i][j]->setText("X");
@@ -1119,21 +788,24 @@ TaoThuVien::TaoThuVien()
                         chanDuLieuIC16[i][j]->setEnabled(0);
                         chanDuLieuIC16[i][j]->setStyleSheet(
                             "background-color: grey; border-radius: 16px; "
-                            "font-size: 14px; color: white; font-weight: bold; border: 1px solid "
+                            "font-size: 14px; color: white; font-weight: bold; border: 1px "
+                            "solid "
                             "blue;");
                     } else if (chanSocketIC[i][j]->text() == "VCC") {
                         chanDuLieuIC16[i][j]->setText("VCC");
                         chanDuLieuIC16[i][j]->setEnabled(0);
                         chanDuLieuIC16[i][j]->setStyleSheet(
                             "background-color: #009900; border-radius: 16px;"
-                            "font-size: 14px; color: white; font-weight: bold; border: 1px solid "
+                            "font-size: 14px; color: white; font-weight: bold; border: 1px "
+                            "solid "
                             "blue;");
                     } else if (chanSocketIC[i][j]->text() == "GND") {
                         chanDuLieuIC16[i][j]->setText("GND");
                         chanDuLieuIC16[i][j]->setEnabled(0);
                         chanDuLieuIC16[i][j]->setStyleSheet(
                             "background-color: red; border-radius: 16px;"
-                            "font-size: 14px; color: white; font-weight: bold; border: 1px solid "
+                            "font-size: 14px; color: white; font-weight: bold; border: 1px "
+                            "solid "
                             "blue;");
                     } else {
                         chanDuLieuIC16[i][j]->setText("X");
@@ -1158,21 +830,24 @@ TaoThuVien::TaoThuVien()
                         chanDuLieuIC20[i][j]->setEnabled(0);
                         chanDuLieuIC20[i][j]->setStyleSheet(
                             "background-color: grey; border-radius: 16px; "
-                            "font-size: 14px; color: white; font-weight: bold; border: 1px solid "
+                            "font-size: 14px; color: white; font-weight: bold; border: 1px "
+                            "solid "
                             "blue;");
                     } else if (chanSocketIC[i][j]->text() == "VCC") {
                         chanDuLieuIC20[i][j]->setText("VCC");
                         chanDuLieuIC20[i][j]->setEnabled(0);
                         chanDuLieuIC20[i][j]->setStyleSheet(
                             "background-color: #009900; border-radius: 16px;"
-                            "font-size: 14px; color: white; font-weight: bold; border: 1px solid "
+                            "font-size: 14px; color: white; font-weight: bold; border: 1px "
+                            "solid "
                             "blue;");
                     } else if (chanSocketIC[i][j]->text() == "GND") {
                         chanDuLieuIC20[i][j]->setText("GND");
                         chanDuLieuIC20[i][j]->setEnabled(0);
                         chanDuLieuIC20[i][j]->setStyleSheet(
                             "background-color: red; border-radius: 16px;"
-                            "font-size: 14px; color: white; font-weight: bold; border: 1px solid "
+                            "font-size: 14px; color: white; font-weight: bold; border: 1px "
+                            "solid "
                             "blue;");
                     } else {
                         chanDuLieuIC20[i][j]->setText("X");
