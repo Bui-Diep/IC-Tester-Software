@@ -931,7 +931,6 @@ TaoThuVien::TaoThuVien()
             // Thiết lập trạng thái ban đầu
             if (*state14[i] == 0) {
                 chanDuLieuIC14[i][0]->setText("0");
-                //            ->setEnabled(false); // Tắt chức năng nút
                 chanDuLieuIC14[i][0]->setStyleSheet(
                     "background-color: red; border-radius: 16px;"
                     "font-size: 16px; color: white; font-weight: bold; border: 1px solid blue;");
@@ -971,6 +970,223 @@ TaoThuVien::TaoThuVien()
             }
             *state14[i + 7] = (*state14[i + 7] + 1) % 3;
         });
+    }
+    //    for (int i = 0; i < 10; ++i) {
+    //        connect(next, &QPushButton::clicked, [this, i, soChanIC]() {
+    //            if (chanSocketIC[i][0]->text() == "NC") {
+    //                if (soChanIC->currentText() == " 14 Chân") {
+    //                    chanDuLieuIC14[i][0]->setText("NC");
+    //                    chanDuLieuIC14[i][0]->setEnabled(0);
+    //                    chanDuLieuIC14[i][0]->setStyleSheet(
+    //                        "background-color: grey; border-radius: 16px; "
+    //                        "font-size: 14px; color: white; font-weight: bold; border: 1px solid "
+    //                        "blue;");
+    //                } else if (soChanIC->currentText() == " 16 Chân") {
+    //                    chanDuLieuIC16[i][0]->setText("NC");
+    //                    chanDuLieuIC16[i][0]->setEnabled(0);
+    //                    chanDuLieuIC16[i][0]->setStyleSheet(
+    //                        "background-color: grey; border-radius: 16px; "
+    //                        "font-size: 14px; color: white; font-weight: bold; border: 1px solid "
+    //                        "blue;");
+    //                } else if (soChanIC->currentText() == " 20 Chân") {
+    //                    chanDuLieuIC20[i][0]->setText("NC");
+    //                    chanDuLieuIC20[i][0]->setEnabled(0);
+    //                    chanDuLieuIC20[i][0]->setStyleSheet(
+    //                        "background-color: grey; border-radius: 16px; "
+    //                        "font-size: 14px; color: white; font-weight: bold; border: 1px solid "
+    //                        "blue;");
+    //                }
+    //            } else if (chanSocketIC[i][0]->text() == "VCC") {
+    //                if (soChanIC->currentText() == " 14 Chân") {
+    //                    chanDuLieuIC14[i][0]->setText("VCC");
+    //                    chanDuLieuIC14[i][0]->setEnabled(0);
+    //                    chanDuLieuIC14[i][0]->setStyleSheet(
+    //                        "background-color: #009900; border-radius: 16px;"
+    //                        "font-size: 14px; color: white; font-weight: bold; border: 1px solid "
+    //                        "blue;");
+    //                } else if (soChanIC->currentText() == " 16 Chân") {
+    //                    chanDuLieuIC16[i][0]->setText("VCC");
+    //                    chanDuLieuIC16[i][0]->setEnabled(0);
+    //                    chanDuLieuIC16[i][0]->setStyleSheet(
+    //                        "background-color: #009900; border-radius: 16px;"
+    //                        "font-size: 14px; color: white; font-weight: bold; border: 1px solid "
+    //                        "blue;");
+    //                } else if (soChanIC->currentText() == " 20 Chân") {
+    //                    chanDuLieuIC20[i][0]->setText("VCC");
+    //                    chanDuLieuIC20[i][0]->setEnabled(0);
+    //                    chanDuLieuIC20[i][0]->setStyleSheet(
+    //                        "background-color: #009900; border-radius: 16px;"
+    //                        "font-size: 14px; color: white; font-weight: bold; border: 1px solid "
+    //                        "blue;");
+    //                }
+    //            } else if (chanSocketIC[i][0]->text() == "GND") {
+    //                if (soChanIC->currentText() == " 14 Chân") {
+    //                    chanDuLieuIC14[i][0]->setText("GND");
+    //                    chanDuLieuIC14[i][0]->setEnabled(0);
+    //                    chanDuLieuIC14[i][0]->setStyleSheet(
+    //                        "background-color: red; border-radius: 16px;"
+    //                        "font-size: 14px; color: white; font-weight: bold; border: 1px solid "
+    //                        "blue;");
+    //                } else if (soChanIC->currentText() == " 16 Chân") {
+    //                    chanDuLieuIC16[i][0]->setText("GND");
+    //                    chanDuLieuIC16[i][0]->setEnabled(0);
+    //                    chanDuLieuIC16[i][0]->setStyleSheet(
+    //                        "background-color: red; border-radius: 16px;"
+    //                        "font-size: 14px; color: white; font-weight: bold; border: 1px solid "
+    //                        "blue;");
+    //                } else if (soChanIC->currentText() == " 20 Chân") {
+    //                    chanDuLieuIC20[i][0]->setText("GND");
+    //                    chanDuLieuIC20[i][0]->setEnabled(0);
+    //                    chanDuLieuIC20[i][0]->setStyleSheet(
+    //                        "background-color: red; border-radius: 16px;"
+    //                        "font-size: 14px; color: white; font-weight: bold; border: 1px solid "
+    //                        "blue;");
+    //                }
+    //            } else {
+    //                chanDuLieuIC14[i][0]->setText("X");
+    //                chanDuLieuIC14[i][0]->setEnabled(1);
+    //                chanDuLieuIC14[i][0]->setStyleSheet("background-color: white;"
+    //                                                    " border-radius: 16px; "
+    //                                                    " font-size: 16px;"
+    //                                                    " font-weight: bold;"
+    //                                                    " color: blue;"
+    //                                                    " border: 1px solid blue;");
+    //                chanDuLieuIC16[i][0]->setText("X");
+    //                chanDuLieuIC16[i][0]->setEnabled(1);
+    //                chanDuLieuIC16[i][0]->setStyleSheet("background-color: white;"
+    //                                                    " border-radius: 16px; "
+    //                                                    " font-size: 16px;"
+    //                                                    " font-weight: bold;"
+    //                                                    " color: blue;"
+    //                                                    " border: 1px solid blue;");
+    //                chanDuLieuIC20[i][0]->setText("X");
+    //                chanDuLieuIC20[i][0]->setEnabled(1);
+    //                chanDuLieuIC20[i][0]->setStyleSheet("background-color: white;"
+    //                                                    " border-radius: 16px; "
+    //                                                    " font-size: 16px;"
+    //                                                    " font-weight: bold;"
+    //                                                    " color: blue;"
+    //                                                    " border: 1px solid blue;");
+    //            }
+    //        });
+    //    }
+
+    for (int i = 0; i < 7; ++i) {
+        for (int j = 0; j < 3; j += 2) {
+            connect(next, &QPushButton::clicked, [this, i, j, soChanIC]() {
+                if (soChanIC->currentText() == " 14 Chân") {
+                    if (chanSocketIC[i][j]->text() == "NC") {
+                        chanDuLieuIC14[i][j]->setText("NC");
+                        chanDuLieuIC14[i][j]->setEnabled(0);
+                        chanDuLieuIC14[i][j]->setStyleSheet(
+                            "background-color: grey; border-radius: 16px; "
+                            "font-size: 14px; color: white; font-weight: bold; border: 1px solid "
+                            "blue;");
+                    } else if (chanSocketIC[i][j]->text() == "VCC") {
+                        chanDuLieuIC14[i][j]->setText("VCC");
+                        chanDuLieuIC14[i][j]->setEnabled(0);
+                        chanDuLieuIC14[i][j]->setStyleSheet(
+                            "background-color: #009900; border-radius: 16px;"
+                            "font-size: 14px; color: white; font-weight: bold; border: 1px solid "
+                            "blue;");
+                    } else if (chanSocketIC[i][j]->text() == "GND") {
+                        chanDuLieuIC14[i][j]->setText("GND");
+                        chanDuLieuIC14[i][j]->setEnabled(0);
+                        chanDuLieuIC14[i][j]->setStyleSheet(
+                            "background-color: red; border-radius: 16px;"
+                            "font-size: 14px; color: white; font-weight: bold; border: 1px solid "
+                            "blue;");
+                    } else {
+                        chanDuLieuIC14[i][j]->setText("X");
+                        chanDuLieuIC14[i][j]->setEnabled(1);
+                        chanDuLieuIC14[i][j]->setStyleSheet("background-color: white;"
+                                                            " border-radius: 16px; "
+                                                            " font-size: 16px;"
+                                                            " font-weight: bold;"
+                                                            " color: blue;"
+                                                            " border: 1px solid blue;");
+                    }
+                }
+            });
+        }
+    }
+    for (int i = 0; i < 8; ++i) {
+        for (int j = 0; j < 3; j += 2) {
+            connect(next, &QPushButton::clicked, [this, i, j, soChanIC]() {
+                if (soChanIC->currentText() == " 16 Chân") {
+                    if (chanSocketIC[i][j]->text() == "NC") {
+                        chanDuLieuIC16[i][j]->setText("NC");
+                        chanDuLieuIC16[i][j]->setEnabled(0);
+                        chanDuLieuIC16[i][j]->setStyleSheet(
+                            "background-color: grey; border-radius: 16px; "
+                            "font-size: 14px; color: white; font-weight: bold; border: 1px solid "
+                            "blue;");
+                    } else if (chanSocketIC[i][j]->text() == "VCC") {
+                        chanDuLieuIC16[i][j]->setText("VCC");
+                        chanDuLieuIC16[i][j]->setEnabled(0);
+                        chanDuLieuIC16[i][j]->setStyleSheet(
+                            "background-color: #009900; border-radius: 16px;"
+                            "font-size: 14px; color: white; font-weight: bold; border: 1px solid "
+                            "blue;");
+                    } else if (chanSocketIC[i][j]->text() == "GND") {
+                        chanDuLieuIC16[i][j]->setText("GND");
+                        chanDuLieuIC16[i][j]->setEnabled(0);
+                        chanDuLieuIC16[i][j]->setStyleSheet(
+                            "background-color: red; border-radius: 16px;"
+                            "font-size: 14px; color: white; font-weight: bold; border: 1px solid "
+                            "blue;");
+                    } else {
+                        chanDuLieuIC16[i][j]->setText("X");
+                        chanDuLieuIC16[i][j]->setEnabled(1);
+                        chanDuLieuIC16[i][j]->setStyleSheet("background-color: white;"
+                                                            " border-radius: 16px; "
+                                                            " font-size: 16px;"
+                                                            " font-weight: bold;"
+                                                            " color: blue;"
+                                                            " border: 1px solid blue;");
+                    }
+                }
+            });
+        }
+    }
+    for (int i = 0; i < 10; ++i) {
+        for (int j = 0; j < 3; j += 2) {
+            connect(next, &QPushButton::clicked, [this, i, j, soChanIC]() {
+                if (soChanIC->currentText() == " 20 Chân") {
+                    if (chanSocketIC[i][j]->text() == "NC") {
+                        chanDuLieuIC20[i][j]->setText("NC");
+                        chanDuLieuIC20[i][j]->setEnabled(0);
+                        chanDuLieuIC20[i][j]->setStyleSheet(
+                            "background-color: grey; border-radius: 16px; "
+                            "font-size: 14px; color: white; font-weight: bold; border: 1px solid "
+                            "blue;");
+                    } else if (chanSocketIC[i][j]->text() == "VCC") {
+                        chanDuLieuIC20[i][j]->setText("VCC");
+                        chanDuLieuIC20[i][j]->setEnabled(0);
+                        chanDuLieuIC20[i][j]->setStyleSheet(
+                            "background-color: #009900; border-radius: 16px;"
+                            "font-size: 14px; color: white; font-weight: bold; border: 1px solid "
+                            "blue;");
+                    } else if (chanSocketIC[i][j]->text() == "GND") {
+                        chanDuLieuIC20[i][j]->setText("GND");
+                        chanDuLieuIC20[i][j]->setEnabled(0);
+                        chanDuLieuIC20[i][j]->setStyleSheet(
+                            "background-color: red; border-radius: 16px;"
+                            "font-size: 14px; color: white; font-weight: bold; border: 1px solid "
+                            "blue;");
+                    } else {
+                        chanDuLieuIC20[i][j]->setText("X");
+                        chanDuLieuIC20[i][j]->setEnabled(1);
+                        chanDuLieuIC20[i][j]->setStyleSheet("background-color: white;"
+                                                            " border-radius: 16px; "
+                                                            " font-size: 16px;"
+                                                            " font-weight: bold;"
+                                                            " color: blue;"
+                                                            " border: 1px solid blue;");
+                    }
+                }
+            });
+        }
     }
 
     QPushButton *finish = new QPushButton("Hoàn thành");

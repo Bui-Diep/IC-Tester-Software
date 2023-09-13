@@ -35,8 +35,8 @@ private:
     QLabel *bangHienThiThuocTinhIC;
     QLabel *chanSocketIC[10][3];
     QPushButton *chanDuLieuIC20[10][3];
-    QPushButton *chanDuLieuIC16[8][3];
-    QPushButton *chanDuLieuIC14[7][3];
+    QPushButton *chanDuLieuIC16[10][3];
+    QPushButton *chanDuLieuIC14[10][3];
     QStackedWidget *khongGianCauHinhDuLieu;
 };
 
