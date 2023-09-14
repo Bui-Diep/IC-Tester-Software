@@ -36,8 +36,15 @@ TaoThuVien::TaoThuVien()
     QFormLayout *lopThuocTinh = new QFormLayout;
     QPushButton *nutHienSym = new QPushButton("Xong");
     QVBoxLayout *lopNutHienSym = new QVBoxLayout;
-    nutHienSym->setStyleSheet(
-        "background-color: #009900;font-size: 16px;font-weight: bold; color: white");
+    nutHienSym->setStyleSheet("QPushButton {"
+                              "background-color: #009900;"
+                              "color: white;"
+                              "font-weight: bold;"
+                              "font-size: 16px;"
+                              "}"
+                              "QPushButton:hover {"
+                              "background-color: #007500;"
+                              "}");
     lopNutHienSym->addWidget(nutHienSym);
     lopNutHienSym->addWidget(new QLabel("   "));
     lopNutHienSym->addWidget(new QLabel("   "));
@@ -48,10 +55,11 @@ TaoThuVien::TaoThuVien()
     tenIC->setPlaceholderText("Nhập tên IC");
     QComboBox *soChanIC = new QComboBox;
     soChanIC->setFixedSize(150, 25);
-    soChanIC->addItem(" 12 Chân");
+    soChanIC->addItem(" 8 Chân");
     soChanIC->addItem(" 14 Chân");
     soChanIC->addItem(" 16 Chân");
     soChanIC->addItem(" 20 Chân");
+    soChanIC->addItem(" 24 Chân");
     lopThuocTinh->addRow("Số chân IC:", soChanIC);
     QComboBox *congNgheBanDan = new QComboBox;
     congNgheBanDan->setFixedSize(150, 25);
@@ -65,7 +73,7 @@ TaoThuVien::TaoThuVien()
     moTaIC = new QTextEdit;
     lopThuocTinh->addRow("Mô tả:", moTaIC);
     moTaIC->setPlaceholderText("Mô tả IC tại đây ...");
-    connect(nutHienSym, &QPushButton::clicked, [congNgheBanDan, soChanIC, this]() {
+    connect(nutHienSym, &QPushButton::clicked, this, [=]() {
         for (int i = 0; i < 10; ++i) {
             for (int j = 0; j < 3; j += 2) {
                 chanSocketIC[i][j]->setText("NC");
@@ -81,7 +89,7 @@ TaoThuVien::TaoThuVien()
                 "<b>Tên IC:</b> " + tenIC->text() + "<br><b>Số chân IC:</b> " + placeholder
                 + "<br><b>Công nghệ:</b> " + congNgheBanDan->currentText() + textMoTaIC);
 
-            if (soChanIC->currentIndex() == 1) {
+            if (soChanIC->currentText() == " 14 Chân") {
                 khongGianHienSymIC->setCurrentWidget(trangHienSymIC14);
                 boxCauHinhChan->setFixedHeight(400);
             } else if (soChanIC->currentText() == " 16 Chân") {
@@ -166,7 +174,7 @@ TaoThuVien::TaoThuVien()
     for (int n = 0; n < 7; ++n) {
         for (int i = 0; i < 6; ++i) {
             acTick14[n] = acPin14[n].at(i);
-            connect(acTick14[n], &QAction::hovered, [this, acTick14, n]() {
+            connect(acTick14[n], &QAction::hovered, this, [=]() {
                 chanSocketIC[n][0]->setText(acTick14[n]->text());
             });
         }
@@ -174,7 +182,7 @@ TaoThuVien::TaoThuVien()
     for (int n = 0; n < 7; ++n) {
         for (int i = 0; i < 6; ++i) {
             acTick14[n + 7] = acPin14[n + 7].at(i);
-            connect(acTick14[n + 7], &QAction::hovered, [this, acTick14, n]() {
+            connect(acTick14[n + 7], &QAction::hovered, this, [=]() {
                 chanSocketIC[n][2]->setText(acTick14[n + 7]->text());
             });
         }
@@ -183,19 +191,19 @@ TaoThuVien::TaoThuVien()
     for (int i = 0; i < 7; ++i) {
         pin14L[i]->setCursor(QCursor(Qt::PointingHandCursor));
         pin14L[i]->setStyleSheet("QPushButton:hover { background-color: yellow;}");
-        connect(pinType14[i], &QMenu::aboutToShow, [i, this]() {
+        connect(pinType14[i], &QMenu::aboutToShow, this, [=]() {
             chanSocketIC[i][0]->setStyleSheet(
                 "background-color: yellow; border-radius: 12px; font-size: 12px;");
         });
-        connect(pinType14[i], &QMenu::aboutToHide, [i, this]() {
+        connect(pinType14[i], &QMenu::aboutToHide, this, [=]() {
             chanSocketIC[i][0]->setStyleSheet(
                 "background-color: white;border-radius: 12px; font-size: 12px;");
         });
-        connect(pin14L[i], &MyButton::entered, [i, this]() {
+        connect(pin14L[i], &MyButton::entered, this, [=]() {
             chanSocketIC[i][0]->setStyleSheet(
                 "background-color: yellow; border-radius: 12px; font-size: 12px;");
         });
-        connect(pin14L[i], &MyButton::left, [i, this, pinType14]() {
+        connect(pin14L[i], &MyButton::left, this, [=]() {
             if (!pinType14[i]->isVisible()) {
                 chanSocketIC[i][0]->setStyleSheet(
                     "background-color: white; border-radius: 12px; font-size: 12px;");
@@ -203,19 +211,19 @@ TaoThuVien::TaoThuVien()
         });
         pin14R[i]->setCursor(QCursor(Qt::PointingHandCursor));
         pin14R[i]->setStyleSheet("QPushButton:hover { background-color: yellow; }");
-        connect(pinType14[i + 7], &QMenu::aboutToShow, [i, this]() {
+        connect(pinType14[i + 7], &QMenu::aboutToShow, this, [=]() {
             chanSocketIC[i][2]->setStyleSheet(
                 "background-color: yellow; border-radius: 12px; font-size: 12px;");
         });
-        connect(pinType14[i + 7], &QMenu::aboutToHide, [i, this]() {
+        connect(pinType14[i + 7], &QMenu::aboutToHide, this, [=]() {
             chanSocketIC[i][2]->setStyleSheet(
                 "background-color: white;border-radius: 12px; font-size: 12px;");
         });
-        connect(pin14R[i], &MyButton::entered, [i, this]() {
+        connect(pin14R[i], &MyButton::entered, this, [=]() {
             chanSocketIC[i][2]->setStyleSheet(
                 "background-color: yellow; border-radius: 12px; font-size: 12px;");
         });
-        connect(pin14R[i], &MyButton::left, [i, this, pinType14]() {
+        connect(pin14R[i], &MyButton::left, this, [=]() {
             if (!pinType14[i + 7]->isVisible()) {
                 chanSocketIC[i][2]->setStyleSheet(
                     "background-color: white; border-radius: 12px; font-size: 12px;");
@@ -263,7 +271,7 @@ TaoThuVien::TaoThuVien()
     for (int n = 0; n < 8; ++n) {
         for (int i = 0; i < 6; ++i) {
             acTick16[n] = acPin16[n].at(i);
-            connect(acTick16[n], &QAction::hovered, [this, acTick16, n]() {
+            connect(acTick16[n], &QAction::hovered, this, [=]() {
                 chanSocketIC[n][0]->setText(acTick16[n]->text());
             });
         }
@@ -271,7 +279,7 @@ TaoThuVien::TaoThuVien()
     for (int n = 0; n < 8; ++n) {
         for (int i = 0; i < 6; ++i) {
             acTick16[n + 8] = acPin16[n + 8].at(i);
-            connect(acTick16[n + 8], &QAction::hovered, [this, acTick16, n]() {
+            connect(acTick16[n + 8], &QAction::hovered, this, [=]() {
                 chanSocketIC[n][2]->setText(acTick16[n + 8]->text());
             });
         }
@@ -280,19 +288,19 @@ TaoThuVien::TaoThuVien()
     for (int i = 0; i < 8; ++i) {
         pin16L[i]->setCursor(QCursor(Qt::PointingHandCursor));
         pin16L[i]->setStyleSheet("QPushButton:hover { background-color: yellow;}");
-        connect(pinType16[i], &QMenu::aboutToShow, [i, this]() {
+        connect(pinType16[i], &QMenu::aboutToShow, this, [=]() {
             chanSocketIC[i][0]->setStyleSheet(
                 "background-color: yellow; border-radius: 12px; font-size: 12px;");
         });
-        connect(pinType16[i], &QMenu::aboutToHide, [i, this]() {
+        connect(pinType16[i], &QMenu::aboutToHide, this, [=]() {
             chanSocketIC[i][0]->setStyleSheet(
                 "background-color: white;border-radius: 12px; font-size: 12px;");
         });
-        connect(pin16L[i], &MyButton::entered, [i, this]() {
+        connect(pin16L[i], &MyButton::entered, this, [=]() {
             chanSocketIC[i][0]->setStyleSheet(
                 "background-color: yellow; border-radius: 12px; font-size: 12px;");
         });
-        connect(pin16L[i], &MyButton::left, [i, this, pinType16]() {
+        connect(pin16L[i], &MyButton::left, this, [=]() {
             if (!pinType16[i]->isVisible()) {
                 chanSocketIC[i][0]->setStyleSheet(
                     "background-color: white; border-radius: 12px; font-size: 12px;");
@@ -300,19 +308,19 @@ TaoThuVien::TaoThuVien()
         });
         pin16R[i]->setCursor(QCursor(Qt::PointingHandCursor));
         pin16R[i]->setStyleSheet("QPushButton:hover { background-color: yellow; }");
-        connect(pinType16[i + 8], &QMenu::aboutToShow, [i, this]() {
+        connect(pinType16[i + 8], &QMenu::aboutToShow, this, [=]() {
             chanSocketIC[i][2]->setStyleSheet(
                 "background-color: yellow; border-radius: 12px; font-size: 12px;");
         });
-        connect(pinType16[i + 8], &QMenu::aboutToHide, [i, this]() {
+        connect(pinType16[i + 8], &QMenu::aboutToHide, this, [=]() {
             chanSocketIC[i][2]->setStyleSheet(
                 "background-color: white;border-radius: 12px; font-size: 12px;");
         });
-        connect(pin16R[i], &MyButton::entered, [i, this]() {
+        connect(pin16R[i], &MyButton::entered, this, [=]() {
             chanSocketIC[i][2]->setStyleSheet(
                 "background-color: yellow; border-radius: 12px; font-size: 12px;");
         });
-        connect(pin16R[i], &MyButton::left, [i, this, pinType16]() {
+        connect(pin16R[i], &MyButton::left, this, [=]() {
             if (!pinType16[i + 8]->isVisible()) {
                 chanSocketIC[i][2]->setStyleSheet(
                     "background-color: white; border-radius: 12px; font-size: 12px;");
@@ -360,7 +368,7 @@ TaoThuVien::TaoThuVien()
     for (int n = 0; n < 10; ++n) {
         for (int i = 0; i < 6; ++i) {
             acTick20[n] = acPin20[n].at(i);
-            connect(acTick20[n], &QAction::hovered, [this, acTick20, n]() {
+            connect(acTick20[n], &QAction::hovered, this, [=]() {
                 chanSocketIC[n][0]->setText(acTick20[n]->text());
             });
         }
@@ -368,7 +376,7 @@ TaoThuVien::TaoThuVien()
     for (int n = 0; n < 10; ++n) {
         for (int i = 0; i < 6; ++i) {
             acTick20[n + 10] = acPin20[n + 10].at(i);
-            connect(acTick20[n + 10], &QAction::hovered, [this, acTick20, n]() {
+            connect(acTick20[n + 10], &QAction::hovered, this, [=]() {
                 chanSocketIC[n][2]->setText(acTick20[n + 10]->text());
             });
         }
@@ -376,19 +384,19 @@ TaoThuVien::TaoThuVien()
     for (int i = 0; i < 10; ++i) {
         pin20L[i]->setCursor(QCursor(Qt::PointingHandCursor));
         pin20L[i]->setStyleSheet("QPushButton:hover { background-color: yellow;}");
-        connect(pinType20[i], &QMenu::aboutToShow, [i, this]() {
+        connect(pinType20[i], &QMenu::aboutToShow, this, [=]() {
             chanSocketIC[i][0]->setStyleSheet(
                 "background-color: yellow; border-radius: 12px; font-size: 12px;");
         });
-        connect(pinType20[i], &QMenu::aboutToHide, [i, this]() {
+        connect(pinType20[i], &QMenu::aboutToHide, this, [=]() {
             chanSocketIC[i][0]->setStyleSheet(
                 "background-color: white;border-radius: 12px; font-size: 12px;");
         });
-        connect(pin20L[i], &MyButton::entered, [i, this]() {
+        connect(pin20L[i], &MyButton::entered, this, [=]() {
             chanSocketIC[i][0]->setStyleSheet(
                 "background-color: yellow; border-radius: 12px; font-size: 12px;");
         });
-        connect(pin20L[i], &MyButton::left, [i, this, pinType20]() {
+        connect(pin20L[i], &MyButton::left, this, [=]() {
             if (!pinType20[i]->isVisible()) {
                 chanSocketIC[i][0]->setStyleSheet(
                     "background-color: white; border-radius: 12px; font-size: 12px;");
@@ -396,19 +404,19 @@ TaoThuVien::TaoThuVien()
         });
         pin20R[i]->setCursor(QCursor(Qt::PointingHandCursor));
         pin20R[i]->setStyleSheet("QPushButton:hover { background-color: yellow; }");
-        connect(pinType20[i + 10], &QMenu::aboutToShow, [i, this]() {
+        connect(pinType20[i + 10], &QMenu::aboutToShow, this, [=]() {
             chanSocketIC[i][2]->setStyleSheet(
                 "background-color: yellow; border-radius: 12px; font-size: 12px;");
         });
-        connect(pinType20[i + 10], &QMenu::aboutToHide, [i, this]() {
+        connect(pinType20[i + 10], &QMenu::aboutToHide, this, [=]() {
             chanSocketIC[i][2]->setStyleSheet(
                 "background-color: white;border-radius: 12px; font-size: 12px;");
         });
-        connect(pin20R[i], &MyButton::entered, [i, this]() {
+        connect(pin20R[i], &MyButton::entered, this, [=]() {
             chanSocketIC[i][2]->setStyleSheet(
                 "background-color: yellow; border-radius: 12px; font-size: 12px;");
         });
-        connect(pin20R[i], &MyButton::left, [i, this, pinType20]() {
+        connect(pin20R[i], &MyButton::left, this, [=]() {
             if (!pinType20[i + 10]->isVisible()) {
                 chanSocketIC[i][2]->setStyleSheet(
                     "background-color: white; border-radius: 12px; font-size: 12px;");
@@ -517,16 +525,30 @@ TaoThuVien::TaoThuVien()
     //    Nut nhan
     QHBoxLayout *lopNutNhanCauHinhChanIC = new QHBoxLayout;
     QPushButton *next = new QPushButton("Tiếp Theo");
-    next->setStyleSheet(
-        "background-color: #009900;font-size: 16px;font-weight: bold; color: white");
+    next->setStyleSheet("QPushButton {"
+                        "background-color: #009900;"
+                        "color: white;"
+                        "font-weight: bold;"
+                        "font-size: 16px;"
+                        "}"
+                        "QPushButton:hover {"
+                        "background-color: #007500;"
+                        "}");
     next->setFixedSize(200, 30);
     connect(next, SIGNAL(clicked(bool)), this, SLOT(opTrangCauHinhDuLieu()));
-    QPushButton *datLai = new QPushButton("Đặt lại");
-    datLai->setStyleSheet(
-        "background-color: #009900;font-size: 16px;font-weight: bold; color: white");
-    datLai->setFixedSize(200, 30);
-    connect(datLai, SIGNAL(clicked(bool)), this, SLOT(opTrangCauHinhChan()));
-    lopNutNhanCauHinhChanIC->addWidget(datLai);
+    QPushButton *resetGanChan = new QPushButton("Đặt lại");
+    resetGanChan->setStyleSheet("QPushButton {"
+                                "background-color: #009900;"
+                                "color: white;"
+                                "font-weight: bold;"
+                                "font-size: 16px;"
+                                "}"
+                                "QPushButton:hover {"
+                                "background-color: #007500;"
+                                "}");
+    resetGanChan->setFixedSize(200, 30);
+    connect(resetGanChan, SIGNAL(clicked(bool)), this, SLOT(opTrangCauHinhChan()));
+    lopNutNhanCauHinhChanIC->addWidget(resetGanChan);
     lopNutNhanCauHinhChanIC->addWidget(next);
     lopHienThiThuocTinhIC->addWidget(bangHienThiThuocTinhIC, 0, 0, 1, 3);
     lopHienThiThuocTinhIC->addLayout(lopNutNhanCauHinhChanIC, 4, 0, 1, 3);
@@ -543,8 +565,8 @@ TaoThuVien::TaoThuVien()
     khungCauHinhDuLieu20->setObjectName(
         "khungCauHinhDuLieu20");          // Đặt tên cho việc trang trí CSS sau này
     khungSymIC20->setFixedSize(250, 485); // Đặt kích thước hình chữ nhật
-    khungSymIC20->setStyleSheet(
-        "font-size: 20px; color: blue; font-weight: bold; background-color: rgba(0, 0, 0, 0);");
+    khungSymIC20->setStyleSheet("font-size: 20px; color: blue; font-weight: "
+                                "bold; background-color: rgba(0, 0, 0, 0);");
     khungCauHinhDuLieu20->setStyleSheet("QFrame#khungCauHinhDuLieu20 {"
                                         "   background-color: #A8D9D0;"
                                         "   border: 2px solid black;"
@@ -591,7 +613,7 @@ TaoThuVien::TaoThuVien()
     }
 
     for (int i = 0; i < 10; ++i) {
-        connect(chanDuLieuIC20[i][0], &QPushButton::clicked, [i, this, state20]() {
+        connect(chanDuLieuIC20[i][0], &QPushButton::clicked, this, [=]() {
             // Thiết lập trạng thái ban đầu
             if (*state20[i] == 0) {
                 chanDuLieuIC20[i][0]->setText("0");
@@ -617,7 +639,7 @@ TaoThuVien::TaoThuVien()
         });
     }
     for (int i = 0; i < 10; ++i) {
-        connect(chanDuLieuIC20[i][2], &QPushButton::clicked, [i, this, state20]() {
+        connect(chanDuLieuIC20[i][2], &QPushButton::clicked, this, [=]() {
             // Thiết lập trạng thái ban đầu
             if (*state20[i + 10] == 0) {
                 chanDuLieuIC20[i][2]->setText("0");
@@ -691,7 +713,7 @@ TaoThuVien::TaoThuVien()
     }
 
     for (int i = 0; i < 8; ++i) {
-        connect(chanDuLieuIC16[i][0], &QPushButton::clicked, [i, this, state16]() {
+        connect(chanDuLieuIC16[i][0], &QPushButton::clicked, this, [=]() {
             // Thiết lập trạng thái ban đầu
             if (*state16[i] == 0) {
                 chanDuLieuIC16[i][0]->setText("0");
@@ -717,7 +739,7 @@ TaoThuVien::TaoThuVien()
         });
     }
     for (int i = 0; i < 8; ++i) {
-        connect(chanDuLieuIC16[i][2], &QPushButton::clicked, [i, this, state16]() {
+        connect(chanDuLieuIC16[i][2], &QPushButton::clicked, this, [=]() {
             // Thiết lập trạng thái ban đầu
             if (*state16[i + 8] == 0) {
                 chanDuLieuIC16[i][2]->setText("0");
@@ -791,7 +813,7 @@ TaoThuVien::TaoThuVien()
     }
 
     for (int i = 0; i < 7; ++i) {
-        connect(chanDuLieuIC14[i][0], &QPushButton::clicked, [i, this, state14]() {
+        connect(chanDuLieuIC14[i][0], &QPushButton::clicked, this, [=]() {
             // Thiết lập trạng thái ban đầu
             if (*state14[i] == 0) {
                 chanDuLieuIC14[i][0]->setText("0");
@@ -816,7 +838,7 @@ TaoThuVien::TaoThuVien()
         });
     }
     for (int i = 0; i < 7; ++i) {
-        connect(chanDuLieuIC14[i][2], &QPushButton::clicked, [i, this, state14]() {
+        connect(chanDuLieuIC14[i][2], &QPushButton::clicked, this, [=]() {
             // Thiết lập trạng thái ban đầu
             if (*state14[i + 7] == 0) {
                 chanDuLieuIC14[i][2]->setText("0");
@@ -843,7 +865,7 @@ TaoThuVien::TaoThuVien()
 
     for (int i = 0; i < 7; ++i) {
         for (int j = 0; j < 3; j += 2) {
-            connect(next, &QPushButton::clicked, [this, i, j, soChanIC]() {
+            connect(next, &QPushButton::clicked, this, [=]() {
                 if (soChanIC->currentText() == " 14 Chân") {
                     if (chanSocketIC[i][j]->text() == "NC") {
                         chanDuLieuIC14[i][j]->setText("NC");
@@ -889,7 +911,7 @@ TaoThuVien::TaoThuVien()
     }
     for (int i = 0; i < 8; ++i) {
         for (int j = 0; j < 3; j += 2) {
-            connect(next, &QPushButton::clicked, [this, i, j, soChanIC]() {
+            connect(next, &QPushButton::clicked, this, [=]() {
                 if (soChanIC->currentText() == " 16 Chân") {
                     if (chanSocketIC[i][j]->text() == "NC") {
                         chanDuLieuIC16[i][j]->setText("NC");
@@ -935,7 +957,7 @@ TaoThuVien::TaoThuVien()
     }
     for (int i = 0; i < 10; ++i) {
         for (int j = 0; j < 3; j += 2) {
-            connect(next, &QPushButton::clicked, [this, i, j, soChanIC]() {
+            connect(next, &QPushButton::clicked, this, [=]() {
                 if (soChanIC->currentText() == " 20 Chân") {
                     if (chanSocketIC[i][j]->text() == "NC") {
                         chanDuLieuIC20[i][j]->setText("NC");
@@ -980,39 +1002,82 @@ TaoThuVien::TaoThuVien()
         }
     }
 
+    khongGianCauHinhDuLieu = new QStackedWidget;
     QPushButton *finish = new QPushButton("Hoàn thành");
-    finish->setStyleSheet(
-        "background-color: #009900;font-size: 16px;font-weight: bold; color: white");
+    finish->setStyleSheet("QPushButton {"
+                          "background-color: #009900;"
+                          "color: white;"
+                          "font-weight: bold;"
+                          "font-size: 16px;"
+                          "}"
+                          "QPushButton:hover {"
+                          "background-color: #007500;"
+                          "}");
     QPushButton *back = new QPushButton("Quay lại");
-    back->setStyleSheet(
-        "background-color: #009900;font-size: 16px;font-weight: bold; color: white");
-    QHBoxLayout *lopCauHinhDuLieu = new QHBoxLayout;
+    back->setStyleSheet("QPushButton {"
+                        "background-color: #009900;"
+                        "color: white;"
+                        "font-weight: bold;"
+                        "font-size: 16px;"
+                        "}"
+                        "QPushButton:hover {"
+                        "background-color: #007500;"
+                        "}");
+    QPushButton *resetGanDuLieu = new QPushButton("Đặt lại");
+    resetGanDuLieu->setStyleSheet("QPushButton {"
+                                  "background-color: #009900;"
+                                  "color: white;"
+                                  "font-weight: bold;"
+                                  "font-size: 16px;"
+                                  "}"
+                                  "QPushButton:hover {"
+                                  "background-color: #007500;"
+                                  "}");
+    QPushButton *save = new QPushButton("Lưu bài Test");
+    save->setStyleSheet("QPushButton {"
+                        "background-color: #009900;"
+                        "color: white;"
+                        "font-weight: bold;"
+                        "font-size: 16px;"
+                        "}"
+                        "QPushButton:hover {"
+                        "background-color: #007500;"
+                        "}");
+    QGroupBox *boxCauHinhDuLieu = new QGroupBox("Tạo bài kiểm tra", splitCauHinhDuLieu);
+    QGroupBox *boxHienThiCacBaiTest = new QGroupBox("Hiển thị các bài kiểm tra", splitCauHinhDuLieu);
+    QVBoxLayout *lopCauHinhDuLieu = new QVBoxLayout(boxCauHinhDuLieu);
+    QVBoxLayout *lopHienThiCacBaiTest = new QVBoxLayout(boxHienThiCacBaiTest);
+    QListView *danhSachCacBaiTest = new QListView;
+    QHBoxLayout *lopCauHinhDuLieuTong = new QHBoxLayout;
     QHBoxLayout *lopNutNhanCauHinhDuLieu = new QHBoxLayout;
-
-    lopNutNhanCauHinhDuLieu->addWidget(finish);
+    QHBoxLayout *lopNutNhanTaoBaiTest = new QHBoxLayout;
+    lopHienThiCacBaiTest->addWidget(danhSachCacBaiTest);
+    lopHienThiCacBaiTest->addLayout(lopNutNhanCauHinhDuLieu);
+    lopCauHinhDuLieu->addLayout(lopNutNhanTaoBaiTest);
+    lopCauHinhDuLieu->addWidget(khongGianCauHinhDuLieu);
+    lopCauHinhDuLieu->setAlignment(khongGianCauHinhDuLieu, Qt::AlignCenter);
     lopNutNhanCauHinhDuLieu->addWidget(back);
-    lopCauHinhDuLieu->addWidget(splitCauHinhDuLieu);
+    lopNutNhanCauHinhDuLieu->addWidget(finish);
+    lopNutNhanTaoBaiTest->addWidget(resetGanDuLieu);
+    lopNutNhanTaoBaiTest->addWidget(save);
 
-    khongGianCauHinhDuLieu = new QStackedWidget(splitCauHinhDuLieu);
+    lopCauHinhDuLieuTong->addWidget(splitCauHinhDuLieu);
 
     khongGianCauHinhDuLieu->addWidget(khungSymIC14);
     khongGianCauHinhDuLieu->addWidget(khungSymIC16);
     khongGianCauHinhDuLieu->addWidget(khungSymIC20);
 
-    connect(next,
-            &QPushButton::clicked,
-            [soChanIC, this, khungSymIC20, khungSymIC16, khungSymIC14]() {
-                if (soChanIC->currentText() == " 14 Chân") {
-                    khongGianCauHinhDuLieu->setCurrentWidget(khungSymIC14);
-                } else if (soChanIC->currentText() == " 16 Chân") {
-                    khongGianCauHinhDuLieu->setCurrentWidget(khungSymIC16);
-                } else if (soChanIC->currentText() == " 20 Chân") {
-                    khongGianCauHinhDuLieu->setCurrentWidget(khungSymIC20);
-                }
-            });
+    connect(next, &QPushButton::clicked, this, [=]() {
+        if (soChanIC->currentText() == " 14 Chân") {
+            khongGianCauHinhDuLieu->setCurrentWidget(khungSymIC14);
+        } else if (soChanIC->currentText() == " 16 Chân") {
+            khongGianCauHinhDuLieu->setCurrentWidget(khungSymIC16);
+        } else if (soChanIC->currentText() == " 20 Chân") {
+            khongGianCauHinhDuLieu->setCurrentWidget(khungSymIC20);
+        }
+    });
 
-    lopCauHinhDuLieu->addLayout(lopNutNhanCauHinhDuLieu);
-    trangCauHinhDuLieu->setLayout(lopCauHinhDuLieu);
+    trangCauHinhDuLieu->setLayout(lopCauHinhDuLieuTong);
 
     connect(finish, SIGNAL(clicked(bool)), this, SLOT(opComplete()));
     connect(finish, SIGNAL(clicked(bool)), this, SLOT(opTrangCauHinhChan()));

@@ -44,22 +44,55 @@ MainWindow::MainWindow(QWidget *parent)
     QSize iconSize(30, 30);
     QPushButton *nutKiemTra = new QPushButton("  Kiểm Tra IC");
     nutKiemTra->setFixedSize(300, 55);
-    nutKiemTra->setStyleSheet("font-size: 20px;background-color: #A9C4EB;font-weight: 600;");
+    nutKiemTra->setCursor(QCursor(Qt::PointingHandCursor));
+    nutKiemTra->setStyleSheet("QPushButton {"
+                              "background-color: #A9C4EB;"
+                              "font-weight: 600;"
+                              "font-size: 20px;"
+                              "}"
+                              "QPushButton:hover {"
+                              "background-color: yellow;"
+                              "}");
+
     nutKiemTra->setIcon(QIcon("://resources/KiemTra.png"));
     nutKiemTra->setIconSize(iconSize);
     QPushButton *nutTaoThuVien = new QPushButton("  Tạo Thư Viện");
     nutTaoThuVien->setFixedSize(300, 55);
-    nutTaoThuVien->setStyleSheet("font-size: 20px;background-color: #A9C4EB; font-weight: 600");
+    nutTaoThuVien->setCursor(QCursor(Qt::PointingHandCursor));
+    nutTaoThuVien->setStyleSheet("QPushButton {"
+                                 "background-color: #A9C4EB;"
+                                 "font-weight: 600;"
+                                 "font-size: 20px;"
+                                 "}"
+                                 "QPushButton:hover {"
+                                 "background-color: yellow;"
+                                 "}");
     nutTaoThuVien->setIcon(QIcon("://resources/TaoThuVien.png"));
     nutTaoThuVien->setIconSize(iconSize);
     QPushButton *nutXemThuVien = new QPushButton("  Xem Thư Viện");
     nutXemThuVien->setFixedSize(300, 55);
-    nutXemThuVien->setStyleSheet("font-size: 20px;background-color: #A9C4EB; font-weight: 600");
+    nutXemThuVien->setCursor(QCursor(Qt::PointingHandCursor));
+    nutXemThuVien->setStyleSheet("QPushButton {"
+                                 "background-color: #A9C4EB;"
+                                 "font-weight: 600;"
+                                 "font-size: 20px;"
+                                 "}"
+                                 "QPushButton:hover {"
+                                 "background-color: yellow;"
+                                 "}");
     nutXemThuVien->setIcon(QIcon("://resources/XemThuVien.png"));
     nutXemThuVien->setIconSize(iconSize);
     QPushButton *nutXemLichSu = new QPushButton("  Xem Lịch Sử");
     nutXemLichSu->setFixedSize(300, 55);
-    nutXemLichSu->setStyleSheet("font-size: 20px;background-color: #A9C4EB; font-weight: 600");
+    nutXemLichSu->setCursor(QCursor(Qt::PointingHandCursor));
+    nutXemLichSu->setStyleSheet("QPushButton {"
+                                "background-color: #A9C4EB;"
+                                "font-weight: 600;"
+                                "font-size: 20px;"
+                                "}"
+                                "QPushButton:hover {"
+                                "background-color: yellow;"
+                                "}");
     nutXemLichSu->setIcon(QIcon("://resources/XemLichSu.png"));
     nutXemLichSu->setIconSize(iconSize);
 
@@ -67,14 +100,30 @@ MainWindow::MainWindow(QWidget *parent)
     nhanThongTin->setStyleSheet("font-size: 20px;font-weight: bold;");
     QPushButton *nutHuongDan = new QPushButton("  Hướng Dẫn");
     nutHuongDan->setFixedSize(300, 55);
-    nutHuongDan->setStyleSheet(
-        "font-size: 20px;background-color: #009900;  color: white; font-weight: 600");
+    nutHuongDan->setCursor(QCursor(Qt::WhatsThisCursor));
+    nutHuongDan->setStyleSheet("QPushButton {"
+                               "background-color: #009900;"
+                               "color: white;"
+                               "font-weight: 600;"
+                               "font-size: 20px;"
+                               "}"
+                               "QPushButton:hover {"
+                               "background-color: #007500;"
+                               "}");
     nutHuongDan->setIcon(QIcon("://resources/HuongDan.png"));
     nutHuongDan->setIconSize(iconSize);
     QPushButton *nutLienHe = new QPushButton("  Liên Hệ");
     nutLienHe->setFixedSize(300, 55);
-    nutLienHe->setStyleSheet(
-        "font-size: 20px;background-color: #009900;  color: white; font-weight: 600");
+    nutLienHe->setCursor(QCursor(Qt::PointingHandCursor));
+    nutLienHe->setStyleSheet("QPushButton {"
+                             "background-color: #009900;"
+                             "color: white;"
+                             "font-weight: 600;"
+                             "font-size: 20px;"
+                             "}"
+                             "QPushButton:hover {"
+                             "background-color: #007500;"
+                             "}");
     nutLienHe->setIcon(QIcon("://resources/LienHe.png"));
     nutLienHe->setIconSize(iconSize);
     QMenu *menuLienHe = new QMenu;
@@ -136,7 +185,14 @@ MainWindow::MainWindow(QWidget *parent)
     thanhCongCu->setAllowedAreas(Qt::RightToolBarArea);
     addToolBar(thanhCongCu);
     QPushButton *nutBackHome = new QPushButton(" Home");
-    nutBackHome->setStyleSheet("background-color: #A8D9D0;font-weight: bold;");
+    nutBackHome->setCursor(QCursor(Qt::PointingHandCursor));
+    nutBackHome->setStyleSheet("QPushButton {"
+                               "background-color: #A8D9D0;"
+                               "font-weight: bold;"
+                               "}"
+                               "QPushButton:hover {"
+                               "background-color: yellow;"
+                               "}");
     nutBackHome->setIcon(QIcon("://resources/home.png"));
     nutBackHome->setIconSize(QSize(20, 20));
     nutBackHome->setToolTip("Trở về trang chủ");
@@ -159,7 +215,6 @@ MainWindow::MainWindow(QWidget *parent)
     thanhCongCu->addSeparator();
     thanhCongCu->addAction(thoat);
     thanhLienHe->setMovable(true);
-    thanhLienHe->setAllowedAreas(Qt::TopToolBarArea);
     thanhLienHe->addSeparator();
     thanhLienHe->addAction(fB);
     thanhLienHe->addSeparator();
@@ -171,7 +226,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(acKiemTra, SIGNAL(triggered(bool)), this, SLOT(opKiemTra()));
     thanhCongCu->setIconSize(QSize(20, 20));
 
-    addToolBar(thanhLienHe);
+    addToolBar(Qt::TopToolBarArea, thanhLienHe);
 
     //    cau hinh vung trung tam
     khongGianLamViec = new QStackedWidget;
