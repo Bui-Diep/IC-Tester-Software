@@ -1121,16 +1121,21 @@ TaoThuVien::TaoThuVien()
     boxHienThiCacBaiTest->setStyleSheet("font-weight: bold;font-size: 16px; color: #0000FF");
     QVBoxLayout *lopCauHinhDuLieu = new QVBoxLayout(boxCauHinhDuLieu);
     QVBoxLayout *lopHienThiCacBaiTest = new QVBoxLayout(boxHienThiCacBaiTest);
-    danhSachCacBaiTest = new QStringList;
-    QListView *hienThiCacBaiTest = new QListView;
-    QStringListModel *moHinhCacBaiTest = new QStringListModel;
+    //    danhSachCacBaiTest = new QString;
+    hienThiCacBaiTest = new QListView;
+    QStandardItemModel *moHinhCacBaiTest = new QStandardItemModel;
 
-    connect(save, &QPushButton::clicked, [=]() {
-        danhSachCacBaiTest->append(tenIC->text() + "_test"
-                                   + QString::number(moHinhCacBaiTest->rowCount() + 1));
-        moHinhCacBaiTest->setStringList(*danhSachCacBaiTest);
+    connect(save, &QPushButton::clicked, this, [=]() {
+        danhSachCacBaiTest = (tenIC->text() + "_test"
+                              + QString::number(moHinhCacBaiTest->rowCount() + 1));
+        moHinhCacBaiTest->appendRow(new QStandardItem(danhSachCacBaiTest));
         hienThiCacBaiTest->setModel(moHinhCacBaiTest);
     });
+    hienThiCacBaiTest->setContextMenuPolicy(Qt::CustomContextMenu);
+    connect(hienThiCacBaiTest,
+            SIGNAL(customContextMenuRequested(const QPoint &)),
+            this,
+            SLOT(showContextMenu(const QPoint &)));
 
     QHBoxLayout *lopCauHinhDuLieuTong = new QHBoxLayout;
     QHBoxLayout *lopNutNhanCauHinhDuLieu = new QHBoxLayout;
@@ -1201,4 +1206,19 @@ void TaoThuVien::opTrangCauHinhChan()
 void TaoThuVien::opComplete()
 {
     QMessageBox::information(this, "Thông báo", "Tạo thư viện hoàn tất");
+}
+void TaoThuVien::showContextMenu(const QPoint &point)
+{
+    QMenu contextMenu(tr("Context menu"), this);
+
+    QAction deleteAction("Xóa", this);
+    QAction editAction("Chỉnh sửa", this);
+
+    //    connect(&deleteAction, SIGNAL(triggered()), this, SLOT(deleteItem()));
+    //    connect(&editAction, SIGNAL(triggered()), this, SLOT(editItem()));
+
+    contextMenu.addAction(&deleteAction);
+    contextMenu.addAction(&editAction);
+
+    contextMenu.exec(hienThiCacBaiTest->mapToGlobal(point));
 }
