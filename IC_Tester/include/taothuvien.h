@@ -54,6 +54,7 @@ private:
     QPushButton *chanDuLieuIC16[10][3];
     QPushButton *chanDuLieuIC14[10][3];
     QStackedWidget *khongGianCauHinhDuLieu;
+    QStringList *danhSachCacBaiTest;
 };
 
 #endif // TAOTHUVIEN_H

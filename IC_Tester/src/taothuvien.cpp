@@ -617,7 +617,6 @@ TaoThuVien::TaoThuVien()
             // Thiết lập trạng thái ban đầu
             if (*state20[i] == 0) {
                 chanDuLieuIC20[i][0]->setText("0");
-                //            ->setEnabled(false); // Tắt chức năng nút
                 chanDuLieuIC20[i][0]->setStyleSheet(
                     "background-color: red; border-radius: 16px;"
                     "font-size: 16px; color: white; font-weight: bold; border: 1px solid "
@@ -643,7 +642,6 @@ TaoThuVien::TaoThuVien()
             // Thiết lập trạng thái ban đầu
             if (*state20[i + 10] == 0) {
                 chanDuLieuIC20[i][2]->setText("0");
-                //            ->setEnabled(false); // Tắt chức năng nút
                 chanDuLieuIC20[i][2]->setStyleSheet(
                     "background-color: red; border-radius: 16px; border: 1px solid blue;"
                     "font-size: 16px; color: white; font-weight: bold;");
@@ -813,56 +811,99 @@ TaoThuVien::TaoThuVien()
     }
 
     for (int i = 0; i < 7; ++i) {
-        connect(chanDuLieuIC14[i][0], &QPushButton::clicked, this, [=]() {
-            // Thiết lập trạng thái ban đầu
+        connect(chanDuLieuIC14[i][0], &QPushButton::clicked, this, [=]() {       
             if (*state14[i] == 0) {
                 chanDuLieuIC14[i][0]->setText("0");
-                chanDuLieuIC14[i][0]->setStyleSheet(
-                    "background-color: red; border-radius: 16px;"
-                    "font-size: 16px; color: white; font-weight: bold; border: 1px solid "
-                    "blue;");
+                if (chanSocketIC[i][0]->text() == "DOUT") {
+                    chanDuLieuIC14[i][0]->setStyleSheet(
+                        "background-color: red; border-radius: 16px;"
+                        "font-size: 16px; color: white; font-weight: bold; border: 3px solid "
+                        "#0000FF;");
+                } else {
+                    chanDuLieuIC14[i][0]->setStyleSheet(
+                        "background-color: red; border-radius: 16px;"
+                        "font-size: 16px; color: white; font-weight: bold; border: 1px solid "
+                        "blue;");
+                }
+
             } else if (*state14[i] == 1) {
                 chanDuLieuIC14[i][0]->setText("1");
-                chanDuLieuIC14[i][0]->setStyleSheet(
-                    "background-color: #009900; border-radius: 16px;"
-                    "font-size: 16px; color: white; font-weight: bold; border: 1px solid "
-                    "blue;");
+                if (chanSocketIC[i][0]->text() == "DOUT") {
+                    chanDuLieuIC14[i][0]->setStyleSheet(
+                        "background-color: #009900; border-radius: 16px;"
+                        "font-size: 16px; color: white; font-weight: bold; border: 3px solid "
+                        "#0000FF;");
+                } else {
+                    chanDuLieuIC14[i][0]->setStyleSheet(
+                        "background-color: #009900; border-radius: 16px;"
+                        "font-size: 16px; color: white; font-weight: bold; border: 1px solid "
+                        "blue;");
+                }
+
             } else if (*state14[i] == 2) {
                 chanDuLieuIC14[i][0]->setText("Z");
-                chanDuLieuIC14[i][0]->setStyleSheet(
-                    "background-color: grey; border-radius: 16px;"
-                    "font-size: 16px; color: white; font-weight: bold; border: 1px solid "
-                    "blue;");
+                if (chanSocketIC[i][0]->text() == "DOUT") {
+                    chanDuLieuIC14[i][0]->setStyleSheet(
+                        "background-color: grey; border-radius: 16px;"
+                        "font-size: 16px; color: white; font-weight: bold; border: 3px solid "
+                        "#0000FF;");
+                } else {
+                    chanDuLieuIC14[i][0]->setStyleSheet(
+                        "background-color: grey; border-radius: 16px;"
+                        "font-size: 16px; color: white; font-weight: bold; border: 1px solid "
+                        "blue;");
+                }
             }
             *state14[i] = (*state14[i] + 1) % 3;
         });
     }
     for (int i = 0; i < 7; ++i) {
         connect(chanDuLieuIC14[i][2], &QPushButton::clicked, this, [=]() {
-            // Thiết lập trạng thái ban đầu
             if (*state14[i + 7] == 0) {
                 chanDuLieuIC14[i][2]->setText("0");
-                //            ->setEnabled(false); // Tắt chức năng nút
-                chanDuLieuIC14[i][2]->setStyleSheet(
-                    "background-color: red; border-radius: 16px; border: 1px solid blue;"
-                    "font-size: 16px; color: white; font-weight: bold;");
+                if (chanSocketIC[i][2]->text() == "DOUT") {
+                    chanDuLieuIC14[i][2]->setStyleSheet(
+                        "background-color: red; border-radius: 16px;"
+                        "font-size: 16px; color: white; font-weight: bold; border: 3px solid "
+                        "#0000FF;");
+                } else {
+                    chanDuLieuIC14[i][2]->setStyleSheet(
+                        "background-color: red; border-radius: 16px;"
+                        "font-size: 16px; color: white; font-weight: bold; border: 1px solid "
+                        "blue;");
+                }
             } else if (*state14[i + 7] == 1) {
                 chanDuLieuIC14[i][2]->setText("1");
-                chanDuLieuIC14[i][2]->setStyleSheet(
-                    "background-color: #009900; border-radius: 16px; "
-                    "font-size: 16px; color: white; font-weight: bold; border: 1px solid "
-                    "blue;");
+                if (chanSocketIC[i][2]->text() == "DOUT") {
+                    chanDuLieuIC14[i][2]->setStyleSheet(
+                        "background-color: #009900; border-radius: 16px;"
+                        "font-size: 16px; color: white; font-weight: bold; border: 3px solid "
+                        "#0000FF;");
+                } else {
+                    chanDuLieuIC14[i][2]->setStyleSheet(
+                        "background-color: #009900; border-radius: 16px;"
+                        "font-size: 16px; color: white; font-weight: bold; border: 1px solid "
+                        "blue;");
+                }
             } else if (*state14[i + 7] == 2) {
                 chanDuLieuIC14[i][2]->setText("Z");
-                chanDuLieuIC14[i][2]->setStyleSheet(
-                    "background-color: grey; border-radius: 16px; "
-                    "font-size: 16px; color: white; font-weight: bold; border: 1px solid "
-                    "blue;");
+                if (chanSocketIC[i][2]->text() == "DOUT") {
+                    chanDuLieuIC14[i][2]->setStyleSheet(
+                        "background-color: grey; border-radius: 16px;"
+                        "font-size: 16px; color: white; font-weight: bold; border: 3px solid "
+                        "#0000FF;");
+                } else {
+                    chanDuLieuIC14[i][2]->setStyleSheet(
+                        "background-color: grey; border-radius: 16px;"
+                        "font-size: 16px; color: white; font-weight: bold; border: 1px solid "
+                        "blue;");
+                }
             }
             *state14[i + 7] = (*state14[i + 7] + 1) % 3;
         });
     }
 
+    //    thêm cấu chân IC từ trang cấu hình chân vào trang cấu hình IC
     for (int i = 0; i < 7; ++i) {
         for (int j = 0; j < 3; j += 2) {
             connect(next, &QPushButton::clicked, this, [=]() {
@@ -894,6 +935,17 @@ TaoThuVien::TaoThuVien()
                             "font-size: 14px; color: white; font-weight: bold; border: 1px "
                             "solid "
                             "blue;");
+                    } else if (chanSocketIC[i][j]->text() == "DOUT") {
+                        chanDuLieuIC14[i][j]->setText("X");
+                        chanDuLieuIC14[i][j]->setEnabled(1);
+                        chanDuLieuIC14[i][j]->setFixedSize(32, 32);
+                        chanDuLieuIC14[i][j]->setStyleSheet("background-color: white;"
+                                                            " border-radius: 16px; "
+                                                            " font-size: 16px;"
+                                                            " font-weight: bold;"
+                                                            " color: blue;"
+                                                            " border: 4px solid blue;");
+
                     } else {
                         chanDuLieuIC14[i][j]->setText("X");
                         chanDuLieuIC14[i][j]->setEnabled(1);
@@ -940,6 +992,16 @@ TaoThuVien::TaoThuVien()
                             "font-size: 14px; color: white; font-weight: bold; border: 1px "
                             "solid "
                             "blue;");
+                    } else if (chanSocketIC[i][j]->text() == "DOUT") {
+                        chanDuLieuIC16[i][j]->setText("X");
+                        chanDuLieuIC16[i][j]->setEnabled(1);
+                        chanDuLieuIC16[i][j]->setFixedSize(32, 32);
+                        chanDuLieuIC16[i][j]->setStyleSheet("background-color: white;"
+                                                            " border-radius: 16px; "
+                                                            " font-size: 16px;"
+                                                            " font-weight: bold;"
+                                                            " color: blue;"
+                                                            " border: 4px solid blue;");
                     } else {
                         chanDuLieuIC16[i][j]->setText("X");
                         chanDuLieuIC16[i][j]->setEnabled(1);
@@ -986,6 +1048,16 @@ TaoThuVien::TaoThuVien()
                             "font-size: 14px; color: white; font-weight: bold; border: 1px "
                             "solid "
                             "blue;");
+                    } else if (chanSocketIC[i][j]->text() == "DOUT") {
+                        chanDuLieuIC20[i][j]->setText("X");
+                        chanDuLieuIC20[i][j]->setEnabled(1);
+                        chanDuLieuIC20[i][j]->setFixedSize(32, 32);
+                        chanDuLieuIC20[i][j]->setStyleSheet("background-color: white;"
+                                                            " border-radius: 16px; "
+                                                            " font-size: 16px;"
+                                                            " font-weight: bold;"
+                                                            " color: blue;"
+                                                            " border: 4px solid blue;");
                     } else {
                         chanDuLieuIC20[i][j]->setText("X");
                         chanDuLieuIC20[i][j]->setEnabled(1);
@@ -1044,14 +1116,26 @@ TaoThuVien::TaoThuVien()
                         "background-color: #007500;"
                         "}");
     QGroupBox *boxCauHinhDuLieu = new QGroupBox("Tạo bài kiểm tra", splitCauHinhDuLieu);
+    boxCauHinhDuLieu->setStyleSheet("font-weight: bold;font-size: 16px; color: #0000FF");
     QGroupBox *boxHienThiCacBaiTest = new QGroupBox("Hiển thị các bài kiểm tra", splitCauHinhDuLieu);
+    boxHienThiCacBaiTest->setStyleSheet("font-weight: bold;font-size: 16px; color: #0000FF");
     QVBoxLayout *lopCauHinhDuLieu = new QVBoxLayout(boxCauHinhDuLieu);
     QVBoxLayout *lopHienThiCacBaiTest = new QVBoxLayout(boxHienThiCacBaiTest);
-    QListView *danhSachCacBaiTest = new QListView;
+    danhSachCacBaiTest = new QStringList;
+    QListView *hienThiCacBaiTest = new QListView;
+    QStringListModel *moHinhCacBaiTest = new QStringListModel;
+
+    connect(save, &QPushButton::clicked, [=]() {
+        danhSachCacBaiTest->append(tenIC->text() + "_test"
+                                   + QString::number(moHinhCacBaiTest->rowCount() + 1));
+        moHinhCacBaiTest->setStringList(*danhSachCacBaiTest);
+        hienThiCacBaiTest->setModel(moHinhCacBaiTest);
+    });
+
     QHBoxLayout *lopCauHinhDuLieuTong = new QHBoxLayout;
     QHBoxLayout *lopNutNhanCauHinhDuLieu = new QHBoxLayout;
     QHBoxLayout *lopNutNhanTaoBaiTest = new QHBoxLayout;
-    lopHienThiCacBaiTest->addWidget(danhSachCacBaiTest);
+    lopHienThiCacBaiTest->addWidget(hienThiCacBaiTest);
     lopHienThiCacBaiTest->addLayout(lopNutNhanCauHinhDuLieu);
     lopCauHinhDuLieu->addLayout(lopNutNhanTaoBaiTest);
     lopCauHinhDuLieu->addWidget(khongGianCauHinhDuLieu);
@@ -1078,7 +1162,7 @@ TaoThuVien::TaoThuVien()
     });
 
     trangCauHinhDuLieu->setLayout(lopCauHinhDuLieuTong);
-
+    connect(resetGanDuLieu, &QPushButton::clicked, this, [=]() { next->clicked(); });
     connect(finish, SIGNAL(clicked(bool)), this, SLOT(opComplete()));
     connect(finish, SIGNAL(clicked(bool)), this, SLOT(opTrangCauHinhChan()));
     connect(back, &QPushButton::clicked, this, [this]() {
