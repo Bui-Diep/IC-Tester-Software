@@ -18,6 +18,7 @@
         <file>resources/IC20.png</file>
         <file>resources/Git.png</file>
         <file>resources/SoftwareIcon.ico</file>
+        <file>resources/ChuThichPin.png</file>
     </qresource>
     <qresource prefix="/document">
         <file>Readme/HuongDan.txt</file>

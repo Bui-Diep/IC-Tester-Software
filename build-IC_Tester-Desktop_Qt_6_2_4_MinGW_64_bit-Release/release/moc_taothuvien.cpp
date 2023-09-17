@@ -153,8 +153,8 @@ void MyButton::left()
     QMetaObject::activate(this, &staticMetaObject, 1, nullptr);
 }
 struct qt_meta_stringdata_TaoThuVien_t {
-    const uint offsetsAndSize[14];
-    char stringdata0[85];
+    const uint offsetsAndSize[16];
+    char stringdata0[91];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(offsetof(qt_meta_stringdata_TaoThuVien_t, stringdata0) + ofs), len 
@@ -165,13 +165,14 @@ QT_MOC_LITERAL(11, 20), // "opTrangCauHinhDuLieu"
 QT_MOC_LITERAL(32, 0), // ""
 QT_MOC_LITERAL(33, 18), // "opTrangCauHinhChan"
 QT_MOC_LITERAL(52, 10), // "opComplete"
-QT_MOC_LITERAL(63, 15), // "showContextMenu"
-QT_MOC_LITERAL(79, 5) // "point"
+QT_MOC_LITERAL(63, 13), // "taoFileDuLieu"
+QT_MOC_LITERAL(77, 6), // "dienAp"
+QT_MOC_LITERAL(84, 6) // "soChan"
 
     },
     "TaoThuVien\0opTrangCauHinhDuLieu\0\0"
     "opTrangCauHinhChan\0opComplete\0"
-    "showContextMenu\0point"
+    "taoFileDuLieu\0dienAp\0soChan"
 };
 #undef QT_MOC_LITERAL
 
@@ -192,13 +193,13 @@ static const uint qt_meta_data_TaoThuVien[] = {
        1,    0,   38,    2, 0x0a,    1 /* Public */,
        3,    0,   39,    2, 0x0a,    2 /* Public */,
        4,    0,   40,    2, 0x0a,    3 /* Public */,
-       5,    1,   41,    2, 0x0a,    4 /* Public */,
+       5,    2,   41,    2, 0x0a,    4 /* Public */,
 
  // slots: parameters
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::QPoint,    6,
+    QMetaType::Void, QMetaType::QString, QMetaType::Int,    6,    7,
 
        0        // eod
 };
@@ -212,7 +213,7 @@ void TaoThuVien::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 0: _t->opTrangCauHinhDuLieu(); break;
         case 1: _t->opTrangCauHinhChan(); break;
         case 2: _t->opComplete(); break;
-        case 3: _t->showContextMenu((*reinterpret_cast< std::add_pointer_t<QPoint>>(_a[1]))); break;
+        case 3: _t->taoFileDuLieu((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[2]))); break;
         default: ;
         }
     }
@@ -226,7 +227,7 @@ const QMetaObject TaoThuVien::staticMetaObject = { {
     nullptr,
 qt_incomplete_metaTypeArray<qt_meta_stringdata_TaoThuVien_t
 , QtPrivate::TypeAndForceComplete<TaoThuVien, std::true_type>
-, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const QPoint &, std::false_type>
+, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const QString &, std::false_type>, QtPrivate::TypeAndForceComplete<const int &, std::false_type>
 
 
 >,

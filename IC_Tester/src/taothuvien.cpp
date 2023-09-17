@@ -73,10 +73,15 @@ TaoThuVien::TaoThuVien()
     moTaIC = new QTextEdit;
     lopThuocTinh->addRow("Mô tả:", moTaIC);
     moTaIC->setPlaceholderText("Mô tả IC tại đây ...");
-    connect(nutHienSym, &QPushButton::clicked, this, [=]() {
-        for (int i = 0; i < 10; ++i) {
-            for (int j = 0; j < 3; j += 2) {
-                chanSocketIC[i][j]->setText("NC");
+
+    QString giaTriChanIC(""); // biến lưu trữ trung gian để kiểm tra số chân có thay đổi hay không
+    connect(nutHienSym, &QPushButton::clicked, [=, &giaTriChanIC]() {
+        if (soChanIC->currentText() != giaTriChanIC) {
+            giaTriChanIC = soChanIC->currentText();
+            for (int i = 0; i < 10; ++i) {
+                for (int j = 0; j < 3; j += 2) {
+                    chanSocketIC[i][j]->setText("NC");
+                }
             }
         }
         if (!tenIC->text().isEmpty()) {
@@ -611,7 +616,7 @@ TaoThuVien::TaoThuVien()
     for (int i = 0; i < 20; ++i) {
         state20[i] = new int(0);
     }
-
+    //    hàng chân bên trái IC20 Chân
     for (int i = 0; i < 10; ++i) {
         connect(chanDuLieuIC20[i][0], &QPushButton::clicked, this, [=]() {
             // Thiết lập trạng thái ban đầu
@@ -637,6 +642,7 @@ TaoThuVien::TaoThuVien()
             *state20[i] = (*state20[i] + 1) % 3;
         });
     }
+    //    hàng chân bên phải IC20 Chân
     for (int i = 0; i < 10; ++i) {
         connect(chanDuLieuIC20[i][2], &QPushButton::clicked, this, [=]() {
             // Thiết lập trạng thái ban đầu
@@ -709,7 +715,7 @@ TaoThuVien::TaoThuVien()
     for (int i = 0; i < 16; ++i) {
         state16[i] = new int(0);
     }
-
+    //  hàng chân bên Trái IC16 Chân
     for (int i = 0; i < 8; ++i) {
         connect(chanDuLieuIC16[i][0], &QPushButton::clicked, this, [=]() {
             // Thiết lập trạng thái ban đầu
@@ -736,6 +742,7 @@ TaoThuVien::TaoThuVien()
             *state16[i] = (*state16[i] + 1) % 3;
         });
     }
+    //  hàng chân bên phải IC16 Chân
     for (int i = 0; i < 8; ++i) {
         connect(chanDuLieuIC16[i][2], &QPushButton::clicked, this, [=]() {
             // Thiết lập trạng thái ban đầu
@@ -809,7 +816,7 @@ TaoThuVien::TaoThuVien()
     for (int i = 0; i < 14; ++i) {
         state14[i] = new int(0);
     }
-
+    //  hàng chân bên Trái IC14 Chân
     for (int i = 0; i < 7; ++i) {
         connect(chanDuLieuIC14[i][0], &QPushButton::clicked, this, [=]() {       
             if (*state14[i] == 0) {
@@ -857,6 +864,7 @@ TaoThuVien::TaoThuVien()
             *state14[i] = (*state14[i] + 1) % 3;
         });
     }
+    //  hàng chân bên phải IC14 Chân
     for (int i = 0; i < 7; ++i) {
         connect(chanDuLieuIC14[i][2], &QPushButton::clicked, this, [=]() {
             if (*state14[i + 7] == 0) {
@@ -903,7 +911,7 @@ TaoThuVien::TaoThuVien()
         });
     }
 
-    //    thêm cấu chân IC từ trang cấu hình chân vào trang cấu hình IC
+    //    thêm cấu chân IC từ trang cấu hình chân vào trang cấu hình IC (loại 14 Chân)
     for (int i = 0; i < 7; ++i) {
         for (int j = 0; j < 3; j += 2) {
             connect(next, &QPushButton::clicked, this, [=]() {
@@ -961,6 +969,8 @@ TaoThuVien::TaoThuVien()
             });
         }
     }
+    //    thêm cấu chân IC từ trang cấu hình chân vào trang cấu hình IC (loại 16 Chân)
+
     for (int i = 0; i < 8; ++i) {
         for (int j = 0; j < 3; j += 2) {
             connect(next, &QPushButton::clicked, this, [=]() {
@@ -1017,6 +1027,7 @@ TaoThuVien::TaoThuVien()
             });
         }
     }
+    //    thêm cấu chân IC từ trang cấu hình chân vào trang cấu hình IC (loại 20 Chân)
     for (int i = 0; i < 10; ++i) {
         for (int j = 0; j < 3; j += 2) {
             connect(next, &QPushButton::clicked, this, [=]() {
@@ -1074,6 +1085,7 @@ TaoThuVien::TaoThuVien()
         }
     }
 
+    //    tạo các nút bấm trong trang cấu hình dữ liệu
     khongGianCauHinhDuLieu = new QStackedWidget;
     QPushButton *finish = new QPushButton("Hoàn thành");
     finish->setStyleSheet("QPushButton {"
@@ -1123,28 +1135,60 @@ TaoThuVien::TaoThuVien()
     QVBoxLayout *lopHienThiCacBaiTest = new QVBoxLayout(boxHienThiCacBaiTest);
     //    danhSachCacBaiTest = new QString;
     hienThiCacBaiTest = new QListView;
-    QStandardItemModel *moHinhCacBaiTest = new QStandardItemModel;
+    hienThiCacBaiTest->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    moHinhCacBaiTest = new QStandardItemModel;
 
-    connect(save, &QPushButton::clicked, this, [=]() {
-        danhSachCacBaiTest = (tenIC->text() + "_test"
-                              + QString::number(moHinhCacBaiTest->rowCount() + 1));
-        moHinhCacBaiTest->appendRow(new QStandardItem(danhSachCacBaiTest));
-        hienThiCacBaiTest->setModel(moHinhCacBaiTest);
+    connect(save, &QPushButton::clicked, [=]() {
+        const QString &congNghe = congNgheBanDan->currentText();
+        const int &soChan = soChanIC->currentIndex();
+        taoFileDuLieu(congNghe, soChan);
     });
-    hienThiCacBaiTest->setContextMenuPolicy(Qt::CustomContextMenu);
-    connect(hienThiCacBaiTest,
-            SIGNAL(customContextMenuRequested(const QPoint &)),
-            this,
-            SLOT(showContextMenu(const QPoint &)));
 
+    hienThiCacBaiTest->setContextMenuPolicy(Qt::CustomContextMenu);
+    connect(hienThiCacBaiTest, &QListView::customContextMenuRequested, this, [=](const QPoint &point) {
+        QMenu contextMenu(tr("Context menu"), this);
+
+        QAction deleteAction("Xóa", this);
+        QAction editAction("Chỉnh sửa", this);
+
+        //        Thao tác xóa bài test
+        connect(&deleteAction, &QAction::triggered, [this]() {
+            QModelIndexList selectedIndexes = hienThiCacBaiTest->selectionModel()->selectedIndexes();
+            if (!selectedIndexes.isEmpty()) {
+                int row = selectedIndexes.first().row();
+                QStandardItemModel *model = dynamic_cast<QStandardItemModel *>(
+                    hienThiCacBaiTest->model());
+                if (model) {
+                    model->removeRow(row);
+                }
+            }
+        });
+        //        Thao tác chỉnh sửa bài test
+        //    connect(&editAction, SIGNAL(triggered()), this, SLOT(editItem()));
+
+        contextMenu.addAction(&deleteAction);
+        contextMenu.addAction(&editAction);
+
+        contextMenu.exec(hienThiCacBaiTest->mapToGlobal(point));
+    });
+    //    tạo các layout cho trang cấu hình dữ liệu
     QHBoxLayout *lopCauHinhDuLieuTong = new QHBoxLayout;
     QHBoxLayout *lopNutNhanCauHinhDuLieu = new QHBoxLayout;
     QHBoxLayout *lopNutNhanTaoBaiTest = new QHBoxLayout;
     lopHienThiCacBaiTest->addWidget(hienThiCacBaiTest);
     lopHienThiCacBaiTest->addLayout(lopNutNhanCauHinhDuLieu);
     lopCauHinhDuLieu->addLayout(lopNutNhanTaoBaiTest);
+    lopCauHinhDuLieu->addWidget(new QLabel(""));
     lopCauHinhDuLieu->addWidget(khongGianCauHinhDuLieu);
     lopCauHinhDuLieu->setAlignment(khongGianCauHinhDuLieu, Qt::AlignCenter);
+
+    QLabel *chuThichPin = new QLabel;
+    QPixmap pixmapChuThich("://resources/ChuThichPin.png"); // Đường dẫn đến tệp hình ảnh
+    //    QPixmap scaledPixmap = pixmapChuThich.scaled(QSize(400, 37));
+    chuThichPin->setPixmap(pixmapChuThich);
+    lopCauHinhDuLieu->addWidget(chuThichPin);
+    lopCauHinhDuLieu->setAlignment(chuThichPin, Qt::AlignCenter);
+
     lopNutNhanCauHinhDuLieu->addWidget(back);
     lopNutNhanCauHinhDuLieu->addWidget(finish);
     lopNutNhanTaoBaiTest->addWidget(resetGanDuLieu);
@@ -1182,12 +1226,17 @@ TaoThuVien::TaoThuVien()
 
     QVBoxLayout *lopTaoThuVien = new QVBoxLayout;
     lopTaoThuVien->addWidget(khongGianTaoThuVien);
-    lopTaoThuVien->addWidget(new QLabel("Tạo Thư Viện"));
+    //    lopTaoThuVien->addWidget(new QLabel("Tạo Thư Viện"));
     this->setLayout(lopTaoThuVien);
 }
+
 void TaoThuVien::opTrangCauHinhDuLieu()
 {
-    khongGianTaoThuVien->setCurrentWidget(trangCauHinhDuLieu);
+    if (tenIC->text().isEmpty()) {
+        QMessageBox::warning(this, "Cảnh báo", "Vui lòng cấu hình chân cho IC");
+    } else {
+        khongGianTaoThuVien->setCurrentWidget(trangCauHinhDuLieu);
+    }
 }
 void TaoThuVien::opTrangCauHinhChan()
 {
@@ -1206,19 +1255,49 @@ void TaoThuVien::opTrangCauHinhChan()
 void TaoThuVien::opComplete()
 {
     QMessageBox::information(this, "Thông báo", "Tạo thư viện hoàn tất");
+    QStandardItemModel *model = dynamic_cast<QStandardItemModel *>(hienThiCacBaiTest->model());
+    if (model) {
+        model->clear(); // Xóa tất cả các mục trong mô hình
+    }
 }
-void TaoThuVien::showContextMenu(const QPoint &point)
+void TaoThuVien::taoFileDuLieu(const QString &dienAp, const int &soChan)
 {
-    QMenu contextMenu(tr("Context menu"), this);
+    QByteArray *byteCauHinh = new QByteArray;
+    byteCauHinh->append(0b10000000);
 
-    QAction deleteAction("Xóa", this);
-    QAction editAction("Chỉnh sửa", this);
+    //  byte cấu hình "điện áp(7), số chân(6-5), số bài test (4-1)"
+    char byte = byteCauHinh->at(0);
 
-    //    connect(&deleteAction, SIGNAL(triggered()), this, SLOT(deleteItem()));
-    //    connect(&editAction, SIGNAL(triggered()), this, SLOT(editItem()));
+    //    Cấu hình điệp áp
+    if (dienAp == " TTL (5V)") {
+        byte &= (0b00000000);
+    }
+    qDebug() << dienAp;
 
-    contextMenu.addAction(&deleteAction);
-    contextMenu.addAction(&editAction);
+    //  Cấu hình chân
+    switch (soChan) {
+    case 1:
+        byte |= (0b00000000); //00- 14chân
+        break;
+    case 2:
+        byte |= (0b00100000); //01- 16chân
+        break;
+    case 3:
+        byte |= (0b01000000); //10- 20chân
+        break;
+    default:
+        byte |= (0b01100000); //11- còn lại 8, 24chân
+        break;
+    }
 
-    contextMenu.exec(hienThiCacBaiTest->mapToGlobal(point));
+    QString binaryString;
+    for (int i = 7; i >= 0; --i) {
+        binaryString.append(QString::number((byte >> i) & 1));
+    }
+    qDebug() << "Gia tri nhi phan cua byte:" << binaryString;
+
+    danhSachCacBaiTest = (tenIC->text() + "_test"
+                          + QString::number(moHinhCacBaiTest->rowCount() + 1));
+    moHinhCacBaiTest->appendRow(new QStandardItem(danhSachCacBaiTest));
+    hienThiCacBaiTest->setModel(moHinhCacBaiTest);
 }

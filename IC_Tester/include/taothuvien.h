@@ -27,7 +27,7 @@ public slots:
     void opTrangCauHinhDuLieu();
     void opTrangCauHinhChan();
     void opComplete();
-    void showContextMenu(const QPoint &point);
+    void taoFileDuLieu(const QString &dienAp, const int &soChan);
 
 private:
     QStackedWidget *khongGianTaoThuVien;
@@ -55,6 +55,7 @@ private:
     QPushButton *chanDuLieuIC16[10][3];
     QPushButton *chanDuLieuIC14[10][3];
     QStackedWidget *khongGianCauHinhDuLieu;
+    QStandardItemModel *moHinhCacBaiTest;
     QListView *hienThiCacBaiTest;
     QString danhSachCacBaiTest;
 };
