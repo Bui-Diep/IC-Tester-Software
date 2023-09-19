@@ -721,23 +721,43 @@ TaoThuVien::TaoThuVien()
             // Thiết lập trạng thái ban đầu
             if (*state16[i] == 0) {
                 chanDuLieuIC16[i][0]->setText("0");
-                //            ->setEnabled(false); // Tắt chức năng nút
-                chanDuLieuIC16[i][0]->setStyleSheet(
-                    "background-color: red; border-radius: 16px;"
-                    "font-size: 16px; color: white; font-weight: bold; border: 1px solid "
-                    "blue;");
+                if (chanSocketIC[i][0]->text() == "DOUT") {
+                    chanDuLieuIC16[i][0]->setStyleSheet(
+                        "background-color: red; border-radius: 16px;"
+                        "font-size: 16px; color: white; font-weight: bold; border: 3px solid "
+                        "#0000FF;");
+                } else {
+                    chanDuLieuIC16[i][0]->setStyleSheet(
+                        "background-color: red; border-radius: 16px;"
+                        "font-size: 16px; color: white; font-weight: bold; border: 1px solid "
+                        "blue;");
+                }
             } else if (*state16[i] == 1) {
                 chanDuLieuIC16[i][0]->setText("1");
-                chanDuLieuIC16[i][0]->setStyleSheet(
-                    "background-color: #009900; border-radius: 16px;"
-                    "font-size: 16px; color: white; font-weight: bold; border: 1px solid "
-                    "blue;");
+                if (chanSocketIC[i][0]->text() == "DOUT") {
+                    chanDuLieuIC16[i][0]->setStyleSheet(
+                        "background-color: #009900; border-radius: 16px;"
+                        "font-size: 16px; color: white; font-weight: bold; border: 3px solid "
+                        "#0000FF;");
+                } else {
+                    chanDuLieuIC16[i][0]->setStyleSheet(
+                        "background-color: #009900; border-radius: 16px;"
+                        "font-size: 16px; color: white; font-weight: bold; border: 1px solid "
+                        "blue;");
+                }
             } else if (*state16[i] == 2) {
                 chanDuLieuIC16[i][0]->setText("Z");
-                chanDuLieuIC16[i][0]->setStyleSheet(
-                    "background-color: grey; border-radius: 16px;"
-                    "font-size: 16px; color: white; font-weight: bold; border: 1px solid "
-                    "blue;");
+                if (chanSocketIC[i][0]->text() == "DOUT") {
+                    chanDuLieuIC16[i][0]->setStyleSheet(
+                        "background-color: grey; border-radius: 16px;"
+                        "font-size: 16px; color: white; font-weight: bold; border: 3px solid "
+                        "#0000FF;");
+                } else {
+                    chanDuLieuIC16[i][0]->setStyleSheet(
+                        "background-color: grey; border-radius: 16px;"
+                        "font-size: 16px; color: white; font-weight: bold; border: 1px solid "
+                        "blue;");
+                }
             }
             *state16[i] = (*state16[i] + 1) % 3;
         });
@@ -748,22 +768,43 @@ TaoThuVien::TaoThuVien()
             // Thiết lập trạng thái ban đầu
             if (*state16[i + 8] == 0) {
                 chanDuLieuIC16[i][2]->setText("0");
-                //            ->setEnabled(false); // Tắt chức năng nút
-                chanDuLieuIC16[i][2]->setStyleSheet(
-                    "background-color: red; border-radius: 16px; border: 1px solid blue;"
-                    "font-size: 16px; color: white; font-weight: bold;");
+                if (chanSocketIC[i][2]->text() == "DOUT") {
+                    chanDuLieuIC16[i][2]->setStyleSheet(
+                        "background-color: red; border-radius: 16px;"
+                        "font-size: 16px; color: white; font-weight: bold; border: 3px solid "
+                        "#0000FF;");
+                } else {
+                    chanDuLieuIC16[i][2]->setStyleSheet(
+                        "background-color: red; border-radius: 16px;"
+                        "font-size: 16px; color: white; font-weight: bold; border: 1px solid "
+                        "blue;");
+                }
             } else if (*state16[i + 8] == 1) {
                 chanDuLieuIC16[i][2]->setText("1");
-                chanDuLieuIC16[i][2]->setStyleSheet(
-                    "background-color: #009900; border-radius: 16px; "
-                    "font-size: 16px; color: white; font-weight: bold; border: 1px solid "
-                    "blue;");
+                if (chanSocketIC[i][2]->text() == "DOUT") {
+                    chanDuLieuIC16[i][2]->setStyleSheet(
+                        "background-color: #009900; border-radius: 16px;"
+                        "font-size: 16px; color: white; font-weight: bold; border: 3px solid "
+                        "#0000FF;");
+                } else {
+                    chanDuLieuIC16[i][2]->setStyleSheet(
+                        "background-color: #009900; border-radius: 16px;"
+                        "font-size: 16px; color: white; font-weight: bold; border: 1px solid "
+                        "blue;");
+                }
             } else if (*state16[i + 8] == 2) {
                 chanDuLieuIC16[i][2]->setText("Z");
-                chanDuLieuIC16[i][2]->setStyleSheet(
-                    "background-color: grey; border-radius: 16px; "
-                    "font-size: 16px; color: white; font-weight: bold; border: 1px solid "
-                    "blue;");
+                if (chanSocketIC[i][2]->text() == "DOUT") {
+                    chanDuLieuIC16[i][2]->setStyleSheet(
+                        "background-color: grey; border-radius: 16px;"
+                        "font-size: 16px; color: white; font-weight: bold; border: 3px solid "
+                        "#0000FF;");
+                } else {
+                    chanDuLieuIC16[i][2]->setStyleSheet(
+                        "background-color: grey; border-radius: 16px;"
+                        "font-size: 16px; color: white; font-weight: bold; border: 1px solid "
+                        "blue;");
+                }
             }
             *state16[i + 8] = (*state16[i + 8] + 1) % 3;
         });
@@ -1133,14 +1174,14 @@ TaoThuVien::TaoThuVien()
     boxHienThiCacBaiTest->setStyleSheet("font-weight: bold;font-size: 16px; color: #0000FF");
     QVBoxLayout *lopCauHinhDuLieu = new QVBoxLayout(boxCauHinhDuLieu);
     QVBoxLayout *lopHienThiCacBaiTest = new QVBoxLayout(boxHienThiCacBaiTest);
-    //    danhSachCacBaiTest = new QString;
+
     hienThiCacBaiTest = new QListView;
     hienThiCacBaiTest->setEditTriggers(QAbstractItemView::NoEditTriggers);
     moHinhCacBaiTest = new QStandardItemModel;
 
-    connect(save, &QPushButton::clicked, [=]() {
+    connect(save, &QPushButton::clicked, this, [=]() {
         const QString &congNghe = congNgheBanDan->currentText();
-        const int &soChan = soChanIC->currentIndex();
+        const QString &soChan = soChanIC->currentText();
         taoFileDuLieu(congNghe, soChan);
     });
 
@@ -1152,7 +1193,7 @@ TaoThuVien::TaoThuVien()
         QAction editAction("Chỉnh sửa", this);
 
         //        Thao tác xóa bài test
-        connect(&deleteAction, &QAction::triggered, [this]() {
+        connect(&deleteAction, &QAction::triggered, this, [=]() {
             QModelIndexList selectedIndexes = hienThiCacBaiTest->selectionModel()->selectedIndexes();
             if (!selectedIndexes.isEmpty()) {
                 int row = selectedIndexes.first().row();
@@ -1160,9 +1201,28 @@ TaoThuVien::TaoThuVien()
                     hienThiCacBaiTest->model());
                 if (model) {
                     model->removeRow(row);
+                    int rowCountTemp(moHinhCacBaiTest->rowCount());
+                    moHinhCacBaiTest->clear();
+                    for (int i = 0; i < rowCountTemp; ++i) {
+                        danhSachCacBaiTest = (tenIC->text() + "_test"
+                                              + QString::number(moHinhCacBaiTest->rowCount() + 1));
+                        moHinhCacBaiTest->appendRow(new QStandardItem(danhSachCacBaiTest));
+                    }
+                    hienThiCacBaiTest->setModel(moHinhCacBaiTest);
+                    qDebug() << row;
+
+                    if (row * 10 >= 0 && row * 10 < duLieuBaiKiemTra->size()) {
+                        // Xóa byte từ QByteArray
+                        duLieuBaiKiemTra->remove(row * 10, 10);
+
+                        // Giảm kích thước của QByteArray sau khi xóa
+                        //          duLieuBaiKiemTra.resize(duLieuBaiKiemTra.size() - 10);
+                        qDebug() << duLieuBaiKiemTra->size();
+                    }
                 }
             }
         });
+
         //        Thao tác chỉnh sửa bài test
         //    connect(&editAction, SIGNAL(triggered()), this, SLOT(editItem()));
 
@@ -1212,7 +1272,14 @@ TaoThuVien::TaoThuVien()
 
     trangCauHinhDuLieu->setLayout(lopCauHinhDuLieuTong);
     connect(resetGanDuLieu, &QPushButton::clicked, this, [=]() { next->clicked(); });
-    connect(finish, SIGNAL(clicked(bool)), this, SLOT(opComplete()));
+
+    duLieuBaiKiemTra = new QByteArray;
+
+    connect(finish, &QPushButton::clicked, this, [=]() {
+        const QString &congNghe = congNgheBanDan->currentText();
+        const int &soChan = soChanIC->currentIndex();
+        opComplete(congNghe, soChan);
+    });
     connect(finish, SIGNAL(clicked(bool)), this, SLOT(opTrangCauHinhChan()));
     connect(back, &QPushButton::clicked, this, [this]() {
         khongGianTaoThuVien->setCurrentWidget(trangCauHinhChan);
@@ -1252,52 +1319,213 @@ void TaoThuVien::opTrangCauHinhChan()
         }
     }
 }
-void TaoThuVien::opComplete()
+void TaoThuVien::opComplete(const QString &dienAp, const int &soChan)
 {
+    //  byte cấu hình "điện áp(7), số chân(6-5), số bài test (4-1)"
+    //    "1xxxxxxx" thể hiện mức điện áp IC 5V
+    //    "0xxxxxxx" thể hiện mức điện áp IC 3.3V
+
+    //    "x00xxxxx" thể hiện IC 14 Chân
+    //    "x01xxxxx" thể hiện IC 16 Chân
+    //    "x10xxxxx" thể hiện IC 20 Chân
+    //    "x00xxxxx" thể hiện các trường hợp còn lại về số chân IC
+
+    char byteMaHoaThuocTinhIC = '\0';
+    //    Mã hóa thông tin điện áp sử dụng
+    if (dienAp == " TTL (5V)") {
+        byteMaHoaThuocTinhIC |= (0b10000000); //5V
+    } else if (dienAp == " CMOS (3.3V)") {
+        byteMaHoaThuocTinhIC &= (0b01111111); //3.3V
+    }
+    //  Mã hóa thông tin Số chân của IC
+    switch (soChan) {
+    case 1:
+        byteMaHoaThuocTinhIC |= (0b00000000); //00- 14chân
+        break;
+    case 2:
+        byteMaHoaThuocTinhIC |= (0b00100000); //01- 16chân
+        break;
+    case 3:
+        byteMaHoaThuocTinhIC |= (0b01000000); //10- 20chân
+        break;
+    default:
+        byteMaHoaThuocTinhIC |= (0b01100000); //11- còn lại 8, 24chân
+        break;
+    }
+    //    Mã hóa thông tin tổng số bài kiểm tra
+    QByteArray soLuongBaiKiemTra(1, static_cast<char>(moHinhCacBaiTest->rowCount() - 1));
+    byteMaHoaThuocTinhIC |= (soLuongBaiKiemTra[0]); // số lượng bài kiểm tra
+
+    duLieuBaiKiemTra->insert(0, byteMaHoaThuocTinhIC); //gán byte mã hóa thuộc tính IC
+
+    QString binaryString;
+    for (int i = 7; i >= 0; --i) {
+        binaryString.append(QString::number((byteMaHoaThuocTinhIC >> i) & 1));
+    }
+    qDebug() << "ByteMaHoaThuocTinhIC:" << binaryString;
+    qDebug() << "So byte ma hoa:" << duLieuBaiKiemTra->size();
+
     QMessageBox::information(this, "Thông báo", "Tạo thư viện hoàn tất");
     QStandardItemModel *model = dynamic_cast<QStandardItemModel *>(hienThiCacBaiTest->model());
     if (model) {
         model->clear(); // Xóa tất cả các mục trong mô hình
     }
 }
-void TaoThuVien::taoFileDuLieu(const QString &dienAp, const int &soChan)
+
+void TaoThuVien::taoFileDuLieu(const QString &dienAp, const QString &soChan)
 {
-    QByteArray *byteCauHinh = new QByteArray;
-    byteCauHinh->append(0b10000000);
+    //    QByteArray *baiKiemTra = new QByteArray(10, 0);
+    char *byteMaHoaDuLieu = new char[10]{0}; // Tạo mảng char 10 phần tử, giá trị ban đầu là 0
 
-    //  byte cấu hình "điện áp(7), số chân(6-5), số bài test (4-1)"
-    char byte = byteCauHinh->at(0);
+    //    Mã hóa chân dữ liệu (4bit cho một chân)
+    //    4bit trọng số cao mã hóa dữ liệu của hàng chân bên trái
+    //    4bit trọng số thấp mã hóa dữ liệu của hàng chân bên phải
 
-    //    Cấu hình điệp áp
-    if (dienAp == " TTL (5V)") {
-        byte &= (0b00000000);
+    //    "10xx" thể hiện chân OutPut của IC
+    //    "00xx" thể hiện chân InPut của IC
+    //    "x000" không xác định được mức Logic
+    //    "x001" thể hiện mức Logic '1'
+    //    "x010" thể hiện mức Logic '0'
+    //    "x011" thể hiện mức trở kháng cao 'Z'
+
+    //    mã hóa dữ liệu cho chân nguồn
+    for (int i = 0; i < 10; ++i) {
+        //        hàng chân bên trái
+        if (chanSocketIC[i][0]->text() == "VCC") {
+            byteMaHoaDuLieu[i] |= (0b00010000); //Logic '1'
+
+        } else if (chanSocketIC[i][0]->text() == "GND") {
+            byteMaHoaDuLieu[i] |= (0b00100000); //Logic '0'
+
+        } else if (chanSocketIC[i][0]->text() == "NC") {
+            byteMaHoaDuLieu[i] |= (0b00110000); //trở kháng cao 'Z'
+
+        } else if (chanSocketIC[i][0]->text() == "DOUT") {
+            byteMaHoaDuLieu[i] |= (0b10000000); //OutPut
+        }
+        //        hàng chân bên phải
+        if (chanSocketIC[i][2]->text() == "VCC") {
+            byteMaHoaDuLieu[i] |= (0b00000001); //Logic '1'
+
+        } else if (chanSocketIC[i][2]->text() == "GND") {
+            byteMaHoaDuLieu[i] |= (0b00000010); //Logic '0'
+
+        } else if (chanSocketIC[i][2]->text() == "NC") {
+            byteMaHoaDuLieu[i] |= (0b00000011); //trở kháng cao 'Z'
+
+        } else if (chanSocketIC[i][2]->text() == "DOUT") {
+            byteMaHoaDuLieu[i] |= (0b00001000); //OutPut
+        }
     }
-    qDebug() << dienAp;
-
-    //  Cấu hình chân
-    switch (soChan) {
-    case 1:
-        byte |= (0b00000000); //00- 14chân
-        break;
-    case 2:
-        byte |= (0b00100000); //01- 16chân
-        break;
-    case 3:
-        byte |= (0b01000000); //10- 20chân
-        break;
-    default:
-        byte |= (0b01100000); //11- còn lại 8, 24chân
-        break;
+    //  mã hóa dữ liêu cho chân InPut và OutPut cho IC 14 chân
+    for (int i = 0; i < 7; ++i) {
+        if (soChan == " 14 Chân") {
+            //            mã hóa hàng chân bên trái
+            if (chanSocketIC[i][0]->text() == "CLK" || chanSocketIC[i][0]->text() == "DIN"
+                || chanSocketIC[i][0]->text() == "DOUT") {
+                if (chanDuLieuIC14[i][0]->text() == "1") {
+                    byteMaHoaDuLieu[i] |= (0b00010000); //Logic '1'
+                } else if (chanDuLieuIC14[i][0]->text() == "0") {
+                    byteMaHoaDuLieu[i] |= (0b00100000); //Logic '0'
+                } else if (chanDuLieuIC14[i][0]->text() == "Z") {
+                    byteMaHoaDuLieu[i] |= (0b00110000); //trở kháng cao 'Z'
+                }
+            }
+            //          mã hóa hàng chân bên phải
+            if (chanSocketIC[i][2]->text() == "CLK" || chanSocketIC[i][2]->text() == "DIN"
+                || chanSocketIC[i][2]->text() == "DOUT") {
+                if (chanDuLieuIC14[i][0]->text() == "1") {
+                    byteMaHoaDuLieu[i] |= (0b00000001); //Logic '1'
+                } else if (chanDuLieuIC14[i][0]->text() == "0") {
+                    byteMaHoaDuLieu[i] |= (0b00000010); //Logic '0'
+                } else if (chanDuLieuIC14[i][0]->text() == "Z") {
+                    byteMaHoaDuLieu[i] |= (0b00000011); //trở kháng cao 'Z'
+                }
+            }
+        }
+    }
+    //  mã hóa dữ liêu cho chân InPut và OutPut cho IC 16 chân
+    for (int i = 0; i < 8; ++i) {
+        if (soChan == " 16 Chân") {
+            //            mã hóa hàng chân bên trái
+            if (chanSocketIC[i][0]->text() == "CLK" || chanSocketIC[i][0]->text() == "DIN"
+                || chanSocketIC[i][0]->text() == "DOUT") {
+                if (chanDuLieuIC16[i][0]->text() == "1") {
+                    byteMaHoaDuLieu[i] |= (0b00010000); //Logic '1'
+                } else if (chanDuLieuIC16[i][0]->text() == "0") {
+                    byteMaHoaDuLieu[i] |= (0b00100000); //Logic '0'
+                } else if (chanDuLieuIC16[i][0]->text() == "Z") {
+                    byteMaHoaDuLieu[i] |= (0b00110000); //trở kháng cao 'Z'
+                }
+            }
+            //          mã hóa hàng chân bên phải
+            if (chanSocketIC[i][2]->text() == "CLK" || chanSocketIC[i][2]->text() == "DIN"
+                || chanSocketIC[i][2]->text() == "DOUT") {
+                if (chanDuLieuIC16[i][0]->text() == "1") {
+                    byteMaHoaDuLieu[i] |= (0b00000001); //Logic '1'
+                } else if (chanDuLieuIC16[i][0]->text() == "0") {
+                    byteMaHoaDuLieu[i] |= (0b00000010); //Logic '0'
+                } else if (chanDuLieuIC16[i][0]->text() == "Z") {
+                    byteMaHoaDuLieu[i] |= (0b00000011); //trở kháng cao 'Z'
+                }
+            }
+        }
+    }
+    //  mã hóa dữ liêu cho chân InPut và OutPut cho IC 20 chân
+    for (int i = 0; i < 10; ++i) {
+        if (soChan == " 20 Chân") {
+            //            mã hóa hàng chân bên trái
+            if (chanSocketIC[i][0]->text() == "CLK" || chanSocketIC[i][0]->text() == "DIN"
+                || chanSocketIC[i][0]->text() == "DOUT") {
+                if (chanDuLieuIC20[i][0]->text() == "1") {
+                    byteMaHoaDuLieu[i] |= (0b00010000); //Logic '1'
+                } else if (chanDuLieuIC20[i][0]->text() == "0") {
+                    byteMaHoaDuLieu[i] |= (0b00100000); //Logic '0'
+                } else if (chanDuLieuIC20[i][0]->text() == "Z") {
+                    byteMaHoaDuLieu[i] |= (0b00110000); //trở kháng cao 'Z'
+                }
+            }
+            //          mã hóa hàng chân bên phải
+            if (chanSocketIC[i][2]->text() == "CLK" || chanSocketIC[i][2]->text() == "DIN"
+                || chanSocketIC[i][2]->text() == "DOUT") {
+                if (chanDuLieuIC20[i][0]->text() == "1") {
+                    byteMaHoaDuLieu[i] |= (0b00000001); //Logic '1'
+                } else if (chanDuLieuIC20[i][0]->text() == "0") {
+                    byteMaHoaDuLieu[i] |= (0b00000010); //Logic '0'
+                } else if (chanDuLieuIC20[i][0]->text() == "Z") {
+                    byteMaHoaDuLieu[i] |= (0b00000011); //trở kháng cao 'Z'
+                }
+            }
+        }
     }
 
-    QString binaryString;
-    for (int i = 7; i >= 0; --i) {
-        binaryString.append(QString::number((byte >> i) & 1));
+    //    thêm bài kiểm tra vào mảng các bài kiểm tra
+    for (int i = 0; i < 10; ++i) {
+        duLieuBaiKiemTra->append(byteMaHoaDuLieu[i]);
     }
-    qDebug() << "Gia tri nhi phan cua byte:" << binaryString;
 
-    danhSachCacBaiTest = (tenIC->text() + "_test"
-                          + QString::number(moHinhCacBaiTest->rowCount() + 1));
-    moHinhCacBaiTest->appendRow(new QStandardItem(danhSachCacBaiTest));
-    hienThiCacBaiTest->setModel(moHinhCacBaiTest);
+    //    Hiển thị bài Test
+    qDebug() << "Test" << moHinhCacBaiTest->rowCount() + 1;
+    for (int n = 0; n < 10; ++n) {
+        unsigned char unsignedChar = static_cast<unsigned char>(byteMaHoaDuLieu[n]);
+        QString binaryString = QString("%1").arg(unsignedChar, 8, 2, QChar('0'));
+        qDebug() << "Byte " << n + 1 << binaryString;
+    }
+    qDebug() << "So byte ma hoa:" << duLieuBaiKiemTra->size();
+    delete[] byteMaHoaDuLieu;
+    //========================hiển thị=====================================
+
+    if (moHinhCacBaiTest->rowCount() <= 31) {
+        danhSachCacBaiTest = (tenIC->text() + "_test"
+                              + QString::number(moHinhCacBaiTest->rowCount() + 1));
+        moHinhCacBaiTest->appendRow(new QStandardItem(danhSachCacBaiTest));
+        hienThiCacBaiTest->setModel(moHinhCacBaiTest);
+
+    } else {
+        QMessageBox::warning(this, "Cảnh báo", "Sô lượng bài kiểm tra tối đa");
+    }
 }
+TaoThuVien::~TaoThuVien()
+{
+    delete duLieuBaiKiemTra;
+};

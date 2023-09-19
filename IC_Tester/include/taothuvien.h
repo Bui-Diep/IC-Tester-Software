@@ -22,12 +22,13 @@ class TaoThuVien : public QWidget
     Q_OBJECT
 public:
     TaoThuVien();
+    ~TaoThuVien();
 
 public slots:
     void opTrangCauHinhDuLieu();
     void opTrangCauHinhChan();
-    void opComplete();
-    void taoFileDuLieu(const QString &dienAp, const int &soChan);
+    void opComplete(const QString &dienAp, const int &soChan);
+    void taoFileDuLieu(const QString &dienAp, const QString &soChan);
 
 private:
     QStackedWidget *khongGianTaoThuVien;
@@ -58,6 +59,7 @@ private:
     QStandardItemModel *moHinhCacBaiTest;
     QListView *hienThiCacBaiTest;
     QString danhSachCacBaiTest;
+    QByteArray *duLieuBaiKiemTra;
 };
 
 #endif // TAOTHUVIEN_H
