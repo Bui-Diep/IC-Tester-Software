@@ -16,8 +16,7 @@ MainWindow::MainWindow(QWidget *parent)
     wellcomeText->setStyleSheet("color: #0000FF; font-size: 36px;font-weight: bold;");
     QLabel *wellcomeIcon = new QLabel;
     QLabel *homeIcon = new QLabel;
-    QPixmap pixmap("://resources/SoftwareIcon.png"); // Đường dẫn đến tệp hình ảnh
-    //    QPixmap scaledPixmap = pixmap.scaled(QSize(55, 55));
+    QPixmap pixmap(":/images/resources/SoftwareIcon.png"); // Đường dẫn đến tệp hình ảnh
     QPixmap scaledPixmapBigIcon = pixmap.scaled(QSize(400, 400));
     QGraphicsBlurEffect *blurEffect = new QGraphicsBlurEffect();
     blurEffect->setBlurRadius(0); // Điều chỉnh độ mờ ở đây;
@@ -54,7 +53,7 @@ MainWindow::MainWindow(QWidget *parent)
                               "background-color: yellow;"
                               "}");
 
-    nutKiemTra->setIcon(QIcon("://resources/KiemTra.png"));
+    nutKiemTra->setIcon(QIcon(":/images/resources/KiemTra.png"));
     nutKiemTra->setIconSize(iconSize);
     QPushButton *nutTaoThuVien = new QPushButton("  Tạo Thư Viện");
     nutTaoThuVien->setFixedSize(300, 55);
@@ -67,7 +66,7 @@ MainWindow::MainWindow(QWidget *parent)
                                  "QPushButton:hover {"
                                  "background-color: yellow;"
                                  "}");
-    nutTaoThuVien->setIcon(QIcon("://resources/TaoThuVien.png"));
+    nutTaoThuVien->setIcon(QIcon(":/images/resources/TaoThuVien.png"));
     nutTaoThuVien->setIconSize(iconSize);
     QPushButton *nutXemThuVien = new QPushButton("  Xem Thư Viện");
     nutXemThuVien->setFixedSize(300, 55);
@@ -80,7 +79,7 @@ MainWindow::MainWindow(QWidget *parent)
                                  "QPushButton:hover {"
                                  "background-color: yellow;"
                                  "}");
-    nutXemThuVien->setIcon(QIcon("://resources/XemThuVien.png"));
+    nutXemThuVien->setIcon(QIcon(":/images/resources/XemThuVien.png"));
     nutXemThuVien->setIconSize(iconSize);
     QPushButton *nutXemLichSu = new QPushButton("  Xem Lịch Sử");
     nutXemLichSu->setFixedSize(300, 55);
@@ -93,7 +92,7 @@ MainWindow::MainWindow(QWidget *parent)
                                 "QPushButton:hover {"
                                 "background-color: yellow;"
                                 "}");
-    nutXemLichSu->setIcon(QIcon("://resources/XemLichSu.png"));
+    nutXemLichSu->setIcon(QIcon(":/images/resources/XemLichSu.png"));
     nutXemLichSu->setIconSize(iconSize);
 
     QLabel *nhanThongTin = new QLabel("                   Thông Tin?");
@@ -110,7 +109,7 @@ MainWindow::MainWindow(QWidget *parent)
                                "QPushButton:hover {"
                                "background-color: #007500;"
                                "}");
-    nutHuongDan->setIcon(QIcon("://resources/HuongDan.png"));
+    nutHuongDan->setIcon(QIcon(":/images/resources/HuongDan.png"));
     nutHuongDan->setIconSize(iconSize);
     QPushButton *nutLienHe = new QPushButton("  Liên Hệ");
     nutLienHe->setFixedSize(300, 55);
@@ -124,17 +123,17 @@ MainWindow::MainWindow(QWidget *parent)
                              "QPushButton:hover {"
                              "background-color: #007500;"
                              "}");
-    nutLienHe->setIcon(QIcon("://resources/LienHe.png"));
+    nutLienHe->setIcon(QIcon(":/images/resources/LienHe.png"));
     nutLienHe->setIconSize(iconSize);
     QMenu *menuLienHe = new QMenu;
     QAction *fB = new QAction("FaceBook");
-    fB->setIcon(QIcon("://resources/Face.png"));
+    fB->setIcon(QIcon(":/images/resources/Face.png"));
     menuLienHe->addAction(fB);
     QAction *tG = new QAction("Telegram");
-    tG->setIcon(QIcon("://resources/Tele.png"));
+    tG->setIcon(QIcon(":/images/resources/Tele.png"));
     menuLienHe->addAction(tG);
     QAction *gH = new QAction("GitHub");
-    gH->setIcon(QIcon("://resources/Git.png"));
+    gH->setIcon(QIcon(":/images/resources/Git.png"));
     menuLienHe->addAction(gH);
     nutLienHe->setMenu(menuLienHe);
     QObject::connect(fB, &QAction::triggered, [&]() {
@@ -193,25 +192,25 @@ MainWindow::MainWindow(QWidget *parent)
                                "QPushButton:hover {"
                                "background-color: yellow;"
                                "}");
-    nutBackHome->setIcon(QIcon("://resources/home.png"));
+    nutBackHome->setIcon(QIcon(":/images/resources/home.png"));
     nutBackHome->setIconSize(QSize(20, 20));
     nutBackHome->setToolTip("Trở về trang chủ");
     thanhCongCu->addWidget(nutBackHome);
 
     QAction *acKiemTra = new QAction("Chuyển tới trang kiểm tra IC");
-    acKiemTra->setIcon(QIcon("://resources/KiemTra.png"));
+    acKiemTra->setIcon(QIcon(":/images/resources/KiemTra.png"));
     thanhCongCu->addSeparator();
     thanhCongCu->addAction(acKiemTra);
     QAction *acXemThuVien = new QAction("Chuyển tới trang xem thư viện");
-    acXemThuVien->setIcon(QIcon("://resources/XemThuVien.png"));
+    acXemThuVien->setIcon(QIcon(":/images/resources/XemThuVien.png"));
     thanhCongCu->addSeparator();
     thanhCongCu->addAction(acXemThuVien);
     thanhCongCu->addSeparator();
     QAction *setting = new QAction("Cài đặt");
-    setting->setIcon(QIcon("://resources/setting.png"));
+    setting->setIcon(QIcon(":/images/resources/setting.png"));
     thanhCongCu->addAction(setting);
     QAction *thoat = new QAction("Thoát Phần Mềm");
-    thoat->setIcon(QIcon("://resources/power.png"));
+    thoat->setIcon(QIcon(":/images/resources/power.png"));
     thanhCongCu->addSeparator();
     thanhCongCu->addAction(thoat);
     thanhLienHe->setMovable(true);

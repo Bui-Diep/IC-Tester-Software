@@ -138,6 +138,7 @@ compiler_rcc_clean:
 	-$(DEL_FILE) debug\qrc_resource.cpp
 debug/qrc_resource.cpp: ../IC_Tester/resource.qrc \
 		X:/QT_Creator/6.2.4/mingw_64/bin/rcc.exe \
+		../IC_Tester/Readme/HuongDan.txt \
 		../IC_Tester/resources/power.png \
 		../IC_Tester/resources/IC16.png \
 		../IC_Tester/resources/Face.png \
@@ -156,8 +157,7 @@ debug/qrc_resource.cpp: ../IC_Tester/resource.qrc \
 		../IC_Tester/resources/XemLichSu.png \
 		../IC_Tester/resources/home.png \
 		../IC_Tester/resources/Find.png \
-		../IC_Tester/resources/ChuThichPin.png \
-		../IC_Tester/Readme/HuongDan.txt
+		../IC_Tester/resources/ChuThichPin.png
 	X:\QT_Creator\6.2.4\mingw_64\bin\rcc.exe -name resource ..\IC_Tester\resource.qrc -o debug\qrc_resource.cpp
 
 compiler_moc_predefs_make_all: debug/moc_predefs.h

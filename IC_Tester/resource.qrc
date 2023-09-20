@@ -1,5 +1,5 @@
 <RCC>
-    <qresource prefix="/">
+    <qresource prefix="/images">
         <file>resources/power.png</file>
         <file>resources/setting.png</file>
         <file>resources/home.png</file>
@@ -23,4 +23,5 @@
     <qresource prefix="/document">
         <file>Readme/HuongDan.txt</file>
     </qresource>
+    <qresource prefix="/library"/>
 </RCC>

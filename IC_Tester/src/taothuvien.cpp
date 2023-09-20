@@ -433,9 +433,9 @@ TaoThuVien::TaoThuVien()
     QLabel *imageLabelIC14 = new QLabel;
     QLabel *imageLabelIC16 = new QLabel;
     QLabel *imageLabelIC20 = new QLabel;
-    QPixmap pixmap14("://resources/IC14.png"); // Đường dẫn đến tệp hình ảnh IC14
-    QPixmap pixmap16("://resources/IC16.png"); // Đường dẫn đến tệp hình ảnh IC16
-    QPixmap pixmap20("://resources/IC20.png"); // Đường dẫn đến tệp hình ảnh IC20
+    QPixmap pixmap14(":/images/resources/IC14.png"); // Đường dẫn đến tệp hình ảnh IC14
+    QPixmap pixmap16(":/images/resources/IC16.png"); // Đường dẫn đến tệp hình ảnh IC16
+    QPixmap pixmap20(":/images/resources/IC20.png"); // Đường dẫn đến tệp hình ảnh IC20
     QPixmap scaledPixmap14 = pixmap14.scaled(QSize(220, 340));
     QPixmap scaledPixmap16 = pixmap16.scaled(QSize(220, 370));
     QPixmap scaledPixmap20 = pixmap20.scaled(QSize(220, 400));
@@ -448,7 +448,7 @@ TaoThuVien::TaoThuVien()
     nhanTrangHienSymDefault->setAlignment(Qt::AlignCenter);
 
     QLabel *icontrangHienSymDefault = new QLabel;
-    QPixmap pixmapIcon("://resources/SoftwareIcon.png"); // Đường dẫn đến tệp hình ảnh
+    QPixmap pixmapIcon(":/images/resources/SoftwareIcon.png"); // Đường dẫn đến tệp hình ảnh
     QPixmap scaledPixmapIcon = pixmapIcon.scaled(QSize(200, 200));
     QGraphicsBlurEffect *blurEffect = new QGraphicsBlurEffect();
     blurEffect->setBlurRadius(0); // Điều chỉnh độ mờ ở đây;
@@ -1180,17 +1180,17 @@ TaoThuVien::TaoThuVien()
     moHinhCacBaiTest = new QStandardItemModel;
 
     connect(save, &QPushButton::clicked, this, [=]() {
-        const QString &congNghe = congNgheBanDan->currentText();
         const QString &soChan = soChanIC->currentText();
-        taoFileDuLieu(congNghe, soChan);
+        taoFileDuLieu(soChan);
     });
 
     hienThiCacBaiTest->setContextMenuPolicy(Qt::CustomContextMenu);
     connect(hienThiCacBaiTest, &QListView::customContextMenuRequested, this, [=](const QPoint &point) {
-        QMenu contextMenu(tr("Context menu"), this);
+        QMenu contextMenu(this);
+        contextMenu.setStyleSheet("background-color: #97D077");
 
-        QAction deleteAction("Xóa", this);
-        QAction editAction("Chỉnh sửa", this);
+        QAction deleteAction("Xóa");
+        QAction editAction("Chỉnh sửa");
 
         //        Thao tác xóa bài test
         connect(&deleteAction, &QAction::triggered, this, [=]() {
@@ -1243,7 +1243,7 @@ TaoThuVien::TaoThuVien()
     lopCauHinhDuLieu->setAlignment(khongGianCauHinhDuLieu, Qt::AlignCenter);
 
     QLabel *chuThichPin = new QLabel;
-    QPixmap pixmapChuThich("://resources/ChuThichPin.png"); // Đường dẫn đến tệp hình ảnh
+    QPixmap pixmapChuThich(":/images/resources/ChuThichPin.png"); // Đường dẫn đến tệp hình ảnh
     //    QPixmap scaledPixmap = pixmapChuThich.scaled(QSize(400, 37));
     chuThichPin->setPixmap(pixmapChuThich);
     lopCauHinhDuLieu->addWidget(chuThichPin);
@@ -1280,7 +1280,7 @@ TaoThuVien::TaoThuVien()
         const int &soChan = soChanIC->currentIndex();
         opComplete(congNghe, soChan);
     });
-    connect(finish, SIGNAL(clicked(bool)), this, SLOT(opTrangCauHinhChan()));
+
     connect(back, &QPushButton::clicked, this, [this]() {
         khongGianTaoThuVien->setCurrentWidget(trangCauHinhChan);
     });
@@ -1353,26 +1353,53 @@ void TaoThuVien::opComplete(const QString &dienAp, const int &soChan)
         break;
     }
     //    Mã hóa thông tin tổng số bài kiểm tra
-    QByteArray soLuongBaiKiemTra(1, static_cast<char>(moHinhCacBaiTest->rowCount() - 1));
-    byteMaHoaThuocTinhIC |= (soLuongBaiKiemTra[0]); // số lượng bài kiểm tra
-
-    duLieuBaiKiemTra->insert(0, byteMaHoaThuocTinhIC); //gán byte mã hóa thuộc tính IC
 
     QString binaryString;
     for (int i = 7; i >= 0; --i) {
         binaryString.append(QString::number((byteMaHoaThuocTinhIC >> i) & 1));
     }
     qDebug() << "ByteMaHoaThuocTinhIC:" << binaryString;
-    qDebug() << "So byte ma hoa:" << duLieuBaiKiemTra->size();
 
-    QMessageBox::information(this, "Thông báo", "Tạo thư viện hoàn tất");
-    QStandardItemModel *model = dynamic_cast<QStandardItemModel *>(hienThiCacBaiTest->model());
-    if (model) {
-        model->clear(); // Xóa tất cả các mục trong mô hình
+    QString currentPath = QDir::currentPath(); // đường dẫn file thực thi
+
+    QFile file(currentPath + "/library/" + tenIC->text() + ".bin"); //tạo file vào folder library
+    if (file.exists()) {
+        QMessageBox::warning(this, "Cảnh báo", "Tệp " + tenIC->text() + ".bin" + " đã tồn tại");
+    } else if (file.open(QIODevice::WriteOnly)) {
+        QByteArray soLuongBaiKiemTra(1, static_cast<char>(moHinhCacBaiTest->rowCount() - 1));
+        byteMaHoaThuocTinhIC |= (soLuongBaiKiemTra[0]);    // số lượng bài kiểm tra
+        duLieuBaiKiemTra->insert(0, byteMaHoaThuocTinhIC); //gán byte mã hóa thuộc tính IC
+
+        // Ghi dữ liệu từ QByteArray vào tệp binaray
+        qint64 bytesWritten = file.write(*duLieuBaiKiemTra);
+
+        if (bytesWritten == -1) {
+            duLieuBaiKiemTra->remove(0, 1);
+            QMessageBox::critical(this,
+                                  "Lỗi",
+                                  "Lỗi khi ghi dữ liệu vào tệp" + tenIC->text() + ".bin");
+            qDebug() << "Lỗi khi ghi dữ liệu vào tệp binaray";
+        } else {
+            QMessageBox::information(this, "Thông báo", "Tạo thư viện hoàn tất");
+            qDebug() << "Ghi thanh cong" << bytesWritten << "byte vao tep"
+                     << tenIC->text() + ".bin";
+            opTrangCauHinhChan();
+            QStandardItemModel *model = dynamic_cast<QStandardItemModel *>(
+                hienThiCacBaiTest->model());
+            if (model) {
+                model->clear(); // Xóa tất cả các mục trong mô hình
+            }
+        }
+        // Đóng tệp
+        file.close();
+        duLieuBaiKiemTra->clear();
+    } else {
+        QMessageBox::critical(this, "Lỗi", "Không thể mở tệp để ghi");
+        qDebug() << "Không thể mở tệp để ghi";
     }
 }
 
-void TaoThuVien::taoFileDuLieu(const QString &dienAp, const QString &soChan)
+void TaoThuVien::taoFileDuLieu(const QString &soChan)
 {
     //    QByteArray *baiKiemTra = new QByteArray(10, 0);
     char *byteMaHoaDuLieu = new char[10]{0}; // Tạo mảng char 10 phần tử, giá trị ban đầu là 0
@@ -1381,37 +1408,39 @@ void TaoThuVien::taoFileDuLieu(const QString &dienAp, const QString &soChan)
     //    4bit trọng số cao mã hóa dữ liệu của hàng chân bên trái
     //    4bit trọng số thấp mã hóa dữ liệu của hàng chân bên phải
 
-    //    "10xx" thể hiện chân OutPut của IC
     //    "00xx" thể hiện chân InPut của IC
-    //    "x000" không xác định được mức Logic
-    //    "x001" thể hiện mức Logic '1'
-    //    "x010" thể hiện mức Logic '0'
-    //    "x011" thể hiện mức trở kháng cao 'Z'
+    //    "10xx" thể hiện chân OutPut của IC
+    //    "01xx" thể hiện chân Nguồn của IC
+
+    //    "xx00" không xác định được mức Logic
+    //    "xx01" thể hiện mức Logic '1'
+    //    "xx10" thể hiện mức Logic '0'
+    //    "xx11" thể hiện mức trở kháng cao 'Z'
 
     //    mã hóa dữ liệu cho chân nguồn
     for (int i = 0; i < 10; ++i) {
         //        hàng chân bên trái
         if (chanSocketIC[i][0]->text() == "VCC") {
-            byteMaHoaDuLieu[i] |= (0b00010000); //Logic '1'
+            byteMaHoaDuLieu[i] |= (0b01010000); //Logic '1'
 
         } else if (chanSocketIC[i][0]->text() == "GND") {
-            byteMaHoaDuLieu[i] |= (0b00100000); //Logic '0'
+            byteMaHoaDuLieu[i] |= (0b01100000); //Logic '0'
 
         } else if (chanSocketIC[i][0]->text() == "NC") {
-            byteMaHoaDuLieu[i] |= (0b00110000); //trở kháng cao 'Z'
+            byteMaHoaDuLieu[i] |= (0b01110000); //trở kháng cao 'Z'
 
         } else if (chanSocketIC[i][0]->text() == "DOUT") {
             byteMaHoaDuLieu[i] |= (0b10000000); //OutPut
         }
         //        hàng chân bên phải
         if (chanSocketIC[i][2]->text() == "VCC") {
-            byteMaHoaDuLieu[i] |= (0b00000001); //Logic '1'
+            byteMaHoaDuLieu[i] |= (0b00000101); //Logic '1'
 
         } else if (chanSocketIC[i][2]->text() == "GND") {
-            byteMaHoaDuLieu[i] |= (0b00000010); //Logic '0'
+            byteMaHoaDuLieu[i] |= (0b00000110); //Logic '0'
 
         } else if (chanSocketIC[i][2]->text() == "NC") {
-            byteMaHoaDuLieu[i] |= (0b00000011); //trở kháng cao 'Z'
+            byteMaHoaDuLieu[i] |= (0b00000111); //trở kháng cao 'Z'
 
         } else if (chanSocketIC[i][2]->text() == "DOUT") {
             byteMaHoaDuLieu[i] |= (0b00001000); //OutPut
@@ -1434,11 +1463,11 @@ void TaoThuVien::taoFileDuLieu(const QString &dienAp, const QString &soChan)
             //          mã hóa hàng chân bên phải
             if (chanSocketIC[i][2]->text() == "CLK" || chanSocketIC[i][2]->text() == "DIN"
                 || chanSocketIC[i][2]->text() == "DOUT") {
-                if (chanDuLieuIC14[i][0]->text() == "1") {
+                if (chanDuLieuIC14[i][2]->text() == "1") {
                     byteMaHoaDuLieu[i] |= (0b00000001); //Logic '1'
-                } else if (chanDuLieuIC14[i][0]->text() == "0") {
+                } else if (chanDuLieuIC14[i][2]->text() == "0") {
                     byteMaHoaDuLieu[i] |= (0b00000010); //Logic '0'
-                } else if (chanDuLieuIC14[i][0]->text() == "Z") {
+                } else if (chanDuLieuIC14[i][2]->text() == "Z") {
                     byteMaHoaDuLieu[i] |= (0b00000011); //trở kháng cao 'Z'
                 }
             }
@@ -1461,11 +1490,11 @@ void TaoThuVien::taoFileDuLieu(const QString &dienAp, const QString &soChan)
             //          mã hóa hàng chân bên phải
             if (chanSocketIC[i][2]->text() == "CLK" || chanSocketIC[i][2]->text() == "DIN"
                 || chanSocketIC[i][2]->text() == "DOUT") {
-                if (chanDuLieuIC16[i][0]->text() == "1") {
+                if (chanDuLieuIC16[i][2]->text() == "1") {
                     byteMaHoaDuLieu[i] |= (0b00000001); //Logic '1'
-                } else if (chanDuLieuIC16[i][0]->text() == "0") {
+                } else if (chanDuLieuIC16[i][2]->text() == "0") {
                     byteMaHoaDuLieu[i] |= (0b00000010); //Logic '0'
-                } else if (chanDuLieuIC16[i][0]->text() == "Z") {
+                } else if (chanDuLieuIC16[i][2]->text() == "Z") {
                     byteMaHoaDuLieu[i] |= (0b00000011); //trở kháng cao 'Z'
                 }
             }
@@ -1488,42 +1517,65 @@ void TaoThuVien::taoFileDuLieu(const QString &dienAp, const QString &soChan)
             //          mã hóa hàng chân bên phải
             if (chanSocketIC[i][2]->text() == "CLK" || chanSocketIC[i][2]->text() == "DIN"
                 || chanSocketIC[i][2]->text() == "DOUT") {
-                if (chanDuLieuIC20[i][0]->text() == "1") {
+                if (chanDuLieuIC20[i][2]->text() == "1") {
                     byteMaHoaDuLieu[i] |= (0b00000001); //Logic '1'
-                } else if (chanDuLieuIC20[i][0]->text() == "0") {
+                } else if (chanDuLieuIC20[i][2]->text() == "0") {
                     byteMaHoaDuLieu[i] |= (0b00000010); //Logic '0'
-                } else if (chanDuLieuIC20[i][0]->text() == "Z") {
+                } else if (chanDuLieuIC20[i][2]->text() == "Z") {
                     byteMaHoaDuLieu[i] |= (0b00000011); //trở kháng cao 'Z'
                 }
             }
         }
     }
-
-    //    thêm bài kiểm tra vào mảng các bài kiểm tra
+    //tạo hai mảng đệm để so sánh bài kiểm tra có bị trùng hay không
+    QByteArray *baiKiemTraMoi = new QByteArray;
+    QByteArray *baiKiemTraCu = new QByteArray;
+    //gán bài kiểm tra mới cho mảng
     for (int i = 0; i < 10; ++i) {
-        duLieuBaiKiemTra->append(byteMaHoaDuLieu[i]);
+        baiKiemTraMoi->append(byteMaHoaDuLieu[i]);
     }
-
-    //    Hiển thị bài Test
-    qDebug() << "Test" << moHinhCacBaiTest->rowCount() + 1;
-    for (int n = 0; n < 10; ++n) {
-        unsigned char unsignedChar = static_cast<unsigned char>(byteMaHoaDuLieu[n]);
-        QString binaryString = QString("%1").arg(unsignedChar, 8, 2, QChar('0'));
-        qDebug() << "Byte " << n + 1 << binaryString;
+    //thực hiện lấy những bài kiểm tra trước để so sánh với bài kiểm tra mới
+    int chiSoBaiKiemTra = 0;
+    for (chiSoBaiKiemTra = 0; chiSoBaiKiemTra < duLieuBaiKiemTra->size(); chiSoBaiKiemTra += 10) {
+        baiKiemTraCu->append(duLieuBaiKiemTra->mid(chiSoBaiKiemTra, 10));
+        // lần lượt lấy các bài kiẻm tra đã lưu để so sánh với bài kiểm tra mới
+        if (baiKiemTraCu->compare(*baiKiemTraMoi) == 0) {
+            QMessageBox::warning(this,
+                                 "Cảnh báo",
+                                 "Bài kiểm tra này đã tồn tại\nTrùng với Test_"
+                                     + QString::number(chiSoBaiKiemTra / 10 + 1));
+            break;
+        }
+        baiKiemTraCu->clear();
     }
-    qDebug() << "So byte ma hoa:" << duLieuBaiKiemTra->size();
-    delete[] byteMaHoaDuLieu;
-    //========================hiển thị=====================================
 
     if (moHinhCacBaiTest->rowCount() <= 31) {
-        danhSachCacBaiTest = (tenIC->text() + "_test"
-                              + QString::number(moHinhCacBaiTest->rowCount() + 1));
-        moHinhCacBaiTest->appendRow(new QStandardItem(danhSachCacBaiTest));
-        hienThiCacBaiTest->setModel(moHinhCacBaiTest);
+        if (duLieuBaiKiemTra->size() == 0 || chiSoBaiKiemTra == duLieuBaiKiemTra->size()) {
+            duLieuBaiKiemTra->append(*baiKiemTraMoi); //thêm bài kiểm tra vào mảng các bài kiểm tra
+            baiKiemTraMoi->clear();                   //xóa mảng đệm
+            // hiển thị danh sách bài kiểm tra lên màn hình
+            danhSachCacBaiTest = (tenIC->text() + "_test"
+                                  + QString::number(moHinhCacBaiTest->rowCount() + 1));
+            moHinhCacBaiTest->appendRow(new QStandardItem(danhSachCacBaiTest));
+            hienThiCacBaiTest->setModel(moHinhCacBaiTest);
+
+            qDebug() << "Test" << moHinhCacBaiTest->rowCount();
+            for (int n = 0; n < 10; ++n) {
+                unsigned char unsignedChar = static_cast<unsigned char>(byteMaHoaDuLieu[n]);
+                QString binaryString = QString("%1").arg(unsignedChar, 8, 2, QChar('0'));
+                qDebug() << "Byte " << n + 1 << binaryString;
+            }
+        }
 
     } else {
         QMessageBox::warning(this, "Cảnh báo", "Sô lượng bài kiểm tra tối đa");
     }
+
+    //    Hiển thị bài Test
+
+    qDebug() << "So byte ma hoa:" << duLieuBaiKiemTra->size();
+    delete[] byteMaHoaDuLieu;
+    //========================hiển thị=====================================
 }
 TaoThuVien::~TaoThuVien()
 {

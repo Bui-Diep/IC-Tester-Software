@@ -193,13 +193,13 @@ static const uint qt_meta_data_TaoThuVien[] = {
        1,    0,   38,    2, 0x0a,    1 /* Public */,
        3,    0,   39,    2, 0x0a,    2 /* Public */,
        4,    2,   40,    2, 0x0a,    3 /* Public */,
-       7,    2,   45,    2, 0x0a,    6 /* Public */,
+       7,    1,   45,    2, 0x0a,    6 /* Public */,
 
  // slots: parameters
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void, QMetaType::QString, QMetaType::Int,    5,    6,
-    QMetaType::Void, QMetaType::QString, QMetaType::QString,    5,    6,
+    QMetaType::Void, QMetaType::QString,    6,
 
        0        // eod
 };
@@ -213,7 +213,7 @@ void TaoThuVien::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 0: _t->opTrangCauHinhDuLieu(); break;
         case 1: _t->opTrangCauHinhChan(); break;
         case 2: _t->opComplete((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[2]))); break;
-        case 3: _t->taoFileDuLieu((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[2]))); break;
+        case 3: _t->taoFileDuLieu((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
         default: ;
         }
     }
@@ -227,7 +227,7 @@ const QMetaObject TaoThuVien::staticMetaObject = { {
     nullptr,
 qt_incomplete_metaTypeArray<qt_meta_stringdata_TaoThuVien_t
 , QtPrivate::TypeAndForceComplete<TaoThuVien, std::true_type>
-, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const QString &, std::false_type>, QtPrivate::TypeAndForceComplete<const int &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const QString &, std::false_type>, QtPrivate::TypeAndForceComplete<const QString &, std::false_type>
+, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const QString &, std::false_type>, QtPrivate::TypeAndForceComplete<const int &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const QString &, std::false_type>
 
 
 >,

@@ -28,7 +28,7 @@ public slots:
     void opTrangCauHinhDuLieu();
     void opTrangCauHinhChan();
     void opComplete(const QString &dienAp, const int &soChan);
-    void taoFileDuLieu(const QString &dienAp, const QString &soChan);
+    void taoFileDuLieu(const QString &soChan);
 
 private:
     QStackedWidget *khongGianTaoThuVien;
