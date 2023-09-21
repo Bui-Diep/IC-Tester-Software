@@ -1176,6 +1176,7 @@ TaoThuVien::TaoThuVien()
     QVBoxLayout *lopHienThiCacBaiTest = new QVBoxLayout(boxHienThiCacBaiTest);
 
     hienThiCacBaiTest = new QListView;
+    hienThiCacBaiTest->setStyleSheet("font-weight: 520;font-size: 15px; color: black");
     hienThiCacBaiTest->setEditTriggers(QAbstractItemView::NoEditTriggers);
     moHinhCacBaiTest = new QStandardItemModel;
 
@@ -1224,7 +1225,9 @@ TaoThuVien::TaoThuVien()
         });
 
         //        Thao tác chỉnh sửa bài test
-        //    connect(&editAction, SIGNAL(triggered()), this, SLOT(editItem()));
+        connect(&editAction, &QAction::triggered, this, [=]() {
+            QMessageBox::information(this, "Chỉnh sửa", "Tính năng này sẽ sớm được cập nhật");
+        });
 
         contextMenu.addAction(&deleteAction);
         contextMenu.addAction(&editAction);
@@ -1360,11 +1363,11 @@ void TaoThuVien::opComplete(const QString &dienAp, const int &soChan)
     }
     qDebug() << "ByteMaHoaThuocTinhIC:" << binaryString;
 
-    QString currentPath = QDir::currentPath(); // đường dẫn file thực thi
-
-    QFile file(currentPath + "/library/" + tenIC->text() + ".bin"); //tạo file vào folder library
+    QFile file(QDir::currentPath() + "/library/" + tenIC->text()
+               + ".bin"); //tạo file vào folder library
     if (file.exists()) {
         QMessageBox::warning(this, "Cảnh báo", "Tệp " + tenIC->text() + ".bin" + " đã tồn tại");
+
     } else if (file.open(QIODevice::WriteOnly)) {
         QByteArray soLuongBaiKiemTra(1, static_cast<char>(moHinhCacBaiTest->rowCount() - 1));
         byteMaHoaThuocTinhIC |= (soLuongBaiKiemTra[0]);    // số lượng bài kiểm tra
@@ -1380,16 +1383,24 @@ void TaoThuVien::opComplete(const QString &dienAp, const int &soChan)
                                   "Lỗi khi ghi dữ liệu vào tệp" + tenIC->text() + ".bin");
             qDebug() << "Lỗi khi ghi dữ liệu vào tệp binaray";
         } else {
-            QMessageBox::information(this, "Thông báo", "Tạo thư viện hoàn tất");
-            qDebug() << "Ghi thanh cong" << bytesWritten << "byte vao tep"
+            QMessageBox::information(this,
+                                     "Thông báo",
+                                     "Tạo thư viện thành công cho IC " + tenIC->text());
+            qDebug() << "Ghi thanh cong" << bytesWritten << "byte ma hoa vao tep"
                      << tenIC->text() + ".bin";
-            opTrangCauHinhChan();
+
+            // ghi thông tin IC vào file sai khi đã ghi các byte mã hóa dữ liệu
+            QTextStream stream(&file);
+            stream << bangHienThiThuocTinhIC->text();
+
+            opTrangCauHinhChan(); //chuyển tới trang cấu hình chân để thực hiện tạo thư viện mới
             QStandardItemModel *model = dynamic_cast<QStandardItemModel *>(
                 hienThiCacBaiTest->model());
             if (model) {
                 model->clear(); // Xóa tất cả các mục trong mô hình
             }
         }
+
         // Đóng tệp
         file.close();
         duLieuBaiKiemTra->clear();
@@ -1542,8 +1553,8 @@ void TaoThuVien::taoFileDuLieu(const QString &soChan)
         if (baiKiemTraCu->compare(*baiKiemTraMoi) == 0) {
             QMessageBox::warning(this,
                                  "Cảnh báo",
-                                 "Bài kiểm tra này đã tồn tại\nTrùng với Test_"
-                                     + QString::number(chiSoBaiKiemTra / 10 + 1));
+                                 "Bài kiểm tra này đã tồn tại    \nTrùng với " + tenIC->text()
+                                     + "_test" + QString::number(chiSoBaiKiemTra / 10 + 1));
             break;
         }
         baiKiemTraCu->clear();

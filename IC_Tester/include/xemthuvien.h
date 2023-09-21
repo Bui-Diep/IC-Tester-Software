@@ -1,16 +1,12 @@
 #ifndef XEMTHUVIEN_H
 #define XEMTHUVIEN_H
 
-#include <QWidget>
+#include <QtWidgets>
 
 class XemThuVien : public QWidget
 {
-    Q_OBJECT
 public:
-    explicit XemThuVien(QWidget *parent = nullptr);
-
-signals:
-
+    XemThuVien(QWidget *parent = nullptr);
 };
 
 #endif // XEMTHUVIEN_H
