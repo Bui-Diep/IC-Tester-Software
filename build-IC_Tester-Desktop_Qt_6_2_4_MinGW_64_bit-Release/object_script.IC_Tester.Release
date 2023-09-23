@@ -11,4 +11,3 @@ release/moc_kiemtra.o
 release/moc_mainwindow.o
 release/moc_taothuvien.o
 release/moc_xemlichsu.o
-release/moc_xemthuvien.o

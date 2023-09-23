@@ -11,4 +11,3 @@ debug/moc_kiemtra.o
 debug/moc_mainwindow.o
 debug/moc_taothuvien.o
 debug/moc_xemlichsu.o
-debug/moc_xemthuvien.o

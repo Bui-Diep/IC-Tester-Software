@@ -212,6 +212,7 @@ Makefile: ../IC_Tester/IC_Tester.pro X:/QT_Creator/6.2.4/mingw_64/mkspecs/win32-
 		../IC_Tester/IC_Tester.pro \
 		X:/QT_Creator/6.2.4/mingw_64/lib/Qt6Widgets.prl \
 		X:/QT_Creator/6.2.4/mingw_64/lib/Qt6Gui.prl \
+		X:/QT_Creator/6.2.4/mingw_64/lib/Qt6SerialPort.prl \
 		X:/QT_Creator/6.2.4/mingw_64/lib/Qt6Core.prl \
 		X:/QT_Creator/6.2.4/mingw_64/lib/Qt6EntryPoint.prl \
 		X:/QT_Creator/6.2.4/mingw_64/mkspecs/features/build_pass.prf \
@@ -359,6 +360,7 @@ X:/QT_Creator/6.2.4/mingw_64/mkspecs/features/lex.prf:
 ../IC_Tester/IC_Tester.pro:
 X:/QT_Creator/6.2.4/mingw_64/lib/Qt6Widgets.prl:
 X:/QT_Creator/6.2.4/mingw_64/lib/Qt6Gui.prl:
+X:/QT_Creator/6.2.4/mingw_64/lib/Qt6SerialPort.prl:
 X:/QT_Creator/6.2.4/mingw_64/lib/Qt6Core.prl:
 X:/QT_Creator/6.2.4/mingw_64/lib/Qt6EntryPoint.prl:
 X:/QT_Creator/6.2.4/mingw_64/mkspecs/features/build_pass.prf:

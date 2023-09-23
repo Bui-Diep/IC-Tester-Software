@@ -3,7 +3,7 @@
 HuongDan::HuongDan()
 {
     setWindowTitle("Hướng Dẫn - IC Tester Development Version");
-    setWindowIcon(QIcon("://resources/HuongDan.png"));
+    setWindowIcon(QIcon(":/images/resources/HuongDan.png"));
     setFixedWidth(450);
 
     QGridLayout *lopHuongDan = new QGridLayout;
@@ -19,7 +19,7 @@ HuongDan::HuongDan()
     nhanHuongDan->setAlignment(Qt::AlignCenter);
     file.close();
     QLabel *nhanIcon = new QLabel;
-    QPixmap picIcon("://resources/SoftwareIcon.png");
+    QPixmap picIcon(":/images/resources/SoftwareIcon.png");
     QPixmap scaleIcon = picIcon.scaled(60, 60);
     nhanIcon->setPixmap(scaleIcon);
     QLabel *nhanTitle = new QLabel("  IC Tester Development Version");
