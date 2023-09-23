@@ -5,14 +5,15 @@
 KiemTra::KiemTra()
 {
     QGridLayout *lopKiemTraTong = new QGridLayout(this);
-    QGroupBox *boxCauHinhKetNoi = new QGroupBox("Thiết lập kết nối phần cứng");
-    boxCauHinhKetNoi->setStyleSheet(" font-weight: bold;font-size: 16px; color: #0000FF");
-    boxCauHinhKetNoi->setFixedHeight(150);
+    QGroupBox *boxCauHinhKetNoi = new QGroupBox("Thiết lập kết nối tới phần cứng");
+    boxCauHinhKetNoi->setStyleSheet("font-weight: bold;font-size: 16px; color: #0000FF");
+    boxCauHinhKetNoi->setFixedSize(410, 120);
     QGroupBox *boxKiemTraIC = new QGroupBox("Kiểm tra IC");
-    boxKiemTraIC->setStyleSheet(" font-weight: bold;font-size: 16px; color: #0000FF");
+    boxKiemTraIC->setStyleSheet("font-weight: bold;font-size: 16px; color: #0000FF");
     boxKiemTraIC->setDisabled(true);
     QGroupBox *boxChonIC = new QGroupBox("Chọn IC kiểm tra");
-    boxChonIC->setStyleSheet(" font-weight: bold;font-size: 16px; color: #0000FF");
+    boxChonIC->setStyleSheet("font-weight: bold;font-size: 16px; color: #0000FF");
+    boxChonIC->setFixedWidth(410);
 
     //    thiết lập cấu hình truyền thông
 
@@ -22,20 +23,30 @@ KiemTra::KiemTra()
 
     QComboBox *danhSachCongCOM = new QComboBox;
     danhSachCongCOM->setStyleSheet("font-weight: 500;font-size: 15px; color: black");
-    QPushButton *nutNhanKetNoi = new QPushButton("Kết nối");
-    nutNhanKetNoi->setStyleSheet("QPushButton {"
-                                 "background-color: #009900;"
-                                 "color: white;"
-                                 "font-weight: bold;"
-                                 "font-size: 16px;"
-                                 "}"
-                                 "QPushButton:hover {"
-                                 "background-color: #007500;"
-                                 "}");
+    danhSachCongCOM->setFixedWidth(200);
+    QComboBox *danhSachBaud = new QComboBox;
+    danhSachBaud->setFixedWidth(100);
+    danhSachBaud->setStyleSheet("font-weight: 500;font-size: 14px; color: black");
+    QPushButton *nutNhanKetNoi = new QPushButton;
     nutNhanKetNoi->setFixedWidth(80);
     QGridLayout *lopCauHinhKetNoi = new QGridLayout(boxCauHinhKetNoi);
-    lopCauHinhKetNoi->addWidget(danhSachCongCOM, 0, 0);
-    lopCauHinhKetNoi->addWidget(nutNhanKetNoi, 0, 1);
+
+    lopCauHinhKetNoi
+        ->addWidget(new QLabel(
+                        "<html><body><p style=\"font-size:15px; "
+                        "font-weight:550; color: normal;\">Tìm thiết bị: </p></body></html>"),
+                    0,
+                    0);
+    lopCauHinhKetNoi->addWidget(danhSachCongCOM, 0, 1);
+    lopCauHinhKetNoi->addWidget(nutNhanKetNoi, 0, 2);
+    lopCauHinhKetNoi
+        ->addWidget(new QLabel("<html><body><p style=\"font-size:15px; "
+                               "font-weight:550; color: normal;\">Tốc độ Baud: </p></body></html>"),
+                    1,
+                    0);
+    lopCauHinhKetNoi->addWidget(danhSachBaud, 1, 1);
+    danhSachBaud->addItem("9600bps");
+    danhSachBaud->addItem("19200bps");
 
     QSerialPortInfo *portInfo = new QSerialPortInfo;
     // Tạo một QTimer để thực hiện kiểm tra định kỳ
@@ -45,15 +56,43 @@ KiemTra::KiemTra()
         //     Liệt kê các cổng COM và thêm vào QComboBox
         QList<QSerialPortInfo> availablePorts = QSerialPortInfo::availablePorts();
         if (availablePorts.isEmpty()) {
-            danhSachCongCOM->clear();
-            danhSachCongCOM->addItem("Không phát hiện thiết bị");
-            boxKiemTraIC->setDisabled(true);
-            danhSachCongCOM->setDisabled(true); // Vô hiệu hóa QComboBox
+            if (danhSachCongCOM->itemText(0) != ("Không phát hiện thiết bị")) {
+                danhSachCongCOM->clear();
+                danhSachCongCOM->addItem("Không phát hiện thiết bị");
+                danhSachCongCOM->setStyleSheet("font-size: 14px; color : #CC0000");
+                boxKiemTraIC->setDisabled(true);
+                danhSachCongCOM->setDisabled(true); // Vô hiệu hóa QComboBox
+                nutNhanKetNoi->setText("Ngắt\nkết nối");
+                nutNhanKetNoi->setStyleSheet("QPushButton {"
+                                             "background-color: #CC0000;"
+                                             "color: white;"
+                                             "font-weight: bold;"
+                                             "font-size: 16px;"
+                                             "}"
+                                             "QPushButton:hover {"
+                                             "background-color: #007500;"
+                                             "}");
+                QMessageBox::warning(this,
+                                     "Thông tin kết nối",
+                                     "Ngắt kết nối với thiết bị phần cứng");
+            }
+
         } else {
             danhSachCongCOM->setDisabled(false);
             if (danhSachCongCOM->itemText(0) == ("Không phát hiện thiết bị")) {
                 danhSachCongCOM->clear();
             } else if (danhSachCongCOM->count() == 0) {
+                danhSachCongCOM->setStyleSheet("font-size: 14px; color : green");
+                nutNhanKetNoi->setText("Kết nối");
+                nutNhanKetNoi->setStyleSheet("QPushButton {"
+                                             "background-color: #009900;"
+                                             "color: white;"
+                                             "font-weight: bold;"
+                                             "font-size: 16px;"
+                                             "}"
+                                             "QPushButton:hover {"
+                                             "background-color: #007500;"
+                                             "}");
                 foreach (*portInfo, availablePorts) {
                     danhSachCongCOM->addItem(portInfo->portName());
                 }
@@ -70,7 +109,11 @@ KiemTra::KiemTra()
         serialPort->setPortName(danhSachCongCOM->currentText());
 
         // Cài đặt thông số kết nối UART (ví dụ: tốc độ baud 9600)
-        serialPort->setBaudRate(QSerialPort::Baud9600);
+        if (danhSachBaud->currentText() == "9600bps") {
+            serialPort->setBaudRate(QSerialPort::Baud9600);
+        } else if (danhSachBaud->currentText() == "19200bps") {
+            serialPort->setBaudRate(QSerialPort::Baud19200);
+        }
 
         // Mở cổng UART để kiểm tra kết nối
         if (serialPort->open(QIODevice::ReadWrite)) {
@@ -85,7 +128,7 @@ KiemTra::KiemTra()
             // Đóng cổng UART khi kết thúc
             serialPort->close();
         } else {
-            QMessageBox::warning(this, "Thông tin kết nối", "Kết nối thất bại!");
+            QMessageBox::warning(this, "Thông tin kết nối", "Hãy kết nối cable với máy tính!");
         }
     });
 
@@ -94,8 +137,8 @@ KiemTra::KiemTra()
     khungNhinThuVien->setStyleSheet("font-weight: 400;font-size: 15px; color: black");
     QFileSystemModel *moHinhThuVien = new QFileSystemModel;
     QLineEdit *timKiemIC = new QLineEdit;
-    timKiemIC->setStyleSheet("font-weight: 400;font-size: 14px; color: black");
     timKiemIC->setPlaceholderText("Nhập từ khóa tìm kiếm...");
+    timKiemIC->setStyleSheet("font-weight: 400;font-size: 14px; color: normal");
     QLabel *bangHienThiThuocTinhIC = new QLabel("Khu vực hiển thị thông tin IC....");
     bangHienThiThuocTinhIC->setAlignment(Qt::AlignTop);
     bangHienThiThuocTinhIC->setStyleSheet("font-weight: 400;font-size: 15px; color: black");
