@@ -119,7 +119,8 @@ KiemTra::KiemTra()
         if (serialPort->open(QIODevice::ReadWrite)) {
             QMessageBox::information(this,
                                      "Thông tin kết nối",
-                                     "Đã kết nối tới " + portInfo->portName());
+                                     "Đã kết nối tới " + portInfo->portName() + "\nTốc độ Baud "
+                                         + danhSachBaud->currentText());
             qDebug() << "Connected to serial port:" << portInfo->portName();
             boxKiemTraIC->setDisabled(false);
 
