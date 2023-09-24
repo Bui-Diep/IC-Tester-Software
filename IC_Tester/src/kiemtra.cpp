@@ -22,13 +22,25 @@ KiemTra::KiemTra()
     lopKiemTraTong->addWidget(boxKiemTraIC, 0, 1, 2, 1);
 
     QComboBox *danhSachCongCOM = new QComboBox;
-    danhSachCongCOM->setStyleSheet("font-weight: 500;font-size: 15px; color: black");
+    danhSachCongCOM->setStyleSheet("font-size: 14px; color : #CC0000");
     danhSachCongCOM->setFixedWidth(200);
+    danhSachCongCOM->setPlaceholderText("Không tìm thấy thiết bị");
     QComboBox *danhSachBaud = new QComboBox;
     danhSachBaud->setFixedWidth(100);
     danhSachBaud->setStyleSheet("font-weight: 500;font-size: 14px; color: black");
     QPushButton *nutNhanKetNoi = new QPushButton;
     nutNhanKetNoi->setFixedWidth(80);
+    nutNhanKetNoi->setText("Ngắt\nkết nối");
+    nutNhanKetNoi->setStyleSheet("QPushButton {"
+                                 "background-color: #CC0000;"
+                                 "color: white;"
+                                 "font-weight: bold;"
+                                 "font-size: 16px;"
+                                 "}"
+                                 "QPushButton:hover {"
+                                 "background-color: #007500;"
+                                 "}");
+
     QGridLayout *lopCauHinhKetNoi = new QGridLayout(boxCauHinhKetNoi);
 
     lopCauHinhKetNoi
@@ -51,14 +63,16 @@ KiemTra::KiemTra()
     QSerialPortInfo *portInfo = new QSerialPortInfo;
     // Tạo một QTimer để thực hiện kiểm tra định kỳ
     QTimer *timer = new QTimer;
-    timer->setInterval(10);
+    timer->setInterval(1000);
+    //    int *soLuongCOM = new int(0);
     connect(timer, &QTimer::timeout, this, [=]() {
         //     Liệt kê các cổng COM và thêm vào QComboBox
         QList<QSerialPortInfo> availablePorts = QSerialPortInfo::availablePorts();
-        if (availablePorts.isEmpty()) {
-            if (danhSachCongCOM->itemText(0) != ("Không phát hiện thiết bị")) {
+
+        if (availablePorts.size() != danhSachCongCOM->count()) {
+            if (availablePorts.isEmpty()) {
                 danhSachCongCOM->clear();
-                danhSachCongCOM->addItem("Không phát hiện thiết bị");
+                danhSachCongCOM->setPlaceholderText("Không tìm thấy thiết bị");
                 danhSachCongCOM->setStyleSheet("font-size: 14px; color : #CC0000");
                 boxKiemTraIC->setDisabled(true);
                 danhSachCongCOM->setDisabled(true); // Vô hiệu hóa QComboBox
@@ -75,13 +89,12 @@ KiemTra::KiemTra()
                 QMessageBox::warning(this,
                                      "Thông tin kết nối",
                                      "Ngắt kết nối với thiết bị phần cứng");
-            }
+            } else {
+                danhSachCongCOM->setDisabled(false);
 
-        } else {
-            danhSachCongCOM->setDisabled(false);
-            if (danhSachCongCOM->itemText(0) == ("Không phát hiện thiết bị")) {
                 danhSachCongCOM->clear();
-            } else if (danhSachCongCOM->count() == 0) {
+                danhSachCongCOM->setPlaceholderText(
+                    "Tìm thấy " + QString::number(availablePorts.size()) + " thiết bị");
                 danhSachCongCOM->setStyleSheet("font-size: 14px; color : green");
                 nutNhanKetNoi->setText("Kết nối");
                 nutNhanKetNoi->setStyleSheet("QPushButton {"
@@ -129,7 +142,11 @@ KiemTra::KiemTra()
             // Đóng cổng UART khi kết thúc
             serialPort->close();
         } else {
-            QMessageBox::warning(this, "Thông tin kết nối", "Hãy kết nối cable với máy tính!");
+            if (danhSachCongCOM->currentText() == "" && danhSachCongCOM->count() != 0) {
+                QMessageBox::warning(this, "Thông tin kết nối", "Hãy chọn 1 thiết bị");
+            } else {
+                QMessageBox::warning(this, "Thông tin kết nối", "Hãy kết nối cable với máy tính!");
+            }
         }
     });
 
