@@ -1,6 +1,5 @@
 #include "kiemtra.h"
 #include <QSerialPortInfo>
-#include <QtSerialPort>
 
 KiemTra::KiemTra()
 {
@@ -59,7 +58,7 @@ KiemTra::KiemTra()
     lopCauHinhKetNoi->addWidget(danhSachBaud, 1, 1);
     danhSachBaud->addItem("9600bps");
     danhSachBaud->addItem("19200bps");
-
+    serialPort = new QSerialPort;
     QSerialPortInfo *portInfo = new QSerialPortInfo;
     // Tạo một QTimer để thực hiện kiểm tra định kỳ
     QTimer *timer = new QTimer;
@@ -117,7 +116,6 @@ KiemTra::KiemTra()
     timer->start();
 
     connect(nutNhanKetNoi, &QPushButton::clicked, this, [=]() {
-        QSerialPort *serialPort = new QSerialPort;
 
         serialPort->setPortName(danhSachCongCOM->currentText());
 
@@ -130,6 +128,7 @@ KiemTra::KiemTra()
 
         // Mở cổng UART để kiểm tra kết nối
         if (serialPort->open(QIODevice::ReadWrite)) {
+            nutNhanKetNoi->setText("Đã\nkết nối");
             QMessageBox::information(this,
                                      "Thông tin kết nối",
                                      "Đã kết nối tới " + portInfo->portName() + "\nTốc độ Baud "
@@ -185,7 +184,7 @@ KiemTra::KiemTra()
 
             boxKiemTraIC->setTitle("Kiểm tra IC " + itemName);
             // Lấy đường dẫn đầy đủ của tệp được chọn
-            QString filePath = moHinhThuVien->filePath(index);
+            filePath = moHinhThuVien->filePath(index);
 
             // Đọc nội dung của tệp
             QFile file(filePath);
@@ -209,9 +208,151 @@ KiemTra::KiemTra()
     });
 
     QVBoxLayout *lopKiemTraIC = new QVBoxLayout(boxKiemTraIC);
+    QSplitter *splitKiemTra = new QSplitter;
+    splitKiemTra->setStyleSheet("QSplitter::handle { background-color: white; }");
+    QProgressBar *thanhTienTrinh = new QProgressBar;
+    lopKiemTraIC->addWidget(splitKiemTra);
+    lopKiemTraIC->addWidget(thanhTienTrinh, Qt::AlignBottom);
+    QWidget *widHienThiKetqua = new QWidget(splitKiemTra);
+    QGridLayout *lopSymHienThiKetQua = new QGridLayout(widHienThiKetqua);
+    lopSymHienThiKetQua->addWidget(
+        new QLabel("<html><body><p style=\"font-size:15px; "
+                   "font-weight:550; color: normal;\">Chọn tốc độ kiểm tra: </p></body></html>"),
+        0,
+        0);
+    QComboBox *tocDoKiemTra = new QComboBox;
+    tocDoKiemTra->setStyleSheet("font-weight: 500;font-size: 15px; color: black");
+    tocDoKiemTra->addItem("Chậm");
+    tocDoKiemTra->addItem("Bình Thường");
+    tocDoKiemTra->addItem("Nhanh");
+    lopSymHienThiKetQua->addWidget(tocDoKiemTra, 0, 1);
+    lopSymHienThiKetQua->addWidget(new QLabel(" "), 0, 2);
+    lopSymHienThiKetQua->addWidget(new QLabel(" "), 0, 3);
+    QPushButton *nutRun = new QPushButton("Chạy");
+    nutRun->setStyleSheet("QPushButton {"
+                          "background-color: #009900;"
+                          "color: white;"
+                          "font-weight: bold;"
+                          "font-size: 16px;"
+                          "}"
+                          "QPushButton:hover {"
+                          "background-color: #007500;"
+                          "}");
+    lopSymHienThiKetQua->addWidget(nutRun, 0, 4);
 
-    lopKiemTraIC->addWidget(new QListView);
-    lopKiemTraIC->addWidget(new QPushButton("Kiểm tra"));
+    lopSymHienThiKetQua->addWidget(new QLabel(" Hiển thị kết quả ở đây"), 1, 0, 1, 5);
+    QWidget *widSymIC = new QWidget(splitKiemTra);
+    QVBoxLayout *lopSymIC = new QVBoxLayout(widSymIC);
+    lopSymIC->setAlignment(Qt::AlignCenter);
+    QFrame *symIC = new QFrame;
+    lopSymIC->addWidget(symIC);
+    //    lopSymIC->addWidget(new QLabel(""));
+    symIC->setFixedSize(160, 440); // Đặt kích thước hình chữ nhật
+    symIC->setStyleSheet("QFrame {"
+                         "   background-color: #A8D9D0;"
+                         "   border: 2px solid black;"
+                         "   border-radius: 10px;"
+                         "}");
+    //    biểu tượng các chân IC
+    QGridLayout *lopChanIC = new QGridLayout(symIC);
+    for (int i = 0; i < 10; ++i) {
+        for (int j = 0; j < 3; j += 2) {
+            pin[i][j] = new QPushButton;
+            pin[i][j]->setFixedSize(32, 32);
+            pin[i][j]->setEnabled(0);
+            pin[i][j]->setStyleSheet("background-color: grey;"
+                                     " border-radius: 16px;"
+                                     " border: 1px solid blue;");
+            lopChanIC->addWidget(pin[i][j], i, j);
+        }
+    }
+    QLabel *gap = new QLabel("   ");
+    gap->setStyleSheet("border: normal;");
+    lopChanIC->addWidget(gap, 0, 1);
+
+    splitKiemTra->setStretchFactor(0, 1);
+    splitKiemTra->setStretchFactor(1, 1);
+    thanhTienTrinh->setValue(35);
+    thanhTienTrinh->setRange(0, 100);
+    thanhTienTrinh->setToolTip("Thanh tiến trình kiểm tra");
+
+    //    LẬP TRÌNH TRUYỀN NHẬN DỮ LIỆU TỚI PHẦN CỨNG TỪ FILE TRONG THƯ VIỆN
+    connect(nutRun, &QPushButton::clicked, this, [=]() {
+        QFile binFile(filePath); // filePath duong dan toi file duoc chon
+        if (!binFile.open(QIODevice::ReadOnly)) {
+            qDebug() << "Khong the mo tep .bin";
+            return;
+        }
+
+        // Di chuyển con trỏ đọc tệp đến byte thứ hai
+        binFile.seek(1);
+
+        char *byteMaHoaDuLieu = new char[10]; // Mảng char có 10 phần tử
+
+        // Đọc 10 byte từ tệp .bin và lưu vào mảng char
+        qint64 bytesRead = binFile.read(byteMaHoaDuLieu, 10);
+
+        qDebug() << "Du lieu 10 byte: ";
+        for (int n = 0; n < 10; ++n) {
+            unsigned char unsignedChar = static_cast<unsigned char>(byteMaHoaDuLieu[n]);
+            QString binaryString = QString("%1").arg(unsignedChar, 8, 2, QChar('0'));
+            qDebug() << "Byte " << n + 1 << binaryString;
+        }
+
+        if (bytesRead != 10) {
+            qDebug() << "Khong doc du 10 byte tu tep .bin";
+            binFile.close();
+            return;
+        }
+        binFile.close();
+        //        tạo mảng hai chiều chứa thông tin dữ liêu từ hai chân nhận được
+        char duLieuGanChanIC[10][3];
+        //        HIEN THI THONG TIN TU DU LIEU NHAN DUOC LEN SYMIC
+        for (int i = 0; i < 10; ++i) {
+            // 4 bit trọng số cao mang thông tin hàng chân bên trái
+            duLieuGanChanIC[i][0] = byteMaHoaDuLieu[i] & (0b00110000);
+        }
+        for (int i = 0; i < 10; ++i) {
+            // 4 bit trọng số thấp mang thông tin hàng chân bên phải
+            duLieuGanChanIC[i][2] = byteMaHoaDuLieu[i] & (0b00000011);
+        }
+
+        //    thêm cấu chân IC từ file dữ liệu nhận về
+        for (int i = 0; i < 10; ++i) {
+            for (int j = 0; j < 3; j += 2) {
+                //Nếu chân dữ liệu không kết nối
+                if (duLieuGanChanIC[i][j] == (0b00110000) // NC
+                    || duLieuGanChanIC[i][j] == (0b00000011)) {
+                    pin[i][j]->setStyleSheet("background-color: grey;"
+                                             " border-radius: 16px;"
+                                             " border: 1px solid blue;");
+                    lopChanIC->addWidget(pin[i][j], i, j);
+
+                    //nếu chân dữ liệu kết nối với nguồn VCC hoặc mang mức logic 1
+                } else if (duLieuGanChanIC[i][j] == (0b00010000) // LOGIC 1
+                           || duLieuGanChanIC[i][j] == (0b00000001)) {
+                    pin[i][j]->setStyleSheet("background-color: green;"
+                                             " border-radius: 16px;"
+                                             " border: 1px solid blue;");
+                    lopChanIC->addWidget(pin[i][j], i, j);
+                    //nếu chân dữ liệu kết nối với đất hoặc mang mức logic 0
+                } else if (duLieuGanChanIC[i][j] == (0b00100000) //LOGIC 0
+                           || duLieuGanChanIC[i][j] == (0b00000010)) {
+                    pin[i][j]->setStyleSheet("background-color: red;"
+                                             " border-radius: 16px;"
+                                             " border: 1px solid blue;");
+                    lopChanIC->addWidget(pin[i][j], i, j);
+                } else /* if (duLieuGanChanIC[i][j] == (0b00000000) //Không xác định
+                           || duLieuGanChanIC[i][j] == (0b00000000))*/
+                {
+                    pin[i][j]->setStyleSheet("background-color: white;"
+                                             " border-radius: 16px;"
+                                             " border: 1px solid blue;");
+                    lopChanIC->addWidget(pin[i][j], i, j);
+                }
+            }
+        }
+    });
 }
 void KiemTra::backHome()
 {
