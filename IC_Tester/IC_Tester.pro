@@ -10,6 +10,7 @@ CONFIG += c++17
 VPATH += src/
 INCLUDEPATH += include/
 SOURCES += \
+    src/truyennhandulieu.cpp \
     src/huongdan.cpp \
     src/kiemtra.cpp \
     main.cpp \
@@ -19,10 +20,11 @@ SOURCES += \
     src/xemthuvien.cpp
 
 HEADERS += \
-    include/huongdan.h \
+    include/huongdan.h\
     include/kiemtra.h \
     include/mainwindow.h \
     include/taothuvien.h \
+    include/truyennhandulieu.h \
     include/xemlichsu.h \
     include/xemthuvien.h
 

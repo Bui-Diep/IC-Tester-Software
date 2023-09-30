@@ -58,7 +58,7 @@ KiemTra::KiemTra()
     lopCauHinhKetNoi->addWidget(danhSachBaud, 1, 1);
     danhSachBaud->addItem("9600bps");
     danhSachBaud->addItem("19200bps");
-    serialPort = new QSerialPort;
+    serialPort = new QSerialPort(this);
     QSerialPortInfo *portInfo = new QSerialPortInfo;
     // Tạo một QTimer để thực hiện kiểm tra định kỳ
     QTimer *timer = new QTimer;
@@ -117,13 +117,22 @@ KiemTra::KiemTra()
 
     connect(nutNhanKetNoi, &QPushButton::clicked, this, [=]() {
 
-        serialPort->setPortName(danhSachCongCOM->currentText());
-
         // Cài đặt thông số kết nối UART (ví dụ: tốc độ baud 9600)
         if (danhSachBaud->currentText() == "9600bps") {
+            serialPort->setPortName(danhSachCongCOM->currentText());
             serialPort->setBaudRate(QSerialPort::Baud9600);
+            serialPort->setDataBits(QSerialPort::Data8);
+            serialPort->setParity(QSerialPort::NoParity);
+            serialPort->setStopBits(QSerialPort::OneStop);
+            serialPort->setFlowControl(QSerialPort::NoFlowControl);
+
         } else if (danhSachBaud->currentText() == "19200bps") {
+            serialPort->setPortName(danhSachCongCOM->currentText());
             serialPort->setBaudRate(QSerialPort::Baud19200);
+            serialPort->setDataBits(QSerialPort::Data8);
+            serialPort->setParity(QSerialPort::NoParity);
+            serialPort->setStopBits(QSerialPort::OneStop);
+            serialPort->setFlowControl(QSerialPort::NoFlowControl);
         }
 
         // Mở cổng UART để kiểm tra kết nối
@@ -135,10 +144,10 @@ KiemTra::KiemTra()
                                          + danhSachBaud->currentText());
             qDebug() << "Connected to serial port:" << portInfo->portName();
             boxKiemTraIC->setDisabled(false);
-
-            // Ở đây, bạn có thể thực hiện các thao tác truyền dữ liệu hoặc xử lý dữ liệu từ cổng UART.
-
+            // Ở đây, bạn có thể thực hiện các thao tác truyền dữ liệu hoặc xử lý dữ liệu từ cổng UART
+            qDebug() << "kết nối thành công";
             // Đóng cổng UART khi kết thúc
+
             serialPort->close();
         } else {
             if (danhSachCongCOM->currentText() == "" && danhSachCongCOM->count() != 0) {
@@ -241,27 +250,27 @@ KiemTra::KiemTra()
     lopSymHienThiKetQua->addWidget(nutRun, 0, 4);
 
     lopSymHienThiKetQua->addWidget(new QLabel(" Hiển thị kết quả ở đây"), 1, 0, 1, 5);
-    QWidget *widSymIC = new QWidget(splitKiemTra);
-    QVBoxLayout *lopSymIC = new QVBoxLayout(widSymIC);
-    lopSymIC->setAlignment(Qt::AlignCenter);
-    QFrame *symIC = new QFrame;
-    lopSymIC->addWidget(symIC);
-    //    lopSymIC->addWidget(new QLabel(""));
-    symIC->setFixedSize(160, 440); // Đặt kích thước hình chữ nhật
-    symIC->setStyleSheet("QFrame {"
-                         "   background-color: #A8D9D0;"
-                         "   border: 2px solid black;"
-                         "   border-radius: 10px;"
-                         "}");
+    QWidget *widkhungSymIC = new QWidget(splitKiemTra);
+    QVBoxLayout *lopkhungSymIC = new QVBoxLayout(widkhungSymIC);
+    lopkhungSymIC->setAlignment(Qt::AlignCenter);
+    QFrame *khungSymIC = new QFrame;
+    lopkhungSymIC->addWidget(khungSymIC);
+    //    lopkhungSymIC->addWidget(new QLabel(""));
+    khungSymIC->setFixedSize(160, 440); // Đặt kích thước hình chữ nhật
+    khungSymIC->setStyleSheet("QFrame {"
+                              "   background-color: #A8D9D0;"
+                              "   border: 2px solid black;"
+                              "   border-radius: 10px;"
+                              "}");
     //    biểu tượng các chân IC
-    QGridLayout *lopChanIC = new QGridLayout(symIC);
+    lopChanIC = new QGridLayout(khungSymIC);
     for (int i = 0; i < 10; ++i) {
         for (int j = 0; j < 3; j += 2) {
             pin[i][j] = new QPushButton;
-            pin[i][j]->setFixedSize(32, 32);
+            pin[i][j]->setFixedSize(40, 25);
             pin[i][j]->setEnabled(0);
             pin[i][j]->setStyleSheet("background-color: grey;"
-                                     " border-radius: 16px;"
+                                     " border-radius: 8px;"
                                      " border: 1px solid blue;");
             lopChanIC->addWidget(pin[i][j], i, j);
         }
@@ -276,86 +285,81 @@ KiemTra::KiemTra()
     thanhTienTrinh->setRange(0, 100);
     thanhTienTrinh->setToolTip("Thanh tiến trình kiểm tra");
 
-    //    LẬP TRÌNH TRUYỀN NHẬN DỮ LIỆU TỚI PHẦN CỨNG TỪ FILE TRONG THƯ VIỆN
-    connect(nutRun, &QPushButton::clicked, this, [=]() {
-        QFile binFile(filePath); // filePath duong dan toi file duoc chon
-        if (!binFile.open(QIODevice::ReadOnly)) {
-            qDebug() << "Khong the mo tep .bin";
-            return;
-        }
+    //LẬP TRÌNH TRUYỀN NHẬN DỮ LIỆU TỚI PHẦN CỨNG TỪ FILE TRONG THƯ VIỆN
+    /*    connect(nutRun, SIGNAL(clicked(bool)), this, SLOT(sendData(filePath, serialPort)))*/;
+    QObject::connect(nutRun, &QPushButton::clicked, this, [=]() {
+        sendSerial->sendData(filePath, serialPort);
+    });
+    QObject::connect(serialPort, &QSerialPort::readyRead, this, [=]() {
+        receiveByte = (receiveSerial->receiveData(serialPort, receiveByte));
+        if (receiveByte.size() == 10) {
+            qDebug() << "du 10";
+            emit nhanDu10Byte();
+        };
+    });
+    connect(this, SIGNAL(nhanDu10Byte()), this, SLOT(indicateLed()));
+}
 
-        // Di chuyển con trỏ đọc tệp đến byte thứ hai
-        binFile.seek(1);
+void KiemTra::indicateLed()
+{
+    //    qDebug() << "Da nhan 10 byte";
+    //    char *receiveData = new char[10]{0};
+    char duLieuGanChanIC[10][3];
+    //        HIEN THI THONG TIN TU DU LIEU NHAN DUOC LEN khungSymIC
+    for (int i = 0; i < 10; ++i) {
+        // 4 bit trọng số cao mang thông tin hàng chân bên trái
+        duLieuGanChanIC[i][0] = receiveByte[i] & (0b00110000);
+    }
+    for (int i = 0; i < 10; ++i) {
+        // 4 bit trọng số thấp mang thông tin hàng chân bên phải
+        duLieuGanChanIC[i][2] = receiveByte[i] & (0b00000011);
+    }
 
-        char *byteMaHoaDuLieu = new char[10]; // Mảng char có 10 phần tử
+    //    thêm cấu chân IC từ file dữ liệu nhận về
+    for (int i = 0; i < 10; ++i) {
+        for (int j = 0; j < 3; j += 2) {
+            //Nếu chân dữ liệu không kết nối
+            if (duLieuGanChanIC[i][j] == (0b00110000) // NC
+                || duLieuGanChanIC[i][j] == (0b00000011)) {
+                pin[i][j]->setStyleSheet("background-color: grey;"
+                                         " border-radius: 8px;"
+                                         " border: 1px solid blue;");
+                lopChanIC->addWidget(pin[i][j], i, j);
 
-        // Đọc 10 byte từ tệp .bin và lưu vào mảng char
-        qint64 bytesRead = binFile.read(byteMaHoaDuLieu, 10);
-
-        qDebug() << "Du lieu 10 byte: ";
-        for (int n = 0; n < 10; ++n) {
-            unsigned char unsignedChar = static_cast<unsigned char>(byteMaHoaDuLieu[n]);
-            QString binaryString = QString("%1").arg(unsignedChar, 8, 2, QChar('0'));
-            qDebug() << "Byte " << n + 1 << binaryString;
-        }
-
-        if (bytesRead != 10) {
-            qDebug() << "Khong doc du 10 byte tu tep .bin";
-            binFile.close();
-            return;
-        }
-        binFile.close();
-        //        tạo mảng hai chiều chứa thông tin dữ liêu từ hai chân nhận được
-        char duLieuGanChanIC[10][3];
-        //        HIEN THI THONG TIN TU DU LIEU NHAN DUOC LEN SYMIC
-        for (int i = 0; i < 10; ++i) {
-            // 4 bit trọng số cao mang thông tin hàng chân bên trái
-            duLieuGanChanIC[i][0] = byteMaHoaDuLieu[i] & (0b00110000);
-        }
-        for (int i = 0; i < 10; ++i) {
-            // 4 bit trọng số thấp mang thông tin hàng chân bên phải
-            duLieuGanChanIC[i][2] = byteMaHoaDuLieu[i] & (0b00000011);
-        }
-
-        //    thêm cấu chân IC từ file dữ liệu nhận về
-        for (int i = 0; i < 10; ++i) {
-            for (int j = 0; j < 3; j += 2) {
-                //Nếu chân dữ liệu không kết nối
-                if (duLieuGanChanIC[i][j] == (0b00110000) // NC
-                    || duLieuGanChanIC[i][j] == (0b00000011)) {
-                    pin[i][j]->setStyleSheet("background-color: grey;"
-                                             " border-radius: 16px;"
-                                             " border: 1px solid blue;");
-                    lopChanIC->addWidget(pin[i][j], i, j);
-
-                    //nếu chân dữ liệu kết nối với nguồn VCC hoặc mang mức logic 1
-                } else if (duLieuGanChanIC[i][j] == (0b00010000) // LOGIC 1
-                           || duLieuGanChanIC[i][j] == (0b00000001)) {
-                    pin[i][j]->setStyleSheet("background-color: green;"
-                                             " border-radius: 16px;"
-                                             " border: 1px solid blue;");
-                    lopChanIC->addWidget(pin[i][j], i, j);
-                    //nếu chân dữ liệu kết nối với đất hoặc mang mức logic 0
-                } else if (duLieuGanChanIC[i][j] == (0b00100000) //LOGIC 0
-                           || duLieuGanChanIC[i][j] == (0b00000010)) {
-                    pin[i][j]->setStyleSheet("background-color: red;"
-                                             " border-radius: 16px;"
-                                             " border: 1px solid blue;");
-                    lopChanIC->addWidget(pin[i][j], i, j);
-                } else /* if (duLieuGanChanIC[i][j] == (0b00000000) //Không xác định
-                           || duLieuGanChanIC[i][j] == (0b00000000))*/
-                {
-                    pin[i][j]->setStyleSheet("background-color: white;"
-                                             " border-radius: 16px;"
-                                             " border: 1px solid blue;");
-                    lopChanIC->addWidget(pin[i][j], i, j);
-                }
+                //nếu chân dữ liệu kết nối với nguồn VCC hoặc mang mức logic 1
+            } else if (duLieuGanChanIC[i][j] == (0b00010000) // LOGIC 1
+                       || duLieuGanChanIC[i][j] == (0b00000001)) {
+                pin[i][j]->setStyleSheet("background-color: green;"
+                                         " border-radius: 8px;"
+                                         " border: 1px solid blue;");
+                lopChanIC->addWidget(pin[i][j], i, j);
+                //nếu chân dữ liệu kết nối với đất hoặc mang mức logic 0
+            } else if (duLieuGanChanIC[i][j] == (0b00100000) //LOGIC 0
+                       || duLieuGanChanIC[i][j] == (0b00000010)) {
+                pin[i][j]->setStyleSheet("background-color: red;"
+                                         " border-radius: 8px;"
+                                         " border: 1px solid blue;");
+                lopChanIC->addWidget(pin[i][j], i, j);
+            } else /* if (duLieuGanChanIC[i][j] == (0b00000000) //Không xác định
+                                       || duLieuGanChanIC[i][j] == (0b00000000))*/
+            {
+                pin[i][j]->setStyleSheet("background-color: white;"
+                                         " border-radius: 8px;"
+                                         " border: 1px solid blue;");
+                lopChanIC->addWidget(pin[i][j], i, j);
             }
         }
-    });
+    }
+    //thực hiện giải phóng bộ nhớ
+    receiveByte.clear();
+    std::memset(duLieuGanChanIC, 0, sizeof(duLieuGanChanIC));
 }
-void KiemTra::backHome()
+//void KiemTra::sendData(QString &filePath, QSerialPort &serialPort)
+//{
+//    dataSerial->sendData(filePath, serialPort);
+//}
+KiemTra::~KiemTra()
 {
-    qDebug() << "ok";
+    serialPort->close();
+    receiveByte.clear();
 }
-KiemTra::~KiemTra() {}

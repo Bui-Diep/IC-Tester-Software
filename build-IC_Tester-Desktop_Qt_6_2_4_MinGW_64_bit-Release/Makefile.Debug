@@ -50,7 +50,8 @@ OBJECTS_DIR   = debug
 
 ####### Files
 
-SOURCES       = ..\IC_Tester\src\huongdan.cpp \
+SOURCES       = ..\IC_Tester\src\truyennhandulieu.cpp \
+		..\IC_Tester\src\huongdan.cpp \
 		..\IC_Tester\src\kiemtra.cpp \
 		..\IC_Tester\main.cpp \
 		..\IC_Tester\src\mainwindow.cpp \
@@ -61,8 +62,10 @@ SOURCES       = ..\IC_Tester\src\huongdan.cpp \
 		debug\moc_kiemtra.cpp \
 		debug\moc_mainwindow.cpp \
 		debug\moc_taothuvien.cpp \
+		debug\moc_truyennhandulieu.cpp \
 		debug\moc_xemlichsu.cpp
-OBJECTS       = debug/huongdan.o \
+OBJECTS       = debug/truyennhandulieu.o \
+		debug/huongdan.o \
 		debug/kiemtra.o \
 		debug/main.o \
 		debug/mainwindow.o \
@@ -74,14 +77,17 @@ OBJECTS       = debug/huongdan.o \
 		debug/moc_kiemtra.o \
 		debug/moc_mainwindow.o \
 		debug/moc_taothuvien.o \
+		debug/moc_truyennhandulieu.o \
 		debug/moc_xemlichsu.o
 
 DIST          =  ..\IC_Tester\include\huongdan.h \
 		..\IC_Tester\include\kiemtra.h \
 		..\IC_Tester\include\mainwindow.h \
 		..\IC_Tester\include\taothuvien.h \
+		..\IC_Tester\include\truyennhandulieu.h \
 		..\IC_Tester\include\xemlichsu.h \
-		..\IC_Tester\include\xemthuvien.h ..\IC_Tester\src\huongdan.cpp \
+		..\IC_Tester\include\xemthuvien.h ..\IC_Tester\src\truyennhandulieu.cpp \
+		..\IC_Tester\src\huongdan.cpp \
 		..\IC_Tester\src\kiemtra.cpp \
 		..\IC_Tester\main.cpp \
 		..\IC_Tester\src\mainwindow.cpp \
@@ -110,10 +116,10 @@ qmake: FORCE
 qmake_all: FORCE
 
 dist:
-	$(ZIP) IC_Tester.zip $(SOURCES) $(DIST) ..\IC_Tester\IC_Tester.pro X:\QT_Creator\6.2.4\mingw_64\mkspecs\features\spec_pre.prf X:\QT_Creator\6.2.4\mingw_64\mkspecs\features\device_config.prf X:\QT_Creator\6.2.4\mingw_64\mkspecs\common\sanitize.conf X:\QT_Creator\6.2.4\mingw_64\mkspecs\common\gcc-base.conf X:\QT_Creator\6.2.4\mingw_64\mkspecs\common\g++-base.conf X:\QT_Creator\6.2.4\mingw_64\mkspecs\features\win32\windows_vulkan_sdk.prf X:\QT_Creator\6.2.4\mingw_64\mkspecs\common\windows-vulkan.conf X:\QT_Creator\6.2.4\mingw_64\mkspecs\common\g++-win32.conf X:\QT_Creator\6.2.4\mingw_64\mkspecs\common\windows-desktop.conf X:\QT_Creator\6.2.4\mingw_64\mkspecs\qconfig.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_ext_freetype.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_ext_libpng.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_concurrent.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_concurrent_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_core.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_core_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_dbus.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_dbus_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_designer.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_designer_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_designercomponents_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_devicediscovery_support_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_entrypoint_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_fb_support_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_gui.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_gui_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_help.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_help_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_labsanimation.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_labsanimation_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_labsfolderlistmodel.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_labsfolderlistmodel_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_labsqmlmodels.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_labsqmlmodels_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_labssettings.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_labssettings_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_labssharedimage.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_labssharedimage_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_labswavefrontmesh.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_labswavefrontmesh_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_linguist.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_linguist_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_network.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_network_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_opengl.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_opengl_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_openglwidgets.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_openglwidgets_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_packetprotocol_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_printsupport.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_printsupport_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_qml.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_qml_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_qmlcompiler_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_qmlcore.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_qmlcore_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_qmldebug_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_qmldevtools_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_qmldom_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_qmllocalstorage.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_qmllocalstorage_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_qmlmodels.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_qmlmodels_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_qmltest.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_qmltest_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_qmlworkerscript.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_qmlworkerscript_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_qmlxmllistmodel.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_qmlxmllistmodel_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_quick.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_quick_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_quickcontrols2.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_quickcontrols2_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_quickcontrols2impl.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_quickcontrols2impl_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_quickcontrolstestutilsprivate_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_quickdialogs2.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_quickdialogs2_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_quickdialogs2quickimpl.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_quickdialogs2quickimpl_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_quickdialogs2utils.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_quickdialogs2utils_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_quicklayouts.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_quicklayouts_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_quickparticles_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_quickshapes_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_quicktemplates2.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_quicktemplates2_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_quicktestutilsprivate_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_quickwidgets.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_quickwidgets_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_serialport.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_serialport_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_sql.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_sql_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_svg.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_svg_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_svgwidgets.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_svgwidgets_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_testlib.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_testlib_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_tools_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_uiplugin.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_uitools.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_uitools_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_widgets.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_widgets_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_xml.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_xml_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_zlib_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\features\qt_functions.prf X:\QT_Creator\6.2.4\mingw_64\mkspecs\features\qt_config.prf X:\QT_Creator\6.2.4\mingw_64\mkspecs\win32-g++\qmake.conf X:\QT_Creator\6.2.4\mingw_64\mkspecs\features\spec_post.prf .qmake.stash X:\QT_Creator\6.2.4\mingw_64\mkspecs\features\exclusive_builds.prf X:\QT_Creator\6.2.4\mingw_64\mkspecs\features\toolchain.prf X:\QT_Creator\6.2.4\mingw_64\mkspecs\features\default_pre.prf X:\QT_Creator\6.2.4\mingw_64\mkspecs\features\win32\default_pre.prf X:\QT_Creator\6.2.4\mingw_64\mkspecs\features\resolve_config.prf X:\QT_Creator\6.2.4\mingw_64\mkspecs\features\exclusive_builds_post.prf X:\QT_Creator\6.2.4\mingw_64\mkspecs\features\default_post.prf X:\QT_Creator\6.2.4\mingw_64\mkspecs\features\build_pass.prf X:\QT_Creator\6.2.4\mingw_64\mkspecs\features\qtquickcompiler.prf X:\QT_Creator\6.2.4\mingw_64\mkspecs\features\entrypoint.prf X:\QT_Creator\6.2.4\mingw_64\mkspecs\features\precompile_header.prf X:\QT_Creator\6.2.4\mingw_64\mkspecs\features\warn_on.prf X:\QT_Creator\6.2.4\mingw_64\mkspecs\features\qt.prf X:\QT_Creator\6.2.4\mingw_64\mkspecs\features\resources_functions.prf X:\QT_Creator\6.2.4\mingw_64\mkspecs\features\resources.prf X:\QT_Creator\6.2.4\mingw_64\mkspecs\features\moc.prf X:\QT_Creator\6.2.4\mingw_64\mkspecs\features\win32\opengl.prf X:\QT_Creator\6.2.4\mingw_64\mkspecs\features\uic.prf X:\QT_Creator\6.2.4\mingw_64\mkspecs\features\qmake_use.prf X:\QT_Creator\6.2.4\mingw_64\mkspecs\features\file_copies.prf X:\QT_Creator\6.2.4\mingw_64\mkspecs\features\win32\windows.prf X:\QT_Creator\6.2.4\mingw_64\mkspecs\features\testcase_targets.prf X:\QT_Creator\6.2.4\mingw_64\mkspecs\features\exceptions.prf X:\QT_Creator\6.2.4\mingw_64\mkspecs\features\yacc.prf X:\QT_Creator\6.2.4\mingw_64\mkspecs\features\lex.prf ..\IC_Tester\IC_Tester.pro ..\IC_Tester\resource.qrc X:\QT_Creator\6.2.4\mingw_64\lib\Qt6Widgets.prl X:\QT_Creator\6.2.4\mingw_64\lib\Qt6Gui.prl X:\QT_Creator\6.2.4\mingw_64\lib\Qt6SerialPort.prl X:\QT_Creator\6.2.4\mingw_64\lib\Qt6Core.prl X:\QT_Creator\6.2.4\mingw_64\lib\Qt6EntryPoint.prl   ..\IC_Tester\resource.qrc X:\QT_Creator\6.2.4\mingw_64\mkspecs\features\data\dummy.cpp ..\IC_Tester\include\huongdan.h ..\IC_Tester\include\kiemtra.h ..\IC_Tester\include\mainwindow.h ..\IC_Tester\include\taothuvien.h ..\IC_Tester\include\xemlichsu.h ..\IC_Tester\include\xemthuvien.h  ..\IC_Tester\src\huongdan.cpp ..\IC_Tester\src\kiemtra.cpp ..\IC_Tester\main.cpp ..\IC_Tester\src\mainwindow.cpp ..\IC_Tester\src\taothuvien.cpp ..\IC_Tester\src\xemlichsu.cpp ..\IC_Tester\src\xemthuvien.cpp     
+	$(ZIP) IC_Tester.zip $(SOURCES) $(DIST) ..\IC_Tester\IC_Tester.pro X:\QT_Creator\6.2.4\mingw_64\mkspecs\features\spec_pre.prf X:\QT_Creator\6.2.4\mingw_64\mkspecs\features\device_config.prf X:\QT_Creator\6.2.4\mingw_64\mkspecs\common\sanitize.conf X:\QT_Creator\6.2.4\mingw_64\mkspecs\common\gcc-base.conf X:\QT_Creator\6.2.4\mingw_64\mkspecs\common\g++-base.conf X:\QT_Creator\6.2.4\mingw_64\mkspecs\features\win32\windows_vulkan_sdk.prf X:\QT_Creator\6.2.4\mingw_64\mkspecs\common\windows-vulkan.conf X:\QT_Creator\6.2.4\mingw_64\mkspecs\common\g++-win32.conf X:\QT_Creator\6.2.4\mingw_64\mkspecs\common\windows-desktop.conf X:\QT_Creator\6.2.4\mingw_64\mkspecs\qconfig.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_ext_freetype.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_ext_libpng.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_concurrent.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_concurrent_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_core.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_core_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_dbus.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_dbus_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_designer.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_designer_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_designercomponents_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_devicediscovery_support_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_entrypoint_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_fb_support_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_gui.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_gui_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_help.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_help_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_labsanimation.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_labsanimation_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_labsfolderlistmodel.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_labsfolderlistmodel_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_labsqmlmodels.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_labsqmlmodels_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_labssettings.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_labssettings_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_labssharedimage.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_labssharedimage_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_labswavefrontmesh.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_labswavefrontmesh_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_linguist.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_linguist_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_network.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_network_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_opengl.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_opengl_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_openglwidgets.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_openglwidgets_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_packetprotocol_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_printsupport.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_printsupport_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_qml.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_qml_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_qmlcompiler_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_qmlcore.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_qmlcore_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_qmldebug_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_qmldevtools_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_qmldom_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_qmllocalstorage.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_qmllocalstorage_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_qmlmodels.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_qmlmodels_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_qmltest.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_qmltest_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_qmlworkerscript.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_qmlworkerscript_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_qmlxmllistmodel.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_qmlxmllistmodel_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_quick.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_quick_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_quickcontrols2.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_quickcontrols2_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_quickcontrols2impl.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_quickcontrols2impl_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_quickcontrolstestutilsprivate_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_quickdialogs2.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_quickdialogs2_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_quickdialogs2quickimpl.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_quickdialogs2quickimpl_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_quickdialogs2utils.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_quickdialogs2utils_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_quicklayouts.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_quicklayouts_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_quickparticles_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_quickshapes_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_quicktemplates2.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_quicktemplates2_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_quicktestutilsprivate_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_quickwidgets.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_quickwidgets_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_serialport.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_serialport_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_sql.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_sql_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_svg.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_svg_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_svgwidgets.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_svgwidgets_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_testlib.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_testlib_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_tools_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_uiplugin.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_uitools.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_uitools_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_widgets.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_widgets_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_xml.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_xml_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\modules\qt_lib_zlib_private.pri X:\QT_Creator\6.2.4\mingw_64\mkspecs\features\qt_functions.prf X:\QT_Creator\6.2.4\mingw_64\mkspecs\features\qt_config.prf X:\QT_Creator\6.2.4\mingw_64\mkspecs\win32-g++\qmake.conf X:\QT_Creator\6.2.4\mingw_64\mkspecs\features\spec_post.prf .qmake.stash X:\QT_Creator\6.2.4\mingw_64\mkspecs\features\exclusive_builds.prf X:\QT_Creator\6.2.4\mingw_64\mkspecs\features\toolchain.prf X:\QT_Creator\6.2.4\mingw_64\mkspecs\features\default_pre.prf X:\QT_Creator\6.2.4\mingw_64\mkspecs\features\win32\default_pre.prf X:\QT_Creator\6.2.4\mingw_64\mkspecs\features\resolve_config.prf X:\QT_Creator\6.2.4\mingw_64\mkspecs\features\exclusive_builds_post.prf X:\QT_Creator\6.2.4\mingw_64\mkspecs\features\default_post.prf X:\QT_Creator\6.2.4\mingw_64\mkspecs\features\build_pass.prf X:\QT_Creator\6.2.4\mingw_64\mkspecs\features\qtquickcompiler.prf X:\QT_Creator\6.2.4\mingw_64\mkspecs\features\entrypoint.prf X:\QT_Creator\6.2.4\mingw_64\mkspecs\features\precompile_header.prf X:\QT_Creator\6.2.4\mingw_64\mkspecs\features\warn_on.prf X:\QT_Creator\6.2.4\mingw_64\mkspecs\features\qt.prf X:\QT_Creator\6.2.4\mingw_64\mkspecs\features\resources_functions.prf X:\QT_Creator\6.2.4\mingw_64\mkspecs\features\resources.prf X:\QT_Creator\6.2.4\mingw_64\mkspecs\features\moc.prf X:\QT_Creator\6.2.4\mingw_64\mkspecs\features\win32\opengl.prf X:\QT_Creator\6.2.4\mingw_64\mkspecs\features\uic.prf X:\QT_Creator\6.2.4\mingw_64\mkspecs\features\qmake_use.prf X:\QT_Creator\6.2.4\mingw_64\mkspecs\features\file_copies.prf X:\QT_Creator\6.2.4\mingw_64\mkspecs\features\win32\windows.prf X:\QT_Creator\6.2.4\mingw_64\mkspecs\features\testcase_targets.prf X:\QT_Creator\6.2.4\mingw_64\mkspecs\features\exceptions.prf X:\QT_Creator\6.2.4\mingw_64\mkspecs\features\yacc.prf X:\QT_Creator\6.2.4\mingw_64\mkspecs\features\lex.prf ..\IC_Tester\IC_Tester.pro ..\IC_Tester\resource.qrc X:\QT_Creator\6.2.4\mingw_64\lib\Qt6Widgets.prl X:\QT_Creator\6.2.4\mingw_64\lib\Qt6Gui.prl X:\QT_Creator\6.2.4\mingw_64\lib\Qt6SerialPort.prl X:\QT_Creator\6.2.4\mingw_64\lib\Qt6Core.prl X:\QT_Creator\6.2.4\mingw_64\lib\Qt6EntryPoint.prl   ..\IC_Tester\resource.qrc X:\QT_Creator\6.2.4\mingw_64\mkspecs\features\data\dummy.cpp ..\IC_Tester\include\huongdan.h ..\IC_Tester\include\kiemtra.h ..\IC_Tester\include\mainwindow.h ..\IC_Tester\include\taothuvien.h ..\IC_Tester\include\truyennhandulieu.h ..\IC_Tester\include\xemlichsu.h ..\IC_Tester\include\xemthuvien.h  ..\IC_Tester\src\truyennhandulieu.cpp ..\IC_Tester\src\huongdan.cpp ..\IC_Tester\src\kiemtra.cpp ..\IC_Tester\main.cpp ..\IC_Tester\src\mainwindow.cpp ..\IC_Tester\src\taothuvien.cpp ..\IC_Tester\src\xemlichsu.cpp ..\IC_Tester\src\xemthuvien.cpp     
 
 clean: compiler_clean 
-	-$(DEL_FILE) debug\huongdan.o debug\kiemtra.o debug\main.o debug\mainwindow.o debug\taothuvien.o debug\xemlichsu.o debug\xemthuvien.o debug\qrc_resource.o debug\moc_huongdan.o debug\moc_kiemtra.o debug\moc_mainwindow.o debug\moc_taothuvien.o debug\moc_xemlichsu.o
+	-$(DEL_FILE) debug\truyennhandulieu.o debug\huongdan.o debug\kiemtra.o debug\main.o debug\mainwindow.o debug\taothuvien.o debug\xemlichsu.o debug\xemthuvien.o debug\qrc_resource.o debug\moc_huongdan.o debug\moc_kiemtra.o debug\moc_mainwindow.o debug\moc_taothuvien.o debug\moc_truyennhandulieu.o debug\moc_xemlichsu.o
 	-$(DEL_FILE) debug\IC_Tester_resource_res.o
 
 distclean: clean 
@@ -164,9 +170,9 @@ compiler_moc_predefs_clean:
 debug/moc_predefs.h: X:/QT_Creator/6.2.4/mingw_64/mkspecs/features/data/dummy.cpp
 	g++ -fno-keep-inline-dllexport -g -std=gnu++1z -Wall -Wextra -Wextra -dM -E -o debug\moc_predefs.h X:\QT_Creator\6.2.4\mingw_64\mkspecs\features\data\dummy.cpp
 
-compiler_moc_header_make_all: debug/moc_huongdan.cpp debug/moc_kiemtra.cpp debug/moc_mainwindow.cpp debug/moc_taothuvien.cpp debug/moc_xemlichsu.cpp
+compiler_moc_header_make_all: debug/moc_huongdan.cpp debug/moc_kiemtra.cpp debug/moc_mainwindow.cpp debug/moc_taothuvien.cpp debug/moc_truyennhandulieu.cpp debug/moc_xemlichsu.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) debug\moc_huongdan.cpp debug\moc_kiemtra.cpp debug\moc_mainwindow.cpp debug\moc_taothuvien.cpp debug\moc_xemlichsu.cpp
+	-$(DEL_FILE) debug\moc_huongdan.cpp debug\moc_kiemtra.cpp debug\moc_mainwindow.cpp debug\moc_taothuvien.cpp debug\moc_truyennhandulieu.cpp debug\moc_xemlichsu.cpp
 debug/moc_huongdan.cpp: ../IC_Tester/include/huongdan.h \
 		X:/QT_Creator/6.2.4/mingw_64/include/QtWidgets/QtWidgets \
 		X:/QT_Creator/6.2.4/mingw_64/include/QtWidgets/QtWidgetsDepends \
@@ -646,8 +652,8 @@ debug/moc_huongdan.cpp: ../IC_Tester/include/huongdan.h \
 	X:\QT_Creator\6.2.4\mingw_64\bin\moc.exe $(DEFINES) --include "D:/Git new/IC-Tester-Software/build-IC_Tester-Desktop_Qt_6_2_4_MinGW_64_bit-Release/debug/moc_predefs.h" -IX:/QT_Creator/6.2.4/mingw_64/mkspecs/win32-g++ -I"D:/Git new/IC-Tester-Software/IC_Tester" -I"D:/Git new/IC-Tester-Software/IC_Tester/include" -IX:/QT_Creator/6.2.4/mingw_64/include -IX:/QT_Creator/6.2.4/mingw_64/include/QtWidgets -IX:/QT_Creator/6.2.4/mingw_64/include/QtGui -IX:/QT_Creator/6.2.4/mingw_64/include/QtSerialPort -IX:/QT_Creator/6.2.4/mingw_64/include/QtCore -I. -IX:/QT_Creator/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IX:/QT_Creator/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IX:/QT_Creator/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IX:/QT_Creator/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IX:/QT_Creator/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IX:/QT_Creator/Tools/mingw1120_64/x86_64-w64-mingw32/include ..\IC_Tester\include\huongdan.h -o debug\moc_huongdan.cpp
 
 debug/moc_kiemtra.cpp: ../IC_Tester/include/kiemtra.h \
-		X:/QT_Creator/6.2.4/mingw_64/include/QtWidgets/QtWidgets \
-		X:/QT_Creator/6.2.4/mingw_64/include/QtWidgets/QtWidgetsDepends \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtSerialPort/QtSerialPort \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtSerialPort/QtSerialPortDepends \
 		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/QtCore \
 		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/QtCoreDepends \
 		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qglobal.h \
@@ -861,6 +867,12 @@ debug/moc_kiemtra.cpp: ../IC_Tester/include/kiemtra.h \
 		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qwineventnotifier.h \
 		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qxmlstream.h \
 		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qtcoreversion.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtSerialPort/qserialportglobal.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtSerialPort/qserialport.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtSerialPort/qserialportinfo.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtSerialPort/qtserialportversion.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtWidgets/QtWidgets \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtWidgets/QtWidgetsDepends \
 		X:/QT_Creator/6.2.4/mingw_64/include/QtGui/QtGui \
 		X:/QT_Creator/6.2.4/mingw_64/include/QtGui/QtGuiDepends \
 		X:/QT_Creator/6.2.4/mingw_64/include/QtGui/qtguiglobal.h \
@@ -1119,6 +1131,9 @@ debug/moc_kiemtra.cpp: ../IC_Tester/include/kiemtra.h \
 		X:/QT_Creator/6.2.4/mingw_64/include/QtWidgets/qwidgetaction.h \
 		X:/QT_Creator/6.2.4/mingw_64/include/QtWidgets/qwizard.h \
 		X:/QT_Creator/6.2.4/mingw_64/include/QtWidgets/qtwidgetsversion.h \
+		../IC_Tester/include/truyennhandulieu.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtSerialPort/QSerialPort \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/QThread \
 		debug/moc_predefs.h \
 		X:/QT_Creator/6.2.4/mingw_64/bin/moc.exe
 	X:\QT_Creator\6.2.4\mingw_64\bin\moc.exe $(DEFINES) --include "D:/Git new/IC-Tester-Software/build-IC_Tester-Desktop_Qt_6_2_4_MinGW_64_bit-Release/debug/moc_predefs.h" -IX:/QT_Creator/6.2.4/mingw_64/mkspecs/win32-g++ -I"D:/Git new/IC-Tester-Software/IC_Tester" -I"D:/Git new/IC-Tester-Software/IC_Tester/include" -IX:/QT_Creator/6.2.4/mingw_64/include -IX:/QT_Creator/6.2.4/mingw_64/include/QtWidgets -IX:/QT_Creator/6.2.4/mingw_64/include/QtGui -IX:/QT_Creator/6.2.4/mingw_64/include/QtSerialPort -IX:/QT_Creator/6.2.4/mingw_64/include/QtCore -I. -IX:/QT_Creator/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IX:/QT_Creator/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IX:/QT_Creator/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IX:/QT_Creator/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IX:/QT_Creator/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IX:/QT_Creator/Tools/mingw1120_64/x86_64-w64-mingw32/include ..\IC_Tester\include\kiemtra.h -o debug\moc_kiemtra.cpp
@@ -1600,6 +1615,15 @@ debug/moc_mainwindow.cpp: ../IC_Tester/include/mainwindow.h \
 		X:/QT_Creator/6.2.4/mingw_64/include/QtWidgets/qtwidgetsversion.h \
 		../IC_Tester/include/huongdan.h \
 		../IC_Tester/include/kiemtra.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtSerialPort/QtSerialPort \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtSerialPort/QtSerialPortDepends \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtSerialPort/qserialportglobal.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtSerialPort/qserialport.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtSerialPort/qserialportinfo.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtSerialPort/qtserialportversion.h \
+		../IC_Tester/include/truyennhandulieu.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtSerialPort/QSerialPort \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/QThread \
 		../IC_Tester/include/taothuvien.h \
 		../IC_Tester/include/xemlichsu.h \
 		X:/QT_Creator/6.2.4/mingw_64/include/QtWidgets/QWidget \
@@ -2086,6 +2110,84 @@ debug/moc_taothuvien.cpp: ../IC_Tester/include/taothuvien.h \
 		X:/QT_Creator/6.2.4/mingw_64/bin/moc.exe
 	X:\QT_Creator\6.2.4\mingw_64\bin\moc.exe $(DEFINES) --include "D:/Git new/IC-Tester-Software/build-IC_Tester-Desktop_Qt_6_2_4_MinGW_64_bit-Release/debug/moc_predefs.h" -IX:/QT_Creator/6.2.4/mingw_64/mkspecs/win32-g++ -I"D:/Git new/IC-Tester-Software/IC_Tester" -I"D:/Git new/IC-Tester-Software/IC_Tester/include" -IX:/QT_Creator/6.2.4/mingw_64/include -IX:/QT_Creator/6.2.4/mingw_64/include/QtWidgets -IX:/QT_Creator/6.2.4/mingw_64/include/QtGui -IX:/QT_Creator/6.2.4/mingw_64/include/QtSerialPort -IX:/QT_Creator/6.2.4/mingw_64/include/QtCore -I. -IX:/QT_Creator/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IX:/QT_Creator/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IX:/QT_Creator/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IX:/QT_Creator/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IX:/QT_Creator/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IX:/QT_Creator/Tools/mingw1120_64/x86_64-w64-mingw32/include ..\IC_Tester\include\taothuvien.h -o debug\moc_taothuvien.cpp
 
+debug/moc_truyennhandulieu.cpp: ../IC_Tester/include/truyennhandulieu.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtSerialPort/QSerialPort \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtSerialPort/qserialport.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qiodevice.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qglobal.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qconfig-bootstrapped.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qconfig.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qtcore-config.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qsystemdetection.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qprocessordetection.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qcompilerdetection.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qtypeinfo.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qcontainerfwd.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qsysinfo.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qlogging.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qflags.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qatomic.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qbasicatomic.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qatomic_bootstrap.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qgenericatomic.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qatomic_cxx11.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qglobalstatic.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qnumeric.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qversiontagging.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qiodevicebase.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qobject.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qobjectdefs.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qnamespace.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qtmetamacros.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qobjectdefs_impl.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qstring.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qchar.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qstringview.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qbytearray.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qrefcount.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qarraydata.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qpair.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qarraydatapointer.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qarraydataops.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qcontainertools_impl.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qbytearrayalgorithms.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qbytearrayview.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qstringliteral.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qstringalgorithms.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qanystringview.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qutf8stringview.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qstringtokenizer.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qstringbuilder.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qlist.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qhashfunctions.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qiterator.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qbytearraylist.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qstringlist.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qalgorithms.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qstringmatcher.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qcoreevent.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qscopedpointer.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qmetatype.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qcompare.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qvarlengtharray.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qscopeguard.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qdatastream.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qiterable.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qmetacontainer.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qcontainerinfo.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qtaggedpointer.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qmath.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qobject_impl.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qbindingstorage.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtSerialPort/qserialportglobal.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/QThread \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qthread.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qdeadlinetimer.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qelapsedtimer.h \
+		debug/moc_predefs.h \
+		X:/QT_Creator/6.2.4/mingw_64/bin/moc.exe
+	X:\QT_Creator\6.2.4\mingw_64\bin\moc.exe $(DEFINES) --include "D:/Git new/IC-Tester-Software/build-IC_Tester-Desktop_Qt_6_2_4_MinGW_64_bit-Release/debug/moc_predefs.h" -IX:/QT_Creator/6.2.4/mingw_64/mkspecs/win32-g++ -I"D:/Git new/IC-Tester-Software/IC_Tester" -I"D:/Git new/IC-Tester-Software/IC_Tester/include" -IX:/QT_Creator/6.2.4/mingw_64/include -IX:/QT_Creator/6.2.4/mingw_64/include/QtWidgets -IX:/QT_Creator/6.2.4/mingw_64/include/QtGui -IX:/QT_Creator/6.2.4/mingw_64/include/QtSerialPort -IX:/QT_Creator/6.2.4/mingw_64/include/QtCore -I. -IX:/QT_Creator/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IX:/QT_Creator/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IX:/QT_Creator/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IX:/QT_Creator/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IX:/QT_Creator/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IX:/QT_Creator/Tools/mingw1120_64/x86_64-w64-mingw32/include ..\IC_Tester\include\truyennhandulieu.h -o debug\moc_truyennhandulieu.cpp
+
 debug/moc_xemlichsu.cpp: ../IC_Tester/include/xemlichsu.h \
 		X:/QT_Creator/6.2.4/mingw_64/include/QtWidgets/QWidget \
 		X:/QT_Creator/6.2.4/mingw_64/include/QtWidgets/qwidget.h \
@@ -2234,6 +2336,82 @@ compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean compiler_moc_heade
 
 
 ####### Compile
+
+debug/truyennhandulieu.o: ../IC_Tester/src/truyennhandulieu.cpp ../IC_Tester/include/truyennhandulieu.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtSerialPort/QSerialPort \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtSerialPort/qserialport.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qiodevice.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qglobal.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qconfig-bootstrapped.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qconfig.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qtcore-config.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qsystemdetection.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qprocessordetection.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qcompilerdetection.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qtypeinfo.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qcontainerfwd.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qsysinfo.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qlogging.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qflags.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qatomic.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qbasicatomic.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qatomic_bootstrap.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qgenericatomic.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qatomic_cxx11.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qglobalstatic.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qnumeric.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qversiontagging.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qiodevicebase.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qobject.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qobjectdefs.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qnamespace.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qtmetamacros.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qobjectdefs_impl.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qstring.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qchar.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qstringview.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qbytearray.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qrefcount.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qarraydata.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qpair.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qarraydatapointer.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qarraydataops.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qcontainertools_impl.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qbytearrayalgorithms.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qbytearrayview.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qstringliteral.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qstringalgorithms.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qanystringview.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qutf8stringview.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qstringtokenizer.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qstringbuilder.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qlist.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qhashfunctions.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qiterator.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qbytearraylist.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qstringlist.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qalgorithms.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qstringmatcher.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qcoreevent.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qscopedpointer.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qmetatype.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qcompare.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qvarlengtharray.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qscopeguard.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qdatastream.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qiterable.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qmetacontainer.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qcontainerinfo.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qtaggedpointer.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qmath.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qobject_impl.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qbindingstorage.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtSerialPort/qserialportglobal.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/QThread \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qthread.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qdeadlinetimer.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qelapsedtimer.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\truyennhandulieu.o ..\IC_Tester\src\truyennhandulieu.cpp
 
 debug/huongdan.o: ../IC_Tester/src/huongdan.cpp ../IC_Tester/include/huongdan.h \
 		X:/QT_Creator/6.2.4/mingw_64/include/QtWidgets/QtWidgets \
@@ -2712,8 +2890,8 @@ debug/huongdan.o: ../IC_Tester/src/huongdan.cpp ../IC_Tester/include/huongdan.h 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\huongdan.o ..\IC_Tester\src\huongdan.cpp
 
 debug/kiemtra.o: ../IC_Tester/src/kiemtra.cpp ../IC_Tester/include/kiemtra.h \
-		X:/QT_Creator/6.2.4/mingw_64/include/QtWidgets/QtWidgets \
-		X:/QT_Creator/6.2.4/mingw_64/include/QtWidgets/QtWidgetsDepends \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtSerialPort/QtSerialPort \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtSerialPort/QtSerialPortDepends \
 		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/QtCore \
 		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/QtCoreDepends \
 		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qglobal.h \
@@ -2927,6 +3105,12 @@ debug/kiemtra.o: ../IC_Tester/src/kiemtra.cpp ../IC_Tester/include/kiemtra.h \
 		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qwineventnotifier.h \
 		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qxmlstream.h \
 		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/qtcoreversion.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtSerialPort/qserialportglobal.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtSerialPort/qserialport.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtSerialPort/qserialportinfo.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtSerialPort/qtserialportversion.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtWidgets/QtWidgets \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtWidgets/QtWidgetsDepends \
 		X:/QT_Creator/6.2.4/mingw_64/include/QtGui/QtGui \
 		X:/QT_Creator/6.2.4/mingw_64/include/QtGui/QtGuiDepends \
 		X:/QT_Creator/6.2.4/mingw_64/include/QtGui/qtguiglobal.h \
@@ -3185,13 +3369,10 @@ debug/kiemtra.o: ../IC_Tester/src/kiemtra.cpp ../IC_Tester/include/kiemtra.h \
 		X:/QT_Creator/6.2.4/mingw_64/include/QtWidgets/qwidgetaction.h \
 		X:/QT_Creator/6.2.4/mingw_64/include/QtWidgets/qwizard.h \
 		X:/QT_Creator/6.2.4/mingw_64/include/QtWidgets/qtwidgetsversion.h \
-		X:/QT_Creator/6.2.4/mingw_64/include/QtSerialPort/QSerialPortInfo \
-		X:/QT_Creator/6.2.4/mingw_64/include/QtSerialPort/qserialportinfo.h \
-		X:/QT_Creator/6.2.4/mingw_64/include/QtSerialPort/qserialportglobal.h \
-		X:/QT_Creator/6.2.4/mingw_64/include/QtSerialPort/QtSerialPort \
-		X:/QT_Creator/6.2.4/mingw_64/include/QtSerialPort/QtSerialPortDepends \
-		X:/QT_Creator/6.2.4/mingw_64/include/QtSerialPort/qserialport.h \
-		X:/QT_Creator/6.2.4/mingw_64/include/QtSerialPort/qtserialportversion.h
+		../IC_Tester/include/truyennhandulieu.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtSerialPort/QSerialPort \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/QThread \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtSerialPort/QSerialPortInfo
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\kiemtra.o ..\IC_Tester\src\kiemtra.cpp
 
 debug/main.o: ../IC_Tester/main.cpp ../IC_Tester/include/mainwindow.h \
@@ -3671,6 +3852,15 @@ debug/main.o: ../IC_Tester/main.cpp ../IC_Tester/include/mainwindow.h \
 		X:/QT_Creator/6.2.4/mingw_64/include/QtWidgets/qtwidgetsversion.h \
 		../IC_Tester/include/huongdan.h \
 		../IC_Tester/include/kiemtra.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtSerialPort/QtSerialPort \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtSerialPort/QtSerialPortDepends \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtSerialPort/qserialportglobal.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtSerialPort/qserialport.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtSerialPort/qserialportinfo.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtSerialPort/qtserialportversion.h \
+		../IC_Tester/include/truyennhandulieu.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtSerialPort/QSerialPort \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/QThread \
 		../IC_Tester/include/taothuvien.h \
 		../IC_Tester/include/xemlichsu.h \
 		X:/QT_Creator/6.2.4/mingw_64/include/QtWidgets/QWidget \
@@ -4156,6 +4346,15 @@ debug/mainwindow.o: ../IC_Tester/src/mainwindow.cpp ../IC_Tester/include/mainwin
 		X:/QT_Creator/6.2.4/mingw_64/include/QtWidgets/qtwidgetsversion.h \
 		../IC_Tester/include/huongdan.h \
 		../IC_Tester/include/kiemtra.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtSerialPort/QtSerialPort \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtSerialPort/QtSerialPortDepends \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtSerialPort/qserialportglobal.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtSerialPort/qserialport.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtSerialPort/qserialportinfo.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtSerialPort/qtserialportversion.h \
+		../IC_Tester/include/truyennhandulieu.h \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtSerialPort/QSerialPort \
+		X:/QT_Creator/6.2.4/mingw_64/include/QtCore/QThread \
 		../IC_Tester/include/taothuvien.h \
 		../IC_Tester/include/xemlichsu.h \
 		X:/QT_Creator/6.2.4/mingw_64/include/QtWidgets/QWidget \
@@ -5257,6 +5456,9 @@ debug/moc_mainwindow.o: debug/moc_mainwindow.cpp
 
 debug/moc_taothuvien.o: debug/moc_taothuvien.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\moc_taothuvien.o debug\moc_taothuvien.cpp
+
+debug/moc_truyennhandulieu.o: debug/moc_truyennhandulieu.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\moc_truyennhandulieu.o debug\moc_truyennhandulieu.cpp
 
 debug/moc_xemlichsu.o: debug/moc_xemlichsu.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\moc_xemlichsu.o debug\moc_xemlichsu.cpp

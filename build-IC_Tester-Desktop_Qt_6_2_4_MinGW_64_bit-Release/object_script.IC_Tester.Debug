@@ -1,3 +1,4 @@
+debug/truyennhandulieu.o
 debug/huongdan.o
 debug/kiemtra.o
 debug/main.o
@@ -10,4 +11,5 @@ debug/moc_huongdan.o
 debug/moc_kiemtra.o
 debug/moc_mainwindow.o
 debug/moc_taothuvien.o
+debug/moc_truyennhandulieu.o
 debug/moc_xemlichsu.o
