@@ -1,20 +1,21 @@
 #include "truyennhandulieu.h"
 #include "qdebug.h"
 
-void TruyenDuLieu::sendData(QString filePath, QSerialPort *serialPort)
+void TruyenDuLieu::sendData(QString filePath, QSerialPort *serialPort, int chiSoBaiKiemTra)
 {
     serialPort->open(QIODevice::ReadWrite);
     QFile binFile(filePath); // filePath duong dan toi file duoc chon
     binFile.open(QIODevice::ReadOnly);
     // Di chuyển con trỏ đọc tệp đến byte thứ hai
-    binFile.seek(1);
+    binFile.seek(1 + chiSoBaiKiemTra * 10);
     char *sendData = new char[10]; // Mảng char để lưu dữ liệu gửi đi
 
     binFile.read(sendData, 10);
     //    binFile.close(); // Đóng file .bin sau khi đọc xong
     //Gửi dữ liệu từ sendData qua UART
     serialPort->write(sendData, 10);
-    //    qDebug() << "Da gui du lieu";
+    qDebug() << "Da gui du lieu";
+    serialPort->flush();
 
     binFile.close(); // Đóng file .bin sau khi đọc xong
 }
@@ -25,7 +26,7 @@ QVector<char> NhanDuLieu::receiveData(QSerialPort *serialPort, QVector<char> rec
     char *byte = new char;
     serialPort->read(byte, 1);
     receiveByte.append(*byte); // Thêm một phần tử char vào mảng
-                               //    qDebug() << receiveByte.size();
+    qDebug() << receiveByte.size();
     return receiveByte;
 }
 NhanDuLieu::~NhanDuLieu(){};

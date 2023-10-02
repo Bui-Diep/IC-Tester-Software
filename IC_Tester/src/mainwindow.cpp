@@ -97,6 +97,9 @@ MainWindow::MainWindow(QWidget *parent)
 
     QLabel *nhanThongTin = new QLabel("                   Thông Tin?");
     nhanThongTin->setStyleSheet("font-size: 20px;font-weight: bold;");
+    QLabel *nhanCongCu = new QLabel("                   Công Cụ");
+    nhanCongCu->setStyleSheet("font-size: 20px;font-weight: bold;");
+    nhanCongCu->setFixedHeight(27);
     QPushButton *nutHuongDan = new QPushButton("  Hướng Dẫn");
     nutHuongDan->setFixedSize(300, 55);
     nutHuongDan->setCursor(QCursor(Qt::WhatsThisCursor));
@@ -143,6 +146,8 @@ MainWindow::MainWindow(QWidget *parent)
         QDesktopServices::openUrl(
             QUrl("https://github.com/Bui-Diep/IC-Tester-Software/tree/B%C3%B9i_%C4%90i%E1%BB%87p"));
     });
+    lopNutNhan->addWidget(nhanCongCu);
+    nhanCongCu->setAlignment(Qt::AlignTop);
     lopNutNhan->addWidget(nutKiemTra);
     //    lopNutNhan->addWidget(space);
     lopNutNhan->addWidget(nutTaoThuVien);

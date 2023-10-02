@@ -11,7 +11,7 @@ public:
     TruyenDuLieu(QObject *parent = nullptr);
     ~TruyenDuLieu();
 
-    void sendData(QString filePath, QSerialPort *serialPort);
+    void sendData(QString filePath, QSerialPort *serialPort, int chiSoBaiKiemTra);
 };
 class NhanDuLieu : public QThread
 {

@@ -194,7 +194,8 @@ KiemTra::KiemTra()
             boxKiemTraIC->setTitle("Kiểm tra IC " + itemName);
             // Lấy đường dẫn đầy đủ của tệp được chọn
             filePath = moHinhThuVien->filePath(index);
-
+            nutAutoRun->setText("Chạy tự động");
+            nutStop->setText("Dừng");
             // Đọc nội dung của tệp
             QFile file(filePath);
             if (file.open(QIODevice::ReadOnly)) {
@@ -202,11 +203,11 @@ KiemTra::KiemTra()
                 QDataStream stream(&file);
                 stream >> firstByte;
                 firstByte &= (0b00011111);
-                int viTriByteThuocTinh = static_cast<int>(firstByte);
+                viTriByteThuocTinh = static_cast<int>(firstByte);
                 // Di chuyển đến byte chứa thông tin IC
+                // vị trí 0 là có 1 bài kiểm tra
                 file.seek((viTriByteThuocTinh * 10 + 10) + 1);
-
-                // Đọc nội dung từ byte thứ 5 đến hết
+                qDebug() << QString::number(viTriByteThuocTinh);
                 QByteArray fileContent = file.readAll();
                 file.close();
 
@@ -218,7 +219,7 @@ KiemTra::KiemTra()
 
     QVBoxLayout *lopKiemTraIC = new QVBoxLayout(boxKiemTraIC);
     QSplitter *splitKiemTra = new QSplitter;
-    splitKiemTra->setStyleSheet("QSplitter::handle { background-color: white; }");
+    splitKiemTra->setStyleSheet("QSplitter::handle { background-color: #F5F5F5; }");
     QProgressBar *thanhTienTrinh = new QProgressBar;
     lopKiemTraIC->addWidget(splitKiemTra);
     lopKiemTraIC->addWidget(thanhTienTrinh, Qt::AlignBottom);
@@ -237,19 +238,32 @@ KiemTra::KiemTra()
     lopSymHienThiKetQua->addWidget(tocDoKiemTra, 0, 1);
     lopSymHienThiKetQua->addWidget(new QLabel(" "), 0, 2);
     lopSymHienThiKetQua->addWidget(new QLabel(" "), 0, 3);
-    QPushButton *nutRun = new QPushButton("Chạy");
-    nutRun->setStyleSheet("QPushButton {"
-                          "background-color: #009900;"
-                          "color: white;"
-                          "font-weight: bold;"
-                          "font-size: 16px;"
-                          "}"
-                          "QPushButton:hover {"
-                          "background-color: #007500;"
-                          "}");
-    lopSymHienThiKetQua->addWidget(nutRun, 0, 4);
+    nutAutoRun = new QPushButton("Chạy tự động");
+    nutAutoRun->setFixedWidth(120);
+    nutAutoRun->setStyleSheet("QPushButton {"
+                              "background-color: #009900;"
+                              "color: white;"
+                              "font-weight: bold;"
+                              "font-size: 16px;"
+                              "}"
+                              "QPushButton:hover {"
+                              "background-color: #007500;"
+                              "}");
+    lopSymHienThiKetQua->addWidget(nutAutoRun, 0, 4);
+    nutStop = new QPushButton("Dừng");
+    nutStop->setEnabled(0);
+    nutStop->setStyleSheet("QPushButton {"
+                           "background-color: yellow;"
+                           "color: blue;"
+                           "font-weight: bold;"
+                           "font-size: 16px;"
+                           "}"
+                           "QPushButton:hover {"
+                           "background-color: #FFE599;"
+                           "}");
+    lopSymHienThiKetQua->addWidget(nutStop, 1, 4);
 
-    lopSymHienThiKetQua->addWidget(new QLabel(" Hiển thị kết quả ở đây"), 1, 0, 1, 5);
+    lopSymHienThiKetQua->addWidget(new QLabel(""), 2, 0, 1, 5);
     QWidget *widkhungSymIC = new QWidget(splitKiemTra);
     QVBoxLayout *lopkhungSymIC = new QVBoxLayout(widkhungSymIC);
     lopkhungSymIC->setAlignment(Qt::AlignCenter);
@@ -281,14 +295,69 @@ KiemTra::KiemTra()
 
     splitKiemTra->setStretchFactor(0, 1);
     splitKiemTra->setStretchFactor(1, 1);
-    thanhTienTrinh->setValue(35);
+    //    thanhTienTrinh->setValue(35);
     thanhTienTrinh->setRange(0, 100);
     thanhTienTrinh->setToolTip("Thanh tiến trình kiểm tra");
+    // Thiết lập stylesheet cho QProgressBar
+    thanhTienTrinh->setStyleSheet("QProgressBar {"
+                                  "background: #C0C0C0;"
+                                  "border: 2px solid grey;"
+                                  "border-radius: 5px;"
+                                  "text-align: center;"
+                                  "}"
+                                  "QProgressBar::chunk {"
+                                  "background-color: orange;"
+                                  "width: 20px;" // Điều này sẽ làm cho chunk trông mượt mà hơn
+                                  "}");
 
     //LẬP TRÌNH TRUYỀN NHẬN DỮ LIỆU TỚI PHẦN CỨNG TỪ FILE TRONG THƯ VIỆN
-    /*    connect(nutRun, SIGNAL(clicked(bool)), this, SLOT(sendData(filePath, serialPort)))*/;
-    QObject::connect(nutRun, &QPushButton::clicked, this, [=]() {
-        sendSerial->sendData(filePath, serialPort);
+
+    // Tạo một QTimer để gửi dữ liệu sau mỗi 1 giây
+    QTimer *thoiGian1Test = new QTimer;
+    chiSoBaiKiemTra = new int(0);
+    QObject::connect(thoiGian1Test, &QTimer::timeout, this, [=]() {
+        sendSerial->sendData(filePath, serialPort, *chiSoBaiKiemTra);
+
+        thanhTienTrinh->setValue(
+            static_cast<int>((100 / (viTriByteThuocTinh + 1)) * (*chiSoBaiKiemTra + 1)));
+
+        qDebug() << QString::number(*chiSoBaiKiemTra);
+        if (*chiSoBaiKiemTra == viTriByteThuocTinh) {
+            thanhTienTrinh->setValue(100);
+            thanhTienTrinh->setFormat("Kiểm tra xong: %p%");
+            QMessageBox::information(this, "Thông báo kết quả kiểm tra", "IC không lỗi");
+            thoiGian1Test->stop();
+            nutStop->setEnabled(0);
+            boxChonIC->setEnabled(1);
+        }
+        *chiSoBaiKiemTra = *chiSoBaiKiemTra + 1;
+    });
+    QObject::connect(nutAutoRun, &QPushButton::clicked, this, [=]() {
+        if (tocDoKiemTra->currentText() == "Nhanh") {
+            thoiGian1Test->start(10); // 10ms
+        } else if (tocDoKiemTra->currentText() == "Bình Thường") {
+            thoiGian1Test->start(100); // 100ms
+        } else if (tocDoKiemTra->currentText() == "Chậm") {
+            thoiGian1Test->start(500); // 500ms
+        }
+        *chiSoBaiKiemTra = 0;
+        thanhTienTrinh->setFormat("Đang kiểm tra: %p%");
+        nutAutoRun->setText("Chạy lại");
+        nutStop->setText("Dừng");
+        nutStop->setEnabled(1);
+        boxChonIC->setEnabled(0);
+    });
+    QObject::connect(nutStop, &QPushButton::clicked, this, [=]() {
+        if (nutStop->text() == "Dừng") {
+            thoiGian1Test->stop();
+            nutStop->setText("Tiếp Tục");
+            boxChonIC->setEnabled(1);
+
+        } else if (nutStop->text() == "Tiếp Tục") {
+            thoiGian1Test->start();
+
+            nutStop->setText("Dừng");
+        }
     });
     QObject::connect(serialPort, &QSerialPort::readyRead, this, [=]() {
         receiveByte = (receiveSerial->receiveData(serialPort, receiveByte));
@@ -302,7 +371,7 @@ KiemTra::KiemTra()
 
 void KiemTra::indicateLed()
 {
-    //    qDebug() << "Da nhan 10 byte";
+    qDebug() << "Da nhan 10 byte";
     //    char *receiveData = new char[10]{0};
     char duLieuGanChanIC[10][3];
     //        HIEN THI THONG TIN TU DU LIEU NHAN DUOC LEN khungSymIC
@@ -352,6 +421,7 @@ void KiemTra::indicateLed()
     }
     //thực hiện giải phóng bộ nhớ
     receiveByte.clear();
+    serialPort->close();
     std::memset(duLieuGanChanIC, 0, sizeof(duLieuGanChanIC));
 }
 //void KiemTra::sendData(QString &filePath, QSerialPort &serialPort)

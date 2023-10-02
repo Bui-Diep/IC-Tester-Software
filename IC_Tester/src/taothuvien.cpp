@@ -30,8 +30,8 @@ TaoThuVien::TaoThuVien()
     lopTempTrangCauHinhChan->addWidget(splitCauHinhChanTong);
 
     //    nhom thuoc tinh
-    QGroupBox *boxThuocTinh = new QGroupBox();
-    boxThuocTinh->setStyleSheet("font-size: 15px;");
+    QGroupBox *boxThuocTinh = new QGroupBox("Thuộc tính IC");
+    boxThuocTinh->setStyleSheet("font-weight: bold;font-size: 16px; color: #0000FF");
     QHBoxLayout *lopThuocTinhChung = new QHBoxLayout;
     QFormLayout *lopThuocTinh = new QFormLayout;
     QPushButton *nutHienSym = new QPushButton("Xong");
@@ -51,28 +51,40 @@ TaoThuVien::TaoThuVien()
     lopNutHienSym->addWidget(new QLabel("   "));
     tenIC = new QLineEdit;
     tenIC->setFixedSize(150, 25);
-    lopThuocTinh->addRow("Tên IC:", tenIC);
+    tenIC->setStyleSheet("font-weight: normal;font-size: 15px; color: normal");
+    lopThuocTinh->addRow("<html><body><p style=\"font-size:15px; "
+                         "font-weight:550; color: normal;\">Tên IC: </p></body></html>",
+                         tenIC);
     tenIC->setPlaceholderText("Nhập tên IC");
     QComboBox *soChanIC = new QComboBox;
+    soChanIC->setStyleSheet("font-weight: normal;font-size: 15px; color: normal");
     soChanIC->setFixedSize(150, 25);
     soChanIC->addItem(" 8 Chân");
     soChanIC->addItem(" 14 Chân");
     soChanIC->addItem(" 16 Chân");
     soChanIC->addItem(" 20 Chân");
     soChanIC->addItem(" 24 Chân");
-    lopThuocTinh->addRow("Số chân IC:", soChanIC);
+    lopThuocTinh->addRow("<html><body><p style=\"font-size:15px; "
+                         "font-weight:550; color: normal;\">Số chân IC: </p></body></html>",
+                         soChanIC);
     QComboBox *congNgheBanDan = new QComboBox;
+    congNgheBanDan->setStyleSheet("font-weight: normal;font-size: 15px; color: normal");
     congNgheBanDan->setFixedSize(150, 25);
     congNgheBanDan->addItem(" CMOS (3.3V)");
     congNgheBanDan->addItem(" TTL (5V)");
-    lopThuocTinh->addRow("Công nghệ:", congNgheBanDan);
+    lopThuocTinh->addRow("<html><body><p style=\"font-size:15px; "
+                         "font-weight:550; color: normal;\">Công nghệ: </p></body></html>",
+                         congNgheBanDan);
     lopThuocTinhChung->addLayout(lopThuocTinh);
     lopThuocTinhChung->addLayout(lopNutHienSym);
     boxThuocTinh->setLayout(lopThuocTinhChung);
     lopCauHinhChan->addWidget(boxThuocTinh);
     moTaIC = new QTextEdit;
-    lopThuocTinh->addRow("Mô tả:", moTaIC);
+    lopThuocTinh->addRow("<html><body><p style=\"font-size:15px; "
+                         "font-weight:550; color: normal;\">Mô tả: </p></body></html>",
+                         moTaIC);
     moTaIC->setPlaceholderText("Mô tả IC tại đây ...");
+    moTaIC->setStyleSheet("font-weight: normal;font-size: 15px; color: normal");
 
     QString giaTriChanIC(""); // biến lưu trữ trung gian để kiểm tra số chân có thay đổi hay không
     connect(nutHienSym, &QPushButton::clicked, [=, &giaTriChanIC]() {

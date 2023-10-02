@@ -20,6 +20,9 @@ signals:
     void nhanDu10Byte();
 
 private:
+    QPushButton *nutAutoRun;
+    QPushButton *nutStop;
+    int viTriByteThuocTinh;
     TruyenDuLieu *sendSerial;
     NhanDuLieu *receiveSerial;
     QGridLayout *lopChanIC;
@@ -27,6 +30,7 @@ private:
     QPushButton *pin[10][3];
     QString filePath;
     QVector<char> receiveByte; // Khởi tạo một QVector<char> rỗng-  Mảng char để lưu dữ liệu nhận về
+    int *chiSoBaiKiemTra;
 };
 
 #endif // KIEMTRA_H
