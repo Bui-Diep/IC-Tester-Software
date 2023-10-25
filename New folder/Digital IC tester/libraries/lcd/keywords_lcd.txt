@@ -1,0 +1,28 @@
+1. class_name.dis_char(char ch)		//--------------------------------> FOR DISPLAYING CHARACTER    		     
+	parameter: character to be displayed.
+
+2. class_name.dis_num(long int n,byte y,char ch)	//----------------> FOR DISPLAYING INTEGER NUMBER
+	1st parameter: the number to be displayed.
+	2nd parameter: Y coordinate (6 lines: 0-5)
+	3rd parameter: where to display the character/string--->
+				'c'=center
+				'l'=left
+				'r'=right
+
+3. class_name.erase_row(int x)		//--------------------------------> FOR ERASING A ROW
+	parameter: which row to be erased.
+
+4. class_name.string(char *ch,int y,char c)	//------------------------> FOR DISPLAYING STRING
+	1st parameter: character pointer (for the string).
+	2nd parameter: Y coordinate (6 lines: 0-5)
+	3rd parameter: where to display the character/string--->
+				'c'=center
+				'l'=left
+				'r'=right
+
+5. class_name.go2xy(int x,int y)	//--------------------------------> TO GO TO PARTICULAR POINT
+	1st parameter: X coordinate
+	2nd parameter: Ycoordinate
+
+6. class_name.erase()	      //------------------------------------------> FOR ERASING THE WHOLE SCREEN
+	NO PARAMETER

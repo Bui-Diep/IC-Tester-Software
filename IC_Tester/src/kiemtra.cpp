@@ -8,7 +8,7 @@ KiemTra::KiemTra()
     boxCauHinhKetNoi->setStyleSheet("font-weight: bold;font-size: 16px; color: #0000FF");
     boxCauHinhKetNoi->setFixedSize(410, 120);
     QGroupBox *boxKiemTraIC = new QGroupBox("Kiểm tra IC");
-    boxKiemTraIC->setStyleSheet("font-weight: bold;font-size: 16px; color: #0000FF");
+    boxKiemTraIC->setStyleSheet("font-weight: bold;font-size: 20px; color: #0000FF");
     boxKiemTraIC->setDisabled(true);
     QGroupBox *boxChonIC = new QGroupBox("Chọn IC kiểm tra");
     boxChonIC->setStyleSheet("font-weight: bold;font-size: 16px; color: #0000FF");

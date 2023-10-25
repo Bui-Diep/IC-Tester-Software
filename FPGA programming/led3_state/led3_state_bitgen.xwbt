@@ -1,0 +1,8 @@
+INTSTYLE=ise
+INFILE=D:\Git new\IC-Tester-Software\FPGA programming\led3_state\led3_state.ncd
+OUTFILE=D:\Git new\IC-Tester-Software\FPGA programming\led3_state\led3_state.bit
+FAMILY=Spartan6
+PART=xc6slx9-3tqg144
+WORKINGDIR=D:\Git new\IC-Tester-Software\FPGA programming\led3_state
+LICENSE=ISE
+USER_INFO=212768423_0_0_742

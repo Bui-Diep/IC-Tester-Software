@@ -12,6 +12,9 @@ public:
     ~TruyenDuLieu();
 
     void sendData(QString filePath, QSerialPort *serialPort, int chiSoBaiKiemTra);
+
+    //protected:
+    //        void run() override;
 };
 class NhanDuLieu : public QThread
 {
@@ -19,7 +22,7 @@ public:
     NhanDuLieu(QObject *parent = nullptr);
     ~NhanDuLieu();
 
-    void sendData(QString filePath, QSerialPort *serialPort);
     QVector<char> receiveData(QSerialPort *serialPort, QVector<char> receiveByte);
 };
+
 #endif // TRUYENNHANDULIEU_H

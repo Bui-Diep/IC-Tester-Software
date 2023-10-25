@@ -1,0 +1,9 @@
+#    Port ( led_in : in  STD_LOGIC_VECTOR(2 DOWNTO 0);
+#           led_out : out  STD_LOGIC);
+
+NET "led_in[0]" LOC = P82;
+NET "led_in[1]" LOC = P41;
+NET "led_out[0]" LOC = P87;
+NET "led_out[1]" LOC = P84;
+
+# PlanAhead Generated IO constraints 

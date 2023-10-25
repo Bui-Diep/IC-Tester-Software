@@ -1,0 +1,17 @@
+Installing Libraries: 
+
+For windows OS:
+
+i.	ZIP files should be downloaded and extracted. 
+ii.	The folder obtained after extraction should be moved to the following path :          
+
+	C:\Users\User_name\Documents\Arduino\libraries
+         
+iii.	The library should be imported in the IDE.
+iv.	Finally Arduino IDE should be restarted.
+v.	For other OS this process may vary. 
+
+
+For detailed information on installing libraries, visit this page: 
+
+http://arduino.cc/en/Guide/Libraries

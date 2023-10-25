@@ -1,0 +1,5 @@
+1. class_name.init()
+	No parameter; for initializing.
+
+2.  class_name.key_in()
+	No parameter; for taking input.

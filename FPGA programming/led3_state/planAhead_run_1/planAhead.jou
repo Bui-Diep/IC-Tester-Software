@@ -1,0 +1,10 @@
+#-----------------------------------------------------------
+# PlanAhead v14.7 (64-bit)
+# Build 321239 by xbuild on Fri Sep 27 19:29:51 MDT 2013
+# Start of session at: Thu Oct 19 16:56:27 2023
+# Process ID: 10964
+# Log file: D:/Git new/IC-Tester-Software/FPGA programming/led3_state/planAhead_run_1/planAhead.log
+# Journal file: D:/Git new/IC-Tester-Software/FPGA programming/led3_state/planAhead_run_1/planAhead.jou
+#-----------------------------------------------------------
+start_gui
+source {D:/Git new/IC-Tester-Software/FPGA programming/led3_state/pa.fromNetlist.tcl}

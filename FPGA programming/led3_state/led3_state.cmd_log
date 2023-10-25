@@ -1,0 +1,75 @@
+xst -intstyle ise -ifn "D:/Git new/IC-Tester-Software/FPGA programming/led3_state/led3_state.xst" -ofn "D:/Git new/IC-Tester-Software/FPGA programming/led3_state/led3_state.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -i -p xc3s200a-vq100-5 "led3_state.ngc" led3_state.ngd  
+map -intstyle ise -p xc3s200a-vq100-5 -cm area -ir off -pr off -c 100 -o led3_state_map.ncd led3_state.ngd led3_state.pcf 
+par -w -intstyle ise -ol high -t 1 led3_state_map.ncd led3_state.ncd led3_state.pcf 
+trce -intstyle ise -v 3 -s 5 -n 3 -fastpaths -xml led3_state.twx led3_state.ncd -o led3_state.twr led3_state.pcf 
+xst -intstyle ise -ifn "D:/Git new/IC-Tester-Software/FPGA programming/led3_state/led3_state.xst" -ofn "D:/Git new/IC-Tester-Software/FPGA programming/led3_state/led3_state.syr" 
+xst -intstyle ise -ifn "D:/Git new/IC-Tester-Software/FPGA programming/led3_state/led3_state.xst" -ofn "D:/Git new/IC-Tester-Software/FPGA programming/led3_state/led3_state.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -i -p xc3s200a-vq100-5 "led3_state.ngc" led3_state.ngd  
+map -intstyle ise -p xc3s200a-vq100-5 -cm area -ir off -pr off -c 100 -o led3_state_map.ncd led3_state.ngd led3_state.pcf 
+par -w -intstyle ise -ol high -t 1 led3_state_map.ncd led3_state.ncd led3_state.pcf 
+trce -intstyle ise -v 3 -s 5 -n 3 -fastpaths -xml led3_state.twx led3_state.ncd -o led3_state.twr led3_state.pcf 
+xst -intstyle ise -ifn "D:/Git new/IC-Tester-Software/FPGA programming/led3_state/led3_state.xst" -ofn "D:/Git new/IC-Tester-Software/FPGA programming/led3_state/led3_state.syr" 
+xst -intstyle ise -ifn "D:/Git new/IC-Tester-Software/FPGA programming/led3_state/led3_state.xst" -ofn "D:/Git new/IC-Tester-Software/FPGA programming/led3_state/led3_state.syr" 
+xst -intstyle ise -ifn "D:/Git new/IC-Tester-Software/FPGA programming/led3_state/led3_state.xst" -ofn "D:/Git new/IC-Tester-Software/FPGA programming/led3_state/led3_state.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc led3_state.ucf -p xc6slx9-tqg144-3 "led3_state.ngc" led3_state.ngd  
+map -intstyle ise -p xc6slx9-tqg144-3 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off -ir off -pr off -lc off -power off -o led3_state_map.ncd led3_state.ngd led3_state.pcf 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc led3_state.ucf -p xc6slx9-tqg144-3 "led3_state.ngc" led3_state.ngd  
+map -intstyle ise -p xc6slx9-tqg144-3 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off -ir off -pr off -lc off -power off -o led3_state_map.ncd led3_state.ngd led3_state.pcf 
+par -w -intstyle ise -ol high -mt off led3_state_map.ncd led3_state.ncd led3_state.pcf 
+trce -intstyle ise -v 3 -s 3 -n 3 -fastpaths -xml led3_state.twx led3_state.ncd -o led3_state.twr led3_state.pcf -ucf led3_state.ucf 
+bitgen -intstyle ise -f led3_state.ut led3_state.ncd 
+xst -intstyle ise -ifn "D:/Git new/IC-Tester-Software/FPGA programming/led3_state/led3_state.xst" -ofn "D:/Git new/IC-Tester-Software/FPGA programming/led3_state/led3_state.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc led3_state.ucf -p xc6slx9-tqg144-3 "led3_state.ngc" led3_state.ngd  
+map -intstyle ise -p xc6slx9-tqg144-3 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off -ir off -pr off -lc off -power off -o led3_state_map.ncd led3_state.ngd led3_state.pcf 
+par -w -intstyle ise -ol high -mt off led3_state_map.ncd led3_state.ncd led3_state.pcf 
+trce -intstyle ise -v 3 -s 3 -n 3 -fastpaths -xml led3_state.twx led3_state.ncd -o led3_state.twr led3_state.pcf -ucf led3_state.ucf 
+bitgen -intstyle ise -f led3_state.ut led3_state.ncd 
+xst -intstyle ise -ifn "D:/Git new/IC-Tester-Software/FPGA programming/led3_state/led3_state.xst" -ofn "D:/Git new/IC-Tester-Software/FPGA programming/led3_state/led3_state.syr" 
+xst -intstyle ise -ifn "D:/Git new/IC-Tester-Software/FPGA programming/led3_state/led3_state.xst" -ofn "D:/Git new/IC-Tester-Software/FPGA programming/led3_state/led3_state.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc led3_state.ucf -p xc6slx9-tqg144-3 "led3_state.ngc" led3_state.ngd  
+map -intstyle ise -p xc6slx9-tqg144-3 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off -ir off -pr off -lc off -power off -o led3_state_map.ncd led3_state.ngd led3_state.pcf 
+par -w -intstyle ise -ol high -mt off led3_state_map.ncd led3_state.ncd led3_state.pcf 
+trce -intstyle ise -v 3 -s 3 -n 3 -fastpaths -xml led3_state.twx led3_state.ncd -o led3_state.twr led3_state.pcf -ucf led3_state.ucf 
+bitgen -intstyle ise -f led3_state.ut led3_state.ncd 
+xst -intstyle ise -ifn "D:/Git new/IC-Tester-Software/FPGA programming/led3_state/led3_state.xst" -ofn "D:/Git new/IC-Tester-Software/FPGA programming/led3_state/led3_state.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc led3_state.ucf -p xc6slx9-tqg144-3 "led3_state.ngc" led3_state.ngd  
+map -intstyle ise -p xc6slx9-tqg144-3 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off -ir off -pr off -lc off -power off -o led3_state_map.ncd led3_state.ngd led3_state.pcf 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc led3_state.ucf -p xc6slx9-tqg144-3 "led3_state.ngc" led3_state.ngd  
+map -intstyle ise -p xc6slx9-tqg144-3 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off -ir off -pr off -lc off -power off -o led3_state_map.ncd led3_state.ngd led3_state.pcf 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc led3_state.ucf -p xc6slx9-tqg144-3 "led3_state.ngc" led3_state.ngd  
+map -intstyle ise -p xc6slx9-tqg144-3 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off -ir off -pr off -lc off -power off -o led3_state_map.ncd led3_state.ngd led3_state.pcf 
+par -w -intstyle ise -ol high -mt off led3_state_map.ncd led3_state.ncd led3_state.pcf 
+trce -intstyle ise -v 3 -s 3 -n 3 -fastpaths -xml led3_state.twx led3_state.ncd -o led3_state.twr led3_state.pcf -ucf led3_state.ucf 
+xst -intstyle ise -ifn "D:/Git new/IC-Tester-Software/FPGA programming/led3_state/led3_state.xst" -ofn "D:/Git new/IC-Tester-Software/FPGA programming/led3_state/led3_state.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc led3_state.ucf -p xc6slx9-tqg144-3 "led3_state.ngc" led3_state.ngd  
+map -intstyle ise -p xc6slx9-tqg144-3 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off -ir off -pr off -lc off -power off -o led3_state_map.ncd led3_state.ngd led3_state.pcf 
+par -w -intstyle ise -ol high -mt off led3_state_map.ncd led3_state.ncd led3_state.pcf 
+trce -intstyle ise -v 3 -s 3 -n 3 -fastpaths -xml led3_state.twx led3_state.ncd -o led3_state.twr led3_state.pcf -ucf led3_state.ucf 
+bitgen -intstyle ise -f led3_state.ut led3_state.ncd 
+xst -intstyle ise -ifn "D:/Git new/IC-Tester-Software/FPGA programming/led3_state/led3_state.xst" -ofn "D:/Git new/IC-Tester-Software/FPGA programming/led3_state/led3_state.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc led3_state.ucf -p xc6slx9-tqg144-3 "led3_state.ngc" led3_state.ngd  
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc led3_state.ucf -p xc6slx9-tqg144-3 "led3_state.ngc" led3_state.ngd  
+map -intstyle ise -p xc6slx9-tqg144-3 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off -ir off -pr off -lc off -power off -o led3_state_map.ncd led3_state.ngd led3_state.pcf 
+par -w -intstyle ise -ol high -mt off led3_state_map.ncd led3_state.ncd led3_state.pcf 
+trce -intstyle ise -v 3 -s 3 -n 3 -fastpaths -xml led3_state.twx led3_state.ncd -o led3_state.twr led3_state.pcf -ucf led3_state.ucf 
+xst -intstyle ise -ifn "D:/Git new/IC-Tester-Software/FPGA programming/led3_state/led3_state.xst" -ofn "D:/Git new/IC-Tester-Software/FPGA programming/led3_state/led3_state.syr" 
+xst -intstyle ise -ifn "D:/Git new/IC-Tester-Software/FPGA programming/led3_state/led3_state.xst" -ofn "D:/Git new/IC-Tester-Software/FPGA programming/led3_state/led3_state.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc led3_state.ucf -p xc6slx9-tqg144-3 "led3_state.ngc" led3_state.ngd  
+map -intstyle ise -p xc6slx9-tqg144-3 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off -ir off -pr off -lc off -power off -o led3_state_map.ncd led3_state.ngd led3_state.pcf 
+par -w -intstyle ise -ol high -mt off led3_state_map.ncd led3_state.ncd led3_state.pcf 
+trce -intstyle ise -v 3 -s 3 -n 3 -fastpaths -xml led3_state.twx led3_state.ncd -o led3_state.twr led3_state.pcf -ucf led3_state.ucf 
+bitgen -intstyle ise -f led3_state.ut led3_state.ncd 
+xst -intstyle ise -ifn "D:/Git new/IC-Tester-Software/FPGA programming/led3_state/led3_state.xst" -ofn "D:/Git new/IC-Tester-Software/FPGA programming/led3_state/led3_state.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc led3_state.ucf -p xc6slx9-tqg144-3 "led3_state.ngc" led3_state.ngd  
+map -intstyle ise -p xc6slx9-tqg144-3 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off -ir off -pr off -lc off -power off -o led3_state_map.ncd led3_state.ngd led3_state.pcf 
+par -w -intstyle ise -ol high -mt off led3_state_map.ncd led3_state.ncd led3_state.pcf 
+trce -intstyle ise -v 3 -s 3 -n 3 -fastpaths -xml led3_state.twx led3_state.ncd -o led3_state.twr led3_state.pcf -ucf led3_state.ucf 
+bitgen -intstyle ise -f led3_state.ut led3_state.ncd 
+xst -intstyle ise -ifn "D:/Git new/IC-Tester-Software/FPGA programming/led3_state/led3_state.xst" -ofn "D:/Git new/IC-Tester-Software/FPGA programming/led3_state/led3_state.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc led3_state.ucf -p xc6slx9-tqg144-3 "led3_state.ngc" led3_state.ngd  
+map -intstyle ise -p xc6slx9-tqg144-3 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off -ir off -pr off -lc off -power off -o led3_state_map.ncd led3_state.ngd led3_state.pcf 
+par -w -intstyle ise -ol high -mt off led3_state_map.ncd led3_state.ncd led3_state.pcf 
+trce -intstyle ise -v 3 -s 3 -n 3 -fastpaths -xml led3_state.twx led3_state.ncd -o led3_state.twr led3_state.pcf -ucf led3_state.ucf 
+bitgen -intstyle ise -f led3_state.ut led3_state.ncd 
+xst -intstyle ise -ifn "D:/Git new/IC-Tester-Software/FPGA programming/led3_state/led3_state.xst" -ofn "D:/Git new/IC-Tester-Software/FPGA programming/led3_state/led3_state.syr" 

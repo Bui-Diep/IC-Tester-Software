@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- IMPORTANT: This is an internal file that has been generated
+     by the Xilinx ISE software.  Any direct editing or
+     changes made to this file may result in unpredictable
+     behavior or data corruption.  It is strongly advised that
+     users do not edit the contents of this file. -->
+<messages>
+<msg type="error" file="HDLCompiler" num="304" delta="new" >"D:\Git new\IC-Tester-Software\FPGA programming\led3_state\led3_state.vhd" Line 18: Character &apos;<arg fmt="%c" index="1">M</arg>&apos; is not in element type <arg fmt="%s" index="2">std_logic</arg>
+</msg>
+
+<msg type="error" file="HDLCompiler" num="854" delta="new" >"D:\Git new\IC-Tester-Software\FPGA programming\led3_state\led3_state.vhd" Line 9: Unit &lt;<arg fmt="%s" index="1">behavioral</arg>&gt; ignored due to previous errors.
+</msg>
+
+</messages>
+

@@ -1,0 +1,67 @@
+#-----------------------------------------------------------
+# PlanAhead v14.7 (64-bit)
+# Build 321239 by xbuild on Fri Sep 27 19:29:51 MDT 2013
+# Start of session at: Fri Oct 20 12:32:44 2023
+# Process ID: 15864
+# Log file: D:/Git new/IC-Tester-Software/FPGA programming/led3_state/planAhead_run_2/planAhead.log
+# Journal file: D:/Git new/IC-Tester-Software/FPGA programming/led3_state/planAhead_run_2/planAhead.jou
+#-----------------------------------------------------------
+INFO: [Common 17-78] Attempting to get a license: PlanAhead
+INFO: [Common 17-290] Got license for PlanAhead
+INFO: [Device 21-36] Loading parts and site information from X:/ISE_14.7/14.7/ISE_DS/PlanAhead/data/parts/arch.xml
+Parsing RTL primitives file [X:/ISE_14.7/14.7/ISE_DS/PlanAhead/data/parts/xilinx/rtl/prims/rtl_prims.xml]
+Finished parsing RTL primitives file [X:/ISE_14.7/14.7/ISE_DS/PlanAhead/data/parts/xilinx/rtl/prims/rtl_prims.xml]
+start_gui
+source {D:/Git new/IC-Tester-Software/FPGA programming/led3_state/pa.fromNetlist.tcl}
+# create_project -name led3_state -dir "D:/Git new/IC-Tester-Software/FPGA programming/led3_state/planAhead_run_2" -part xc6slx9tqg144-3
+# set_property design_mode GateLvl [get_property srcset [current_run -impl]]
+# set_property edif_top_file "D:/Git new/IC-Tester-Software/FPGA programming/led3_state/led3_state.ngc" [ get_property srcset [ current_run ] ]
+# add_files -norecurse { {D:/Git new/IC-Tester-Software/FPGA programming/led3_state} }
+# set_param project.pinAheadLayout  yes
+# set_property target_constrs_file "led3_state.ucf" [current_fileset -constrset]
+Adding file 'D:/Git new/IC-Tester-Software/FPGA programming/led3_state/led3_state.ucf' to fileset 'constrs_1'
+# add_files [list {led3_state.ucf}] -fileset [get_property constrset [current_run]]
+# link_design
+Design is defaulting to srcset: sources_1
+Design is defaulting to constrset: constrs_1
+Design is defaulting to project part: xc6slx9tqg144-3
+Release 14.7 - ngc2edif P.20131013 (nt64)
+Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
+Reading design led3_state.ngc ...
+WARNING:NetListWriters:298 - No output is written to led3_state.xncf, ignored.
+Processing design ...
+   Preping design's networks ...
+   Preping design's macros ...
+  finished :Prep
+Writing EDIF netlist file led3_state.edif ...
+ngc2edif: Total memory usage is 4310868 kilobytes
+
+Parsing EDIF File [./planAhead_run_2/led3_state.data/cache/led3_state_ngc_zx.edif]
+Finished Parsing EDIF File [./planAhead_run_2/led3_state.data/cache/led3_state_ngc_zx.edif]
+Loading clock regions from X:/ISE_14.7/14.7/ISE_DS/PlanAhead/data\parts/xilinx/spartan6/spartan6lx/xc6slx9/ClockRegion.xml
+Loading clock buffers from X:/ISE_14.7/14.7/ISE_DS/PlanAhead/data\parts/xilinx/spartan6/spartan6lx/xc6slx9/ClockBuffers.xml
+Loading package pin functions from X:/ISE_14.7/14.7/ISE_DS/PlanAhead/data\parts/xilinx/spartan6/PinFunctions.xml...
+Loading package from X:/ISE_14.7/14.7/ISE_DS/PlanAhead/data\parts/xilinx/spartan6/spartan6lx/xc6slx9/tqg144/Package.xml
+Loading io standards from X:/ISE_14.7/14.7/ISE_DS/PlanAhead/data\./parts/xilinx/spartan6/IOStandards.xml
+Loading device configuration modes from X:/ISE_14.7/14.7/ISE_DS/PlanAhead/data\parts/xilinx/spartan6/ConfigModes.xml
+Loading list of drcs for the architecture : X:/ISE_14.7/14.7/ISE_DS/PlanAhead/data\./parts/xilinx/spartan6/drc.xml
+Parsing UCF File [D:/Git new/IC-Tester-Software/FPGA programming/led3_state/led3_state.ucf]
+Finished Parsing UCF File [D:/Git new/IC-Tester-Software/FPGA programming/led3_state/led3_state.ucf]
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Phase 0 | Netlist Checksum: 15fda8da
+link_design: Time (s): elapsed = 00:00:12 . Memory (MB): peak = 628.074 ; gain = 169.520
+set_property iostandard LVCMOS25 [get_ports [list {led_out[0]}]]
+set_property iostandard LVCMOS33 [get_ports [list {led_out[1]}]]
+save_constraints
+exit
+ERROR: [PlanAhead 12-106] *** Exception: ui.h.b: Found deleted key in HTclEventBroker. Verify if the classes listed here call cleanup()
+HTclEvent: SIGNAL_BUS_MODIFY   Classes: ui.views.aR 
+HTclEvent: DEBUG_PORT_CONFIG_CHANGE   Classes: ui.views.aR 
+HTclEvent: SIGNAL_MODIFY   Classes: ui.views.aR 
+HTclEvent: DEBUG_CORE_CONFIG_CHANGE   Classes: ui.views.aR 
+ (See D:/Git new/IC-Tester-Software/FPGA programming/led3_state\planAhead_pid15864.debug)
+ERROR: [Common 17-39] 'stop_gui' failed due to earlier errors.
+INFO: [Common 17-206] Exiting PlanAhead at Fri Oct 20 12:41:19 2023...
+INFO: [Common 17-83] Releasing license: PlanAhead

@@ -1,0 +1,8 @@
+V3 3
+FL "D:/Git new/IC-Tester-Software/FPGA programming/led3_state/led3_state.vhd" 2023/10/20.11:53:18 P.20131013
+EN work/led3_state 1697777803 \
+      FL "D:/Git new/IC-Tester-Software/FPGA programming/led3_state/led3_state.vhd" \
+      PB ieee/std_logic_1164 1381692176
+AR work/led3_state/Behavioral 1697777804 \
+      FL "D:/Git new/IC-Tester-Software/FPGA programming/led3_state/led3_state.vhd" \
+      EN work/led3_state 1697777803

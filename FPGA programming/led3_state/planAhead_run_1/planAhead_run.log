@@ -1,0 +1,56 @@
+
+****** PlanAhead v14.7 (64-bit)
+  **** Build 321239 by xbuild on Fri Sep 27 19:29:51 MDT 2013
+    ** Copyright 1986-1999, 2001-2013 Xilinx, Inc. All Rights Reserved.
+
+INFO: [Common 17-78] Attempting to get a license: PlanAhead
+INFO: [Common 17-290] Got license for PlanAhead
+INFO: [Device 21-36] Loading parts and site information from X:/ISE_14.7/14.7/ISE_DS/PlanAhead/data/parts/arch.xml
+Parsing RTL primitives file [X:/ISE_14.7/14.7/ISE_DS/PlanAhead/data/parts/xilinx/rtl/prims/rtl_prims.xml]
+Finished parsing RTL primitives file [X:/ISE_14.7/14.7/ISE_DS/PlanAhead/data/parts/xilinx/rtl/prims/rtl_prims.xml]
+start_gui
+source {D:/Git new/IC-Tester-Software/FPGA programming/led3_state/pa.fromNetlist.tcl}
+# create_project -name led3_state -dir "D:/Git new/IC-Tester-Software/FPGA programming/led3_state/planAhead_run_1" -part xc3s200avq100-5
+# set_property design_mode GateLvl [get_property srcset [current_run -impl]]
+# set_property edif_top_file "D:/Git new/IC-Tester-Software/FPGA programming/led3_state/led3_state.ngc" [ get_property srcset [ current_run ] ]
+# add_files -norecurse { {D:/Git new/IC-Tester-Software/FPGA programming/led3_state} }
+# set_param project.pinAheadLayout  yes
+# set_property target_constrs_file "led3_state.ucf" [current_fileset -constrset]
+Adding file 'D:/Git new/IC-Tester-Software/FPGA programming/led3_state/led3_state.ucf' to fileset 'constrs_1'
+# add_files [list {led3_state.ucf}] -fileset [get_property constrset [current_run]]
+# link_design
+Design is defaulting to srcset: sources_1
+Design is defaulting to constrset: constrs_1
+Design is defaulting to project part: xc3s200avq100-5
+Release 14.7 - ngc2edif P.20131013 (nt64)
+Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
+Reading design led3_state.ngc ...
+WARNING:NetListWriters:298 - No output is written to led3_state.xncf, ignored.
+Processing design ...
+   Preping design's networks ...
+   Preping design's macros ...
+  finished :Prep
+Writing EDIF netlist file led3_state.edif ...
+ngc2edif: Total memory usage is 4310868 kilobytes
+
+Parsing EDIF File [./planAhead_run_1/led3_state.data/cache/led3_state_ngc_zx.edif]
+Finished Parsing EDIF File [./planAhead_run_1/led3_state.data/cache/led3_state_ngc_zx.edif]
+INFO: [Designutils 20-910] Reading macro library X:/ISE_14.7/14.7/ISE_DS/PlanAhead/data\./parts/xilinx/spartan3a/hd_int_macros.edn
+Parsing EDIF File [X:/ISE_14.7/14.7/ISE_DS/PlanAhead/data\./parts/xilinx/spartan3a/hd_int_macros.edn]
+Finished Parsing EDIF File [X:/ISE_14.7/14.7/ISE_DS/PlanAhead/data\./parts/xilinx/spartan3a/hd_int_macros.edn]
+Loading clock regions from X:/ISE_14.7/14.7/ISE_DS/PlanAhead/data\parts/xilinx/spartan3a/spartan3a/xc3s200a/ClockRegion.xml
+Loading clock buffers from X:/ISE_14.7/14.7/ISE_DS/PlanAhead/data\parts/xilinx/spartan3a/spartan3a/xc3s200a/ClockBuffers.xml
+Loading package from X:/ISE_14.7/14.7/ISE_DS/PlanAhead/data\parts/xilinx/spartan3a/spartan3a/xc3s200a/vq100/Package.xml
+Loading io standards from X:/ISE_14.7/14.7/ISE_DS/PlanAhead/data\./parts/xilinx/spartan3a/IOStandards.xml
+INFO: [Device 21-19] Loading pkg sso from X:/ISE_14.7/14.7/ISE_DS/PlanAhead/data\parts/xilinx/spartan3a/spartan3a/xc3s200a/vq100/SSORules.xml
+Loading list of drcs for the architecture : X:/ISE_14.7/14.7/ISE_DS/PlanAhead/data\./parts/xilinx/spartan3a/drc.xml
+INFO: [Timing 38-77] Reading timing library X:/ISE_14.7/14.7/ISE_DS/PlanAhead/data\parts/xilinx/spartan3a/spartan3a/spartan3a-5.lib.
+INFO: [Timing 38-34] Done reading timing library X:/ISE_14.7/14.7/ISE_DS/PlanAhead/data\parts/xilinx/spartan3a/spartan3a/spartan3a-5.lib.
+Parsing UCF File [D:/Git new/IC-Tester-Software/FPGA programming/led3_state/led3_state.ucf]
+Finished Parsing UCF File [D:/Git new/IC-Tester-Software/FPGA programming/led3_state/led3_state.ucf]
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Phase 0 | Netlist Checksum: 889bb13b
+link_design: Time (s): elapsed = 00:00:09 . Memory (MB): peak = 571.113 ; gain = 114.805
+exit
